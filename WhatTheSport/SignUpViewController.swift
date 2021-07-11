@@ -7,8 +7,13 @@
 //
 
 import UIKit
+import Firebase
 
-class SignUpViewController: UIViewController {
+protocol Transitioner {
+    func signIn (email: String, password: String)
+}
+
+class SignUpViewController: UIViewController, Transitioner {
 
     var emailField: UITextField!
     var usernameField: UITextField!
@@ -19,6 +24,7 @@ class SignUpViewController: UIViewController {
     var constraint: NSLayoutConstraint!
     @IBOutlet weak var topNav: UINavigationItem!
     var logo: UIImageView!
+    var signInLabel: UIButton!
     
     let fieldSpacing: CGFloat = 15
     let fieldHeight: CGFloat = 45
@@ -94,8 +100,8 @@ class SignUpViewController: UIViewController {
         signUpButton.backgroundColor = UIColor(rgb: Constants.Colors.orange)
         signUpButton.setTitleColor(.white, for: .normal)
         signUpButton.layer.cornerRadius = 20.0
+        signUpButton.addTarget(self, action: #selector(signUpPress), for: .touchUpInside)
         self.view.addSubview(signUpButton)
-        //signUpButton.addTarget(self, action: #selector(button1Pressed), for: .touchUpInside)
         
         signUpButton.translatesAutoresizingMaskIntoConstraints = false
         constraints.append(signUpButton.centerXAnchor.constraint(equalTo: confirmField.centerXAnchor))
@@ -103,19 +109,74 @@ class SignUpViewController: UIViewController {
         constraints.append(signUpButton.widthAnchor.constraint(equalTo: emailField.widthAnchor))
         constraints.append(signUpButton.heightAnchor.constraint(equalTo: emailField.heightAnchor))
         
+//        signInLabel = UILabel(frame: .zero)
+//        signInLabel.textColor = .blue
+//        signInLabel.attributedText = NSAttributedString(string: "SignIn", attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue])
+//        signInLabel.textAlignment = .center
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(SignUpViewController.signInPress))
+//        signInLabel.isUserInteractionEnabled = true
+//        signInLabel.addGestureRecognizer(tap)
+//        self.view.addSubview(signInLabel)
+        signInLabel = UIButton(type: .roundedRect)
+        signInLabel.setTitle("Sign In", for: .normal)
+        signInLabel.backgroundColor = UIColor(rgb: Constants.Colors.orange).withAlphaComponent(0)
+        signInLabel.setTitleColor(.blue, for: .normal)
+        signInLabel.addTarget(self, action: #selector(signInPress), for: .touchUpInside)
+        let signInAttributes: [NSAttributedString.Key: Any] = [.underlineStyle: NSUnderlineStyle.single.rawValue]
+        signInLabel.setAttributedTitle(NSMutableAttributedString(string: "Sign In", attributes: signInAttributes), for: .normal)
+        self.view.addSubview(signInLabel)
+
+        
+        signInLabel.translatesAutoresizingMaskIntoConstraints = false
+        constraints.append(signInLabel.centerXAnchor.constraint(equalTo: signUpButton.centerXAnchor))
+        constraints.append(signInLabel.topAnchor.constraint(equalTo: signUpButton.bottomAnchor, constant: Constants.Field.spacing))
+        constraints.append(signInLabel.widthAnchor.constraint(equalTo: signUpButton.widthAnchor, multiplier: 1/4.0))
+        constraints.append(signInLabel.heightAnchor.constraint(equalTo: signUpButton.heightAnchor))
+        
         NSLayoutConstraint.activate(constraints)
     }
+    
+    @objc func signInPress(sender: UIButton!) {
+        if signInVC == nil {
+            signInVC = SignInViewController()
+        }
+        signInVC.signUpVC = self
 
-    @objc func button1Pressed(sender: UIButton!) {
-//        if nextVC == nil {
-//            nextVC = SecondViewController()
-//        }
-//        nextVC.delegate = self
-//        nextVC.vc2NewName = textField1.text!
-//
-//        if let navigator = navigationController {
-//            navigator.pushViewController(nextVC, animated: true)
-//        }
+        if let navigator = navigationController {
+            navigator.pushViewController(signInVC, animated: true)
+        }
+    }
+
+    @objc func signUpPress(sender: UIButton!) {
+        guard let email = emailField.text,
+              let password = passwordField.text,
+              email.count > 0,
+              password.count > 0
+        else {
+          return
+        }
+        
+        if let confirm = confirmField.text,
+        confirm == password {
+            Auth.auth().createUser(withEmail: email, password: password) { user, error in
+                if error == nil {
+                    self.signIn (email: email, password: password)
+                } else {
+                    print(error!.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    func signIn (email: String, password: String) {
+        Auth.auth().signIn(withEmail: email, password: password) {
+          user, error in
+          if error == nil {
+            //TODO: segue to home page
+          } else {
+            print(error!.localizedDescription)
+          }
+        }
     }
     
 }

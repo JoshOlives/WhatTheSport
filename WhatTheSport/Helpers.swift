@@ -31,4 +31,8 @@ struct Constants {
         static var lightOrange = 0xfce9d4
         static var orange = 0xff9500
     }
+    struct Field {
+        static var spacing: CGFloat = 15.0
+        static var height: CGFloat = 45.0
+    }
 }
