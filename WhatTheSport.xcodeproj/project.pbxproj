@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,9 @@
 		8F955FDF2698E4A6003DD8F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F955FDE2698E4A6003DD8F1 /* Assets.xcassets */; };
 		8F955FE22698E4A6003DD8F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F955FE02698E4A6003DD8F1 /* LaunchScreen.storyboard */; };
 		8F955FEC2698E835003DD8F1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F955FEB2698E835003DD8F1 /* GoogleService-Info.plist */; };
+		8F955FEE269A8443003DD8F1 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F955FED269A8443003DD8F1 /* SignUpViewController.swift */; };
+		8F955FF0269A848C003DD8F1 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F955FEF269A848C003DD8F1 /* SignInViewController.swift */; };
+		8F955FF2269A88DE003DD8F1 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F955FF1269A88DE003DD8F1 /* Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +33,9 @@
 		8F955FE12698E4A6003DD8F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8F955FE32698E4A6003DD8F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8F955FEB2698E835003DD8F1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8F955FED269A8443003DD8F1 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		8F955FEF269A848C003DD8F1 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		8F955FF1269A88DE003DD8F1 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		F8E07A5013DEBC95359E872D /* Pods-WhatTheSport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatTheSport.release.xcconfig"; path = "Target Support Files/Pods-WhatTheSport/Pods-WhatTheSport.release.xcconfig"; sourceTree = "<group>"; };
 		FE5519523DB56ACCFCB5B20D /* Pods-WhatTheSport.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatTheSport.debug.xcconfig"; path = "Target Support Files/Pods-WhatTheSport/Pods-WhatTheSport.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,6 +76,9 @@
 				8F955FD22698E4A2003DD8F1 /* AppDelegate.swift */,
 				8F955FD42698E4A2003DD8F1 /* SceneDelegate.swift */,
 				8F955FD62698E4A2003DD8F1 /* ViewController.swift */,
+				8F955FED269A8443003DD8F1 /* SignUpViewController.swift */,
+				8F955FF1269A88DE003DD8F1 /* Helpers.swift */,
+				8F955FEF269A848C003DD8F1 /* SignInViewController.swift */,
 				8F955FD82698E4A2003DD8F1 /* Main.storyboard */,
 				8F955FDE2698E4A6003DD8F1 /* Assets.xcassets */,
 				8F955FE02698E4A6003DD8F1 /* LaunchScreen.storyboard */,
@@ -86,7 +95,6 @@
 				FE5519523DB56ACCFCB5B20D /* Pods-WhatTheSport.debug.xcconfig */,
 				F8E07A5013DEBC95359E872D /* Pods-WhatTheSport.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -213,10 +221,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F955FF2269A88DE003DD8F1 /* Helpers.swift in Sources */,
 				8F955FD72698E4A2003DD8F1 /* ViewController.swift in Sources */,
 				8F955FD32698E4A2003DD8F1 /* AppDelegate.swift in Sources */,
+				8F955FF0269A848C003DD8F1 /* SignInViewController.swift in Sources */,
 				8F955FDD2698E4A2003DD8F1 /* WhatTheSport.xcdatamodeld in Sources */,
 				8F955FD52698E4A2003DD8F1 /* SceneDelegate.swift in Sources */,
+				8F955FEE269A8443003DD8F1 /* SignUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
