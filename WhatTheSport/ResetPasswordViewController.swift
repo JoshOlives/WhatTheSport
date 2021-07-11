@@ -15,7 +15,6 @@ class ResetPasswordViewController: UIViewController {
     var confirmPasswordField: UITextField!
     var resetButton: UIButton!
     var constraint: NSLayoutConstraint!
-    @IBOutlet weak var topNav: UINavigationItem!
     
     override func loadView() {
         super.loadView()
@@ -27,6 +26,7 @@ class ResetPasswordViewController: UIViewController {
         var constraints: [NSLayoutConstraint] = []
         
         view.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
+        navigationController?.navigationBar.topItem?.title = "Reset Password"
         
         oldPasswordField = UITextField(frame: .zero)
         oldPasswordField.placeholder = "  Old Password"

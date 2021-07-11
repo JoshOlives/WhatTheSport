@@ -19,9 +19,6 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="Nad-8n-vAK"/>
-                    <connections>
-                        <outlet property="topNav" destination="Nad-8n-vAK" id="r8F-BI-j8G"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

@@ -13,7 +13,6 @@ class ForgotPasswordViewController: UIViewController {
     var emailField: UITextField!
     var sendResetButton: UIButton!
     var constraint: NSLayoutConstraint!
-    @IBOutlet weak var topNav: UINavigationItem!
     
     override func loadView() {
         super.loadView()
@@ -25,6 +24,7 @@ class ForgotPasswordViewController: UIViewController {
         var constraints: [NSLayoutConstraint] = []
         
         view.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
+        navigationController?.navigationBar.topItem?.title = "Forgot Password"
         
         emailField = UITextField(frame: .zero)
         emailField.placeholder = "  Email"

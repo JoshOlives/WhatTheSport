@@ -22,7 +22,6 @@ class SignUpViewController: UIViewController, Transitioner {
     var signUpButton: UIButton!
     var signInVC: SignInViewController!
     var constraint: NSLayoutConstraint!
-    @IBOutlet weak var topNav: UINavigationItem!
     var logo: UIImageView!
     var signInLabel: UIButton!
     
@@ -39,7 +38,7 @@ class SignUpViewController: UIViewController, Transitioner {
         var constraints: [NSLayoutConstraint] = []
         
         view.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
-        topNav.title = "Sign Up"
+        navigationController?.navigationBar.topItem?.title = "Sign Up"
         
         logo = UIImageView(frame: .zero)
         logo.image = UIImage(named: "splash")
@@ -144,6 +143,7 @@ class SignUpViewController: UIViewController, Transitioner {
 
         if let navigator = navigationController {
             navigator.pushViewController(signInVC, animated: true)
+            navigationController?.navigationBar.topItem?.title = "Sign In"
         }
     }
 

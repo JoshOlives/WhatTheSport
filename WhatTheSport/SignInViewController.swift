@@ -16,7 +16,6 @@ class SignInViewController: UIViewController {
     var signInButton: UIButton!
     var constraint: NSLayoutConstraint!
     var forgotPassword: UILabel!
-    @IBOutlet weak var topNav: UINavigationItem!
     var logo: UIImageView!
     var signUpVC: SignUpViewController!
     
