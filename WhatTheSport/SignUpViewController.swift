@@ -159,7 +159,8 @@ class SignUpViewController: UIViewController, Transitioner {
                 if error == nil {
                     self.signIn (email: email, password: password)
                 } else {
-                    print(error!.localizedDescription)
+                    let controller = UI.createAlert(title: "Error", msg: error!.localizedDescription)
+                    self.present(controller, animated: true, completion: nil)
                 }
             }
         }
@@ -171,7 +172,8 @@ class SignUpViewController: UIViewController, Transitioner {
           if error == nil {
             //TODO: segue to home page
           } else {
-            print(error!.localizedDescription)
+            let controller = UI.createAlert(title: "Error", msg: error!.localizedDescription)
+            self.present(controller, animated: true, completion: nil)
           }
         }
     }

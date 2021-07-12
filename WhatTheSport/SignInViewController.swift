@@ -81,7 +81,7 @@ class SignInViewController: UIViewController {
         forgotButton.backgroundColor = UIColor(rgb: Constants.Colors.orange).withAlphaComponent(0)
         forgotButton.setTitleColor(.blue, for: .normal)
         forgotButton.addTarget(self, action: #selector(forgotPress), for: .touchUpInside)
-        let signInAttributes: [NSAttributedString.Key: Any] = [.underlineStyle: NSUnderlineStyle.single.rawValue, .font: UIFont.systemFont(ofSize: 16)]
+        let signInAttributes: [NSAttributedString.Key: Any] = [/*.underlineStyle: NSUnderlineStyle.single.rawValue,*/ .font: UIFont.systemFont(ofSize: 18)]
         forgotButton.setAttributedTitle(NSMutableAttributedString(string: "Forgot Password?", attributes: signInAttributes), for: .normal)
         self.view.addSubview(forgotButton)
         

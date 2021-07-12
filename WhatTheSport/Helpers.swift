@@ -36,3 +36,17 @@ struct Constants {
         static var height: CGFloat = 45.0
     }
 }
+
+struct UI {
+    static func createAlert(title: String, msg: String) -> UIAlertController{
+        let controller = UIAlertController(
+            title: title,
+            message: msg,
+            preferredStyle: .alert)
+        controller.addAction(UIAlertAction(
+                                title: "OK",
+                                style: .default,
+                                handler: nil))
+        return controller
+    }
+}

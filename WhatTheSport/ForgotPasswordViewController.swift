@@ -39,7 +39,7 @@ class ForgotPasswordViewController: UIViewController {
         constraints.append(emailField.heightAnchor.constraint(equalToConstant: Constants.Field.height))
         
         sendResetButton = UIButton(type: .roundedRect)
-        sendResetButton.setTitle("Next", for: .normal)
+        sendResetButton.setTitle("Send", for: .normal)
         sendResetButton.backgroundColor = UIColor(rgb: Constants.Colors.orange)
         sendResetButton.setTitleColor(.white, for: .normal)
         sendResetButton.layer.cornerRadius = 20.0
@@ -58,9 +58,11 @@ class ForgotPasswordViewController: UIViewController {
     @objc func sendResetEmail(sender: UIButton!) {
         Auth.auth().sendPasswordReset(withEmail: emailField.text!) { (error) in
             if error == nil {
-                //successfully sent alert
+                let controller = UI.createAlert(title: "Success", msg: "Check your email to reset password")
+                self.present(controller, animated: true, completion: nil)
             } else {
-                print(error!.localizedDescription)
+                let controller = UI.createAlert(title: "Error", msg: error!.localizedDescription)
+                self.present(controller, animated: true, completion: nil)
             }
         }
     }
