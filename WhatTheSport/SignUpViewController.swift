@@ -38,7 +38,7 @@ class SignUpViewController: UIViewController, Transitioner {
         var constraints: [NSLayoutConstraint] = []
         
         view.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
-        navigationController?.navigationBar.topItem?.title = "Sign Up"
+        self.title = "Sign Up"
         
         logo = UIImageView(frame: .zero)
         logo.image = UIImage(named: "splash")
@@ -117,19 +117,17 @@ class SignUpViewController: UIViewController, Transitioner {
 //        signInLabel.addGestureRecognizer(tap)
 //        self.view.addSubview(signInLabel)
         signInLabel = UIButton(type: .roundedRect)
-        signInLabel.setTitle("Sign In", for: .normal)
         signInLabel.backgroundColor = UIColor(rgb: Constants.Colors.orange).withAlphaComponent(0)
         signInLabel.setTitleColor(.blue, for: .normal)
         signInLabel.addTarget(self, action: #selector(signInPress), for: .touchUpInside)
-        let signInAttributes: [NSAttributedString.Key: Any] = [.underlineStyle: NSUnderlineStyle.single.rawValue]
+        let signInAttributes: [NSAttributedString.Key: Any] = [.underlineStyle: NSUnderlineStyle.single.rawValue, .font: UIFont.systemFont(ofSize: 16)]
         signInLabel.setAttributedTitle(NSMutableAttributedString(string: "Sign In", attributes: signInAttributes), for: .normal)
         self.view.addSubview(signInLabel)
-
         
         signInLabel.translatesAutoresizingMaskIntoConstraints = false
         constraints.append(signInLabel.centerXAnchor.constraint(equalTo: signUpButton.centerXAnchor))
         constraints.append(signInLabel.topAnchor.constraint(equalTo: signUpButton.bottomAnchor, constant: Constants.Field.spacing))
-        constraints.append(signInLabel.widthAnchor.constraint(equalTo: signUpButton.widthAnchor, multiplier: 1/4.0))
+        constraints.append(signInLabel.widthAnchor.constraint(equalTo: signUpButton.widthAnchor, multiplier: 1/5.0))
         constraints.append(signInLabel.heightAnchor.constraint(equalTo: signUpButton.heightAnchor))
         
         NSLayoutConstraint.activate(constraints)
@@ -143,7 +141,6 @@ class SignUpViewController: UIViewController, Transitioner {
 
         if let navigator = navigationController {
             navigator.pushViewController(signInVC, animated: true)
-            navigationController?.navigationBar.topItem?.title = "Sign In"
         }
     }
 

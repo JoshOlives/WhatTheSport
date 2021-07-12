@@ -26,7 +26,7 @@ class ResetPasswordViewController: UIViewController {
         var constraints: [NSLayoutConstraint] = []
         
         view.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
-        navigationController?.navigationBar.topItem?.title = "Reset Password"
+        self.title = "Reset Password"
         
         oldPasswordField = UITextField(frame: .zero)
         oldPasswordField.placeholder = "  Old Password"

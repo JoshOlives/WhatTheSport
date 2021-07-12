@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ForgotPasswordViewController: UIViewController {
 
@@ -24,7 +25,7 @@ class ForgotPasswordViewController: UIViewController {
         var constraints: [NSLayoutConstraint] = []
         
         view.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
-        navigationController?.navigationBar.topItem?.title = "Forgot Password"
+        self.title = "Forgot Password"
         
         emailField = UITextField(frame: .zero)
         emailField.placeholder = "  Email"
@@ -42,6 +43,7 @@ class ForgotPasswordViewController: UIViewController {
         sendResetButton.backgroundColor = UIColor(rgb: Constants.Colors.orange)
         sendResetButton.setTitleColor(.white, for: .normal)
         sendResetButton.layer.cornerRadius = 20.0
+        sendResetButton.addTarget(self, action: #selector(sendResetEmail), for: .touchUpInside)
         self.view.addSubview(sendResetButton)
         
         sendResetButton.translatesAutoresizingMaskIntoConstraints = false
@@ -51,6 +53,16 @@ class ForgotPasswordViewController: UIViewController {
         constraints.append(sendResetButton.heightAnchor.constraint(equalTo: emailField.heightAnchor))
         
         NSLayoutConstraint.activate(constraints)
+    }
+    
+    @objc func sendResetEmail(sender: UIButton!) {
+        Auth.auth().sendPasswordReset(withEmail: emailField.text!) { (error) in
+            if error == nil {
+                //successfully sent alert
+            } else {
+                print(error!.localizedDescription)
+            }
+        }
     }
 }
 

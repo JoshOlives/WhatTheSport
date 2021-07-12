@@ -18,6 +18,8 @@ class SignInViewController: UIViewController {
     var forgotPassword: UILabel!
     var logo: UIImageView!
     var signUpVC: SignUpViewController!
+    var forgotButton: UIButton!
+    var forgotVC: ForgotPasswordViewController!
     
     override func loadView() {
         super.loadView()
@@ -29,6 +31,7 @@ class SignInViewController: UIViewController {
         var constraints: [NSLayoutConstraint] = []
         
         view.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
+        self.title = "Sign In"
         
         logo = UIImageView(frame: .zero)
         logo.image = UIImage(named: "splash")
@@ -62,31 +65,45 @@ class SignInViewController: UIViewController {
         constraints.append(passwordField.widthAnchor.constraint(equalTo: emailField.widthAnchor))
         constraints.append(passwordField.heightAnchor.constraint(equalTo: emailField.heightAnchor))
         
-        forgotPassword = UILabel(frame: .zero)
-        forgotPassword.textColor = .blue
-        forgotPassword.attributedText = NSAttributedString(string: "Forgot Password?", attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue])
-        forgotPassword.textAlignment = .center
-        self.view.addSubview(forgotPassword)
+//        forgotPassword = UILabel(frame: .zero)
+//        forgotPassword.textColor = .blue
+//        forgotPassword.attributedText = NSAttributedString(string: "Forgot Password?", attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue])
+//        forgotPassword.textAlignment = .center
+//        self.view.addSubview(forgotPassword)
+//
+//        forgotPassword.translatesAutoresizingMaskIntoConstraints = false
+//        constraints.append(forgotPassword.centerXAnchor.constraint(equalTo: passwordField.centerXAnchor))
+//        constraints.append(forgotPassword.topAnchor.constraint(equalTo: passwordField.bottomAnchor, constant: Constants.Field.spacing))
+//        constraints.append(forgotPassword.widthAnchor.constraint(equalTo: emailField.widthAnchor))
+//        constraints.append(forgotPassword.heightAnchor.constraint(equalTo: emailField.heightAnchor))
         
-        forgotPassword.translatesAutoresizingMaskIntoConstraints = false
-        constraints.append(forgotPassword.centerXAnchor.constraint(equalTo: passwordField.centerXAnchor))
-        constraints.append(forgotPassword.topAnchor.constraint(equalTo: passwordField.bottomAnchor, constant: Constants.Field.spacing))
-        constraints.append(forgotPassword.widthAnchor.constraint(equalTo: emailField.widthAnchor))
-        constraints.append(forgotPassword.heightAnchor.constraint(equalTo: emailField.heightAnchor))
+        forgotButton = UIButton(type: .roundedRect)
+        forgotButton.backgroundColor = UIColor(rgb: Constants.Colors.orange).withAlphaComponent(0)
+        forgotButton.setTitleColor(.blue, for: .normal)
+        forgotButton.addTarget(self, action: #selector(forgotPress), for: .touchUpInside)
+        let signInAttributes: [NSAttributedString.Key: Any] = [.underlineStyle: NSUnderlineStyle.single.rawValue, .font: UIFont.systemFont(ofSize: 16)]
+        forgotButton.setAttributedTitle(NSMutableAttributedString(string: "Forgot Password?", attributes: signInAttributes), for: .normal)
+        self.view.addSubview(forgotButton)
+        
+        forgotButton.translatesAutoresizingMaskIntoConstraints = false
+        constraints.append(forgotButton.centerXAnchor.constraint(equalTo: passwordField.centerXAnchor))
+        constraints.append(forgotButton.topAnchor.constraint(equalTo: passwordField.bottomAnchor, constant: Constants.Field.spacing * 1.75))
+        constraints.append(forgotButton.widthAnchor.constraint(equalTo: passwordField.widthAnchor, multiplier: 0.4))
+        constraints.append(forgotButton.heightAnchor.constraint(equalTo: passwordField.heightAnchor))
         
         signInButton = UIButton(type: .roundedRect)
         signInButton.setTitle("Sign In", for: .normal)
         signInButton.backgroundColor = UIColor(rgb: Constants.Colors.orange)
         signInButton.setTitleColor(.white, for: .normal)
         signInButton.layer.cornerRadius = 20.0
-        self.view.addSubview(signInButton)
         signInButton.addTarget(self, action: #selector(signInPress), for: .touchUpInside)
+        self.view.addSubview(signInButton)
         
         signInButton.translatesAutoresizingMaskIntoConstraints = false
-        constraints.append(signInButton.centerXAnchor.constraint(equalTo: forgotPassword.centerXAnchor))
-        constraints.append(signInButton.topAnchor.constraint(equalTo: forgotPassword.bottomAnchor, constant: Constants.Field.spacing * 1.75))
-        constraints.append(signInButton.widthAnchor.constraint(equalTo: emailField.widthAnchor))
-        constraints.append(signInButton.heightAnchor.constraint(equalTo: emailField.heightAnchor))
+        constraints.append(signInButton.centerXAnchor.constraint(equalTo: forgotButton.centerXAnchor))
+        constraints.append(signInButton.topAnchor.constraint(equalTo: forgotButton.bottomAnchor, constant: Constants.Field.spacing * 1.75))
+        constraints.append(signInButton.widthAnchor.constraint(equalTo: passwordField.widthAnchor))
+        constraints.append(signInButton.heightAnchor.constraint(equalTo: passwordField.heightAnchor))
         
         NSLayoutConstraint.activate(constraints)
     }
@@ -99,19 +116,18 @@ class SignInViewController: UIViewController {
         else {
           return
         }
-        signIn(email: email, password: password)
+        let delegate = signUpVC! as Transitioner
+        delegate.signIn(email: email, password: password)
     }
     
-    func signIn (email: String, password: String) {
-        Auth.auth().signIn(withEmail: email, password: password) {
-          user, error in
-          if error == nil {
-            //TODO: segue to home page
-          } else {
-            print(error!.localizedDescription)
-          }
+    @objc func forgotPress(sender: UIButton!) {
+        if forgotVC == nil {
+            forgotVC = ForgotPasswordViewController()
+        }
+
+        if let navigator = navigationController {
+            navigator.pushViewController(forgotVC, animated: true)
         }
     }
-    
 }
 
