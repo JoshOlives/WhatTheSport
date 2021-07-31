@@ -105,7 +105,7 @@ class Button: UIButton {
     
     convenience init(title: String) {
         self.init()
-        self.setTitle("Sign Up", for: .normal)
+        self.setTitle(title, for: .normal)
     }
     
     convenience init() {
