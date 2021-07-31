@@ -31,6 +31,8 @@ class SignUpViewController: UIViewController, Transitioner {
     let fieldSpacing: CGFloat = 15
     let fieldHeight: CGFloat = 45
     
+    var urlString: String = "https://firebasestorage.googleapis.com/v0/b/whatthesport-59d4a.appspot.com/o/images%2Fsplash.png?alt=media&token=23281d6d-19cb-4278-83b9-d411df8917d4"
+    
     override func loadView() {
         super.loadView()
     }
@@ -47,7 +49,8 @@ class SignUpViewController: UIViewController, Transitioner {
         logo = UIImageView(frame: .zero)
         logo.image = UIImage(named: "splash")
         
-        uploadImage(image: logo.image!.pngData()!)
+        //uploadImage(image: logo.image!.pngData()!)
+        //downloadImage(str: urlString)
         self.view.addSubview(logo)
         
         logo.translatesAutoresizingMaskIntoConstraints = false
@@ -156,7 +159,7 @@ class SignUpViewController: UIViewController, Transitioner {
                     
                     db.collection("users").addDocument(data: ["username": username, "sports": [String](),
                                                               "teams": [String](), "postIDs": [String](),
-                                                              "uid": userID ]) { (error) in
+                                                              "URL": "", "uid": userID ]) { (error) in
                         if error != nil {
                             let controller = UI.createAlert(title: "Error", msg: error!.localizedDescription)
                             self.present(controller, animated: true, completion: nil)
@@ -252,11 +255,39 @@ class SignUpViewController: UIViewController, Transitioner {
                   return
                 }
                 
-                let urlString = url.absoluteURL
+                self.urlString = url.absoluteString
+                print("\n\n\(self.urlString)\n\n")
+                
                 //put urlString in Firestore User
             }
         }
         print("finish with uploading")
+    }
+    
+    func downloadImage(url: URL){
+        let task = URLSession.shared.dataTask(with: url) { ( data, _, error) in
+            guard let data = data, error == nil else {
+                print ("\n\n\n\nerror with downloading image")
+                return
+            }
+            DispatchQueue.main.async {
+                let image = UIImage(data: data)
+                let testImageView = UIImageView(frame: self.view.frame)
+                testImageView.image = image
+                
+                self.view.addSubview(testImageView)
+            }
+        }
+        
+        task.resume()
+    }
+    
+    func downloadImage(str: String){
+        guard let url = URL(string: str) else {
+            print("error with string: \(str)")
+            return
+        }
+        downloadImage(url: url)
     }
     
     func retrieveUser(userID: String) -> NSManagedObject {
