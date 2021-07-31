@@ -5,6 +5,10 @@ target 'WhatTheSport' do
 
 pod 'Firebase'
 pod 'Firebase/Auth'
+pod 'Firebase/Core'
+pod 'Firebase/Firestore'
+pod 'FirebaseFirestoreSwift'
+pod 'Firebase/Storage'
 # add pods for desired Firebase products
 # https://firebase.google.com/docs/ios/setup#available-pods
 

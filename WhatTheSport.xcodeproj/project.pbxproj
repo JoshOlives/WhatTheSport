@@ -12,7 +12,6 @@
 		8F955FD52698E4A2003DD8F1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F955FD42698E4A2003DD8F1 /* SceneDelegate.swift */; };
 		8F955FD72698E4A2003DD8F1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F955FD62698E4A2003DD8F1 /* ViewController.swift */; };
 		8F955FDA2698E4A2003DD8F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F955FD82698E4A2003DD8F1 /* Main.storyboard */; };
-		8F955FDD2698E4A2003DD8F1 /* WhatTheSport.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8F955FDB2698E4A2003DD8F1 /* WhatTheSport.xcdatamodeld */; };
 		8F955FDF2698E4A6003DD8F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F955FDE2698E4A6003DD8F1 /* Assets.xcassets */; };
 		8F955FE22698E4A6003DD8F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F955FE02698E4A6003DD8F1 /* LaunchScreen.storyboard */; };
 		8F955FEC2698E835003DD8F1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F955FEB2698E835003DD8F1 /* GoogleService-Info.plist */; };
@@ -21,6 +20,9 @@
 		8F955FF2269A88DE003DD8F1 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F955FF1269A88DE003DD8F1 /* Helpers.swift */; };
 		8F955FF4269AB4FB003DD8F1 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F955FF3269AB4FB003DD8F1 /* ForgotPasswordViewController.swift */; };
 		8F955FF6269AB5B5003DD8F1 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F955FF5269AB5B5003DD8F1 /* ResetPasswordViewController.swift */; };
+		8FB6D35026B4D0A300FD4ECA /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB6D34F26B4D0A300FD4ECA /* Setting.swift */; };
+		8FB6D35426B4D0C300FD4ECA /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB6D35326B4D0C300FD4ECA /* Filter.swift */; };
+		8FC68E1126B4FC3C007B83A2 /* WhatTheSport.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8FC68E0F26B4FC3C007B83A2 /* WhatTheSport.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,7 +32,6 @@
 		8F955FD42698E4A2003DD8F1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8F955FD62698E4A2003DD8F1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8F955FD92698E4A2003DD8F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		8F955FDC2698E4A2003DD8F1 /* WhatTheSport.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WhatTheSport.xcdatamodel; sourceTree = "<group>"; };
 		8F955FDE2698E4A6003DD8F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8F955FE12698E4A6003DD8F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8F955FE32698E4A6003DD8F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -40,6 +41,10 @@
 		8F955FF1269A88DE003DD8F1 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		8F955FF3269AB4FB003DD8F1 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		8F955FF5269AB5B5003DD8F1 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		8FB6D34F26B4D0A300FD4ECA /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
+		8FB6D35326B4D0C300FD4ECA /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
+		8FC68E0926B4EACF007B83A2 /* WhatTheSport.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WhatTheSport.entitlements; sourceTree = "<group>"; };
+		8FC68E1026B4FC3C007B83A2 /* WhatTheSport.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WhatTheSport.xcdatamodel; sourceTree = "<group>"; };
 		F8E07A5013DEBC95359E872D /* Pods-WhatTheSport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatTheSport.release.xcconfig"; path = "Target Support Files/Pods-WhatTheSport/Pods-WhatTheSport.release.xcconfig"; sourceTree = "<group>"; };
 		FE5519523DB56ACCFCB5B20D /* Pods-WhatTheSport.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatTheSport.debug.xcconfig"; path = "Target Support Files/Pods-WhatTheSport/Pods-WhatTheSport.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -77,6 +82,9 @@
 		8F955FD12698E4A2003DD8F1 /* WhatTheSport */ = {
 			isa = PBXGroup;
 			children = (
+				8FC68E0926B4EACF007B83A2 /* WhatTheSport.entitlements */,
+				8FB6D34A26B4D01200FD4ECA /* enums */,
+				8FB6D34726B4CF1100FD4ECA /* Models */,
 				8F955FD22698E4A2003DD8F1 /* AppDelegate.swift */,
 				8F955FD42698E4A2003DD8F1 /* SceneDelegate.swift */,
 				8F955FD62698E4A2003DD8F1 /* ViewController.swift */,
@@ -89,10 +97,26 @@
 				8F955FDE2698E4A6003DD8F1 /* Assets.xcassets */,
 				8F955FE02698E4A6003DD8F1 /* LaunchScreen.storyboard */,
 				8F955FE32698E4A6003DD8F1 /* Info.plist */,
-				8F955FDB2698E4A2003DD8F1 /* WhatTheSport.xcdatamodeld */,
+				8FC68E0F26B4FC3C007B83A2 /* WhatTheSport.xcdatamodeld */,
 				8F955FEB2698E835003DD8F1 /* GoogleService-Info.plist */,
 			);
 			path = WhatTheSport;
+			sourceTree = "<group>";
+		};
+		8FB6D34726B4CF1100FD4ECA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8FB6D34A26B4D01200FD4ECA /* enums */ = {
+			isa = PBXGroup;
+			children = (
+				8FB6D34F26B4D0A300FD4ECA /* Setting.swift */,
+				8FB6D35326B4D0C300FD4ECA /* Filter.swift */,
+			);
+			path = enums;
 			sourceTree = "<group>";
 		};
 		A1684AE59EBBBA1E256D7BFC /* Pods */ = {
@@ -228,13 +252,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F955FF6269AB5B5003DD8F1 /* ResetPasswordViewController.swift in Sources */,
+				8FC68E1126B4FC3C007B83A2 /* WhatTheSport.xcdatamodeld in Sources */,
 				8F955FF4269AB4FB003DD8F1 /* ForgotPasswordViewController.swift in Sources */,
+				8FB6D35026B4D0A300FD4ECA /* Setting.swift in Sources */,
 				8F955FF2269A88DE003DD8F1 /* Helpers.swift in Sources */,
 				8F955FD72698E4A2003DD8F1 /* ViewController.swift in Sources */,
 				8F955FD32698E4A2003DD8F1 /* AppDelegate.swift in Sources */,
 				8F955FF0269A848C003DD8F1 /* SignInViewController.swift in Sources */,
-				8F955FDD2698E4A2003DD8F1 /* WhatTheSport.xcdatamodeld in Sources */,
 				8F955FD52698E4A2003DD8F1 /* SceneDelegate.swift in Sources */,
+				8FB6D35426B4D0C300FD4ECA /* Filter.swift in Sources */,
 				8F955FEE269A8443003DD8F1 /* SignUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -383,6 +409,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WhatTheSport/WhatTheSport.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U4HHHG3282;
 				INFOPLIST_FILE = WhatTheSport/Info.plist;
@@ -403,6 +430,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WhatTheSport/WhatTheSport.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U4HHHG3282;
 				INFOPLIST_FILE = WhatTheSport/Info.plist;
@@ -441,12 +469,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		8F955FDB2698E4A2003DD8F1 /* WhatTheSport.xcdatamodeld */ = {
+		8FC68E0F26B4FC3C007B83A2 /* WhatTheSport.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				8F955FDC2698E4A2003DD8F1 /* WhatTheSport.xcdatamodel */,
+				8FC68E1026B4FC3C007B83A2 /* WhatTheSport.xcdatamodel */,
 			);
-			currentVersion = 8F955FDC2698E4A2003DD8F1 /* WhatTheSport.xcdatamodel */;
+			currentVersion = 8FC68E1026B4FC3C007B83A2 /* WhatTheSport.xcdatamodel */;
 			path = WhatTheSport.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

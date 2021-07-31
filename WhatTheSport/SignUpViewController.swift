@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import CoreData
+import FirebaseStorage
 
 protocol Transitioner {
     func signIn (email: String, password: String)
@@ -24,6 +26,7 @@ class SignUpViewController: UIViewController, Transitioner {
     var constraint: NSLayoutConstraint!
     var logo: UIImageView!
     var signInLabel: UIButton!
+    var user: NSManagedObject?
     
     let fieldSpacing: CGFloat = 15
     let fieldHeight: CGFloat = 45
@@ -33,6 +36,7 @@ class SignUpViewController: UIViewController, Transitioner {
     }
     
     override func viewDidLoad() {
+        clearCoreData()
         super.viewDidLoad()
         
         var constraints: [NSLayoutConstraint] = []
@@ -147,9 +151,13 @@ class SignUpViewController: UIViewController, Transitioner {
     @objc func signUpPress(sender: UIButton!) {
         guard let email = emailField.text,
               let password = passwordField.text,
+              let username = usernameField.text,
               email.count > 0,
-              password.count > 0
+              password.count > 0,
+              username.count > 0
         else {
+          let controller = UI.createAlert(title: "Error", msg: "fields must not be blank")
+          self.present(controller, animated: true, completion: nil)
           return
         }
         
@@ -157,12 +165,34 @@ class SignUpViewController: UIViewController, Transitioner {
         confirm == password {
             Auth.auth().createUser(withEmail: email, password: password) { user, error in
                 if error == nil {
+                    let db = Firestore.firestore()
+                    let userID = user!.user.uid
+                    
+                    //testing TODO: DELETE
+                    let storage = Storage.storage()
+                    
+                    db.collection("users").addDocument(data: ["username": username, "sports": [String](),
+                                                              "teams": [String](), "postIDs": [String](),
+                                                              "uid": userID ]) { (error) in
+                        if error != nil {
+                            let controller = UI.createAlert(title: "Error", msg: error!.localizedDescription)
+                            self.present(controller, animated: true, completion: nil)
+                        }
+                    }
+                    self.user = self.createUser(userID: userID)
+                    SignUpViewController.saveContext()
+                    
+                    self.printUserInfo(userID: userID)
+
                     self.signIn (email: email, password: password)
                 } else {
                     let controller = UI.createAlert(title: "Error", msg: error!.localizedDescription)
                     self.present(controller, animated: true, completion: nil)
                 }
             }
+        } else {
+            let controller = UI.createAlert(title: "Error", msg: "Passwords do not match")
+            self.present(controller, animated: true, completion: nil)
         }
     }
     
@@ -171,11 +201,117 @@ class SignUpViewController: UIViewController, Transitioner {
           user, error in
           if error == nil {
             //TODO: segue to home page
+            print("signed in")
           } else {
             let controller = UI.createAlert(title: "Error", msg: error!.localizedDescription)
             self.present(controller, animated: true, completion: nil)
           }
         }
+    }
+    
+    func createUser(userID: String) -> NSManagedObject {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let user = NSEntityDescription.insertNewObject(forEntityName: "User", into: context) as! User
+        
+        // Set the attribute values
+        user.setValue(userID, forKey: "userID")
+        let settings = NSEntityDescription.insertNewObject(forEntityName: "Setting", into: context) as! Setting
+        let filters = NSEntityDescription.insertNewObject(forEntityName: "Filter", into: context) as! Filter
+        user.filters = filters
+        user.settings = settings
+        
+        return user
+    }
+    
+    func printUserInfo(userID: String) {
+        let user  = retrieveUser(userID: userID) as! User
+        print("core user info")
+        print("\tuserID: \(user.userID)")
+        print("\tsettings: \(user.settings)")
+        print("\tfilters: \(user.filters)")
+        
+        let db = Firestore.firestore()
+        let ref = db.collection("users")
+        let docRef = ref.document(userID)
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                print("Firestore user info")
+                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                print("\tDoc data: \(dataDescription)")
+            } else {
+                print ("user not in Firestore")
+            }
+        }
+    }
+    
+    func retrieveUser(userID: String) -> NSManagedObject {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName:"User")
+        var fetchedResults:[NSManagedObject]? = nil
+        
+        let predicate = NSPredicate(format: "userID == '\(userID)'")
+        request.predicate = predicate
+        
+        do {
+            try fetchedResults = context.fetch(request) as? [NSManagedObject]
+        } catch {
+            // If an error occurs
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+        return(fetchedResults)![0]
+    }
+    
+    static func saveContext(){
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        // Commit the changes
+        do {
+            try context.save()
+        } catch {
+            // If an error occurs
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+    }
+    
+    func clearEntity(entity: String) {
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
+        var fetchedResults:[NSManagedObject]
+        
+        do {
+            try fetchedResults = context.fetch(request) as! [NSManagedObject]
+            
+            if fetchedResults.count > 0 {
+                
+                for result:AnyObject in fetchedResults {
+                    context.delete(result as! NSManagedObject)
+                }
+            }
+            try context.save()
+            
+        } catch {
+            // If an error occurs
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+    }
+    
+    func clearCoreData() {
+        clearEntity(entity: "User")
+        clearEntity(entity: "Setting")
+        clearEntity(entity: "Filter")
     }
     
 }

@@ -28,12 +28,16 @@ extension UIColor {
 
 struct Constants {
     struct Colors {
-        static var lightOrange = 0xfce9d4
-        static var orange = 0xff9500
+        static let lightOrange = 0xfce9d4
+        static let orange = 0xff9500
+    }
+    struct Defaults {
+        //static let settings: NSDictionary = [Setting.setting1: false, Setting.setting2: false, Setting.setting3: false]
+        //static let filters: NSDictionary = [Filter.filter1: false, Filter.filter2: false, Filter.filter3: false]
     }
     struct Field {
-        static var spacing: CGFloat = 15.0
-        static var height: CGFloat = 45.0
+        static let spacing: CGFloat = 15.0
+        static let height: CGFloat = 45.0
     }
 }
 
