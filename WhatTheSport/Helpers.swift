@@ -82,7 +82,7 @@ class LinkButton: UIButton {
     
     convenience init(title: String) {
         self.init()
-        let signInAttributes: [NSAttributedString.Key: Any] = [/*.underlineStyle: NSUnderlineStyle.single.rawValue, */ .font: UIFont.systemFont(ofSize: 16)]
+        let signInAttributes: [NSAttributedString.Key: Any] = [/*.underlineStyle: NSUnderlineStyle.single.rawValue, */ .font: UIFont.systemFont(ofSize: 18)]
         self.setAttributedTitle(NSMutableAttributedString(string: title, attributes: signInAttributes), for: .normal)
     }
     

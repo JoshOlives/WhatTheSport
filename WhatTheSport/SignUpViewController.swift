@@ -46,6 +46,8 @@ class SignUpViewController: UIViewController, Transitioner {
         
         logo = UIImageView(frame: .zero)
         logo.image = UIImage(named: "splash")
+        
+        uploadImage(image: logo.image!.pngData()!)
         self.view.addSubview(logo)
         
         logo.translatesAutoresizingMaskIntoConstraints = false
@@ -152,9 +154,6 @@ class SignUpViewController: UIViewController, Transitioner {
                     let db = Firestore.firestore()
                     let userID = user!.user.uid
                     
-                    //testing TODO: DELETE
-                    let storage = Storage.storage()
-                    
                     db.collection("users").addDocument(data: ["username": username, "sports": [String](),
                                                               "teams": [String](), "postIDs": [String](),
                                                               "uid": userID ]) { (error) in
@@ -228,6 +227,36 @@ class SignUpViewController: UIViewController, Transitioner {
                 print ("user not in Firestore")
             }
         }
+    }
+    
+    func uploadImage(image: Data) {
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        // Data in memory
+        let data = image
+
+        // Create a reference to the file you want to upload
+        let splashref = storageRef.child("images/splash.png")
+
+        // Upload the file to the path "images/rivers.jpg"
+        splashref.putData(data, metadata: nil) { (metadata, error) in
+          guard error == nil else {
+            // Uh-oh, an error occurred!
+            print("\n\n\n\nerror uploading picture")
+            return
+          }
+            splashref.downloadURL { (url, error) in
+                guard let url = url, error == nil else {
+                  // Uh-oh, an error occurred!
+                    print("\n\n\n\nerror downloading url")
+                  return
+                }
+                
+                let urlString = url.absoluteURL
+                //put urlString in Firestore User
+            }
+        }
+        print("finish with uploading")
     }
     
     func retrieveUser(userID: String) -> NSManagedObject {
