@@ -43,7 +43,6 @@
 		8F955FF5269AB5B5003DD8F1 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		8FB6D34F26B4D0A300FD4ECA /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		8FB6D35326B4D0C300FD4ECA /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
-		8FC68E0926B4EACF007B83A2 /* WhatTheSport.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WhatTheSport.entitlements; sourceTree = "<group>"; };
 		8FC68E1026B4FC3C007B83A2 /* WhatTheSport.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WhatTheSport.xcdatamodel; sourceTree = "<group>"; };
 		F8E07A5013DEBC95359E872D /* Pods-WhatTheSport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatTheSport.release.xcconfig"; path = "Target Support Files/Pods-WhatTheSport/Pods-WhatTheSport.release.xcconfig"; sourceTree = "<group>"; };
 		FE5519523DB56ACCFCB5B20D /* Pods-WhatTheSport.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatTheSport.debug.xcconfig"; path = "Target Support Files/Pods-WhatTheSport/Pods-WhatTheSport.debug.xcconfig"; sourceTree = "<group>"; };
@@ -82,7 +81,6 @@
 		8F955FD12698E4A2003DD8F1 /* WhatTheSport */ = {
 			isa = PBXGroup;
 			children = (
-				8FC68E0926B4EACF007B83A2 /* WhatTheSport.entitlements */,
 				8FB6D34A26B4D01200FD4ECA /* enums */,
 				8FB6D34726B4CF1100FD4ECA /* Models */,
 				8F955FD22698E4A2003DD8F1 /* AppDelegate.swift */,

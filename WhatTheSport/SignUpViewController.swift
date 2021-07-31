@@ -36,7 +36,7 @@ class SignUpViewController: UIViewController, Transitioner {
     }
     
     override func viewDidLoad() {
-        clearCoreData()
+        //clearCoreData()
         super.viewDidLoad()
         
         var constraints: [NSLayoutConstraint] = []
@@ -54,9 +54,7 @@ class SignUpViewController: UIViewController, Transitioner {
         constraints.append(logo.widthAnchor.constraint(equalToConstant: view.bounds.width-50))
         constraints.append(logo.heightAnchor.constraint(equalToConstant: 125))
         
-        emailField = UITextField(frame: .zero)
-        emailField.placeholder = "  Email"
-        emailField.backgroundColor = .white
+        emailField = TextField(placeholder: "Email")
         self.view.addSubview(emailField)
         
         emailField.translatesAutoresizingMaskIntoConstraints = false
@@ -65,9 +63,7 @@ class SignUpViewController: UIViewController, Transitioner {
         constraints.append(emailField.widthAnchor.constraint(equalToConstant: view.bounds.width-50))
         constraints.append(emailField.heightAnchor.constraint(equalToConstant: fieldHeight))
         
-        usernameField = UITextField(frame: .zero)
-        usernameField.placeholder = "  Choose username"
-        usernameField.backgroundColor = .white
+        usernameField = TextField(placeholder: "Choose username")
         self.view.addSubview(usernameField)
     
         usernameField.translatesAutoresizingMaskIntoConstraints = false
@@ -76,9 +72,7 @@ class SignUpViewController: UIViewController, Transitioner {
         constraints.append(usernameField.widthAnchor.constraint(equalTo: emailField.widthAnchor))
         constraints.append(usernameField.heightAnchor.constraint(equalTo: emailField.heightAnchor))
         
-        passwordField = UITextField(frame: .zero)
-        passwordField.placeholder = "  Choose password"
-        passwordField.backgroundColor = .white
+        passwordField = SecureTextField(placeholder: "Choose password")
         self.view.addSubview(passwordField)
         
         passwordField.translatesAutoresizingMaskIntoConstraints = false
@@ -87,9 +81,7 @@ class SignUpViewController: UIViewController, Transitioner {
         constraints.append(passwordField.widthAnchor.constraint(equalTo: emailField.widthAnchor))
         constraints.append(passwordField.heightAnchor.constraint(equalTo: emailField.heightAnchor))
         
-        confirmField = UITextField(frame: .zero)
-        confirmField.placeholder = "  Repeat password"
-        confirmField.backgroundColor = .white
+        confirmField = SecureTextField(placeholder: "Repeat password")
         self.view.addSubview(confirmField)
         
         confirmField.translatesAutoresizingMaskIntoConstraints = false
@@ -98,11 +90,7 @@ class SignUpViewController: UIViewController, Transitioner {
         constraints.append(confirmField.widthAnchor.constraint(equalTo: emailField.widthAnchor))
         constraints.append(confirmField.heightAnchor.constraint(equalTo: emailField.heightAnchor))
         
-        signUpButton = UIButton(type: .roundedRect)
-        signUpButton.setTitle("Sign Up", for: .normal)
-        signUpButton.backgroundColor = UIColor(rgb: Constants.Colors.orange)
-        signUpButton.setTitleColor(.white, for: .normal)
-        signUpButton.layer.cornerRadius = 20.0
+        signUpButton = Button(title: "Sign Up")
         signUpButton.addTarget(self, action: #selector(signUpPress), for: .touchUpInside)
         self.view.addSubview(signUpButton)
         
@@ -120,12 +108,8 @@ class SignUpViewController: UIViewController, Transitioner {
 //        signInLabel.isUserInteractionEnabled = true
 //        signInLabel.addGestureRecognizer(tap)
 //        self.view.addSubview(signInLabel)
-        signInLabel = UIButton(type: .roundedRect)
-        signInLabel.backgroundColor = UIColor(rgb: Constants.Colors.orange).withAlphaComponent(0)
-        signInLabel.setTitleColor(.blue, for: .normal)
+        signInLabel = LinkButton(title: "Sign In")
         signInLabel.addTarget(self, action: #selector(signInPress), for: .touchUpInside)
-        let signInAttributes: [NSAttributedString.Key: Any] = [.underlineStyle: NSUnderlineStyle.single.rawValue, .font: UIFont.systemFont(ofSize: 16)]
-        signInLabel.setAttributedTitle(NSMutableAttributedString(string: "Sign In", attributes: signInAttributes), for: .normal)
         self.view.addSubview(signInLabel)
         
         signInLabel.translatesAutoresizingMaskIntoConstraints = false
