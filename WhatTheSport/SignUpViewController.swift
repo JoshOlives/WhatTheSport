@@ -28,9 +28,6 @@ class SignUpViewController: UIViewController, Transitioner {
     var signInLabel: UIButton!
     var user: NSManagedObject?
     
-    let fieldSpacing: CGFloat = 15
-    let fieldHeight: CGFloat = 45
-    
     var urlString: String = "https://firebasestorage.googleapis.com/v0/b/whatthesport-59d4a.appspot.com/o/images%2Fsplash.png?alt=media&token=23281d6d-19cb-4278-83b9-d411df8917d4"
     
     override func loadView() {
@@ -66,14 +63,14 @@ class SignUpViewController: UIViewController, Transitioner {
         constraints.append(emailField.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 125))
         constraints.append(emailField.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor))
         constraints.append(emailField.widthAnchor.constraint(equalToConstant: view.bounds.width-50))
-        constraints.append(emailField.heightAnchor.constraint(equalToConstant: fieldHeight))
+        constraints.append(emailField.heightAnchor.constraint(equalToConstant: Constants.Field.height))
         
         usernameField = TextField(placeholder: "Choose username")
         self.view.addSubview(usernameField)
     
         usernameField.translatesAutoresizingMaskIntoConstraints = false
         constraints.append(usernameField.centerXAnchor.constraint(equalTo: emailField.centerXAnchor))
-        constraints.append(usernameField.topAnchor.constraint(equalTo: emailField.bottomAnchor, constant: fieldSpacing))
+        constraints.append(usernameField.topAnchor.constraint(equalTo: emailField.bottomAnchor, constant: Constants.Field.spacing))
         constraints.append(usernameField.widthAnchor.constraint(equalTo: emailField.widthAnchor))
         constraints.append(usernameField.heightAnchor.constraint(equalTo: emailField.heightAnchor))
         
@@ -82,7 +79,7 @@ class SignUpViewController: UIViewController, Transitioner {
         
         passwordField.translatesAutoresizingMaskIntoConstraints = false
         constraints.append(passwordField.centerXAnchor.constraint(equalTo: usernameField.centerXAnchor))
-        constraints.append(passwordField.topAnchor.constraint(equalTo: usernameField.bottomAnchor, constant: fieldSpacing))
+        constraints.append(passwordField.topAnchor.constraint(equalTo: usernameField.bottomAnchor, constant: Constants.Field.spacing))
         constraints.append(passwordField.widthAnchor.constraint(equalTo: emailField.widthAnchor))
         constraints.append(passwordField.heightAnchor.constraint(equalTo: emailField.heightAnchor))
         
@@ -91,7 +88,7 @@ class SignUpViewController: UIViewController, Transitioner {
         
         confirmField.translatesAutoresizingMaskIntoConstraints = false
         constraints.append(confirmField.centerXAnchor.constraint(equalTo: passwordField.centerXAnchor))
-        constraints.append(confirmField.topAnchor.constraint(equalTo: passwordField.bottomAnchor, constant: fieldSpacing))
+        constraints.append(confirmField.topAnchor.constraint(equalTo: passwordField.bottomAnchor, constant: Constants.Field.spacing))
         constraints.append(confirmField.widthAnchor.constraint(equalTo: emailField.widthAnchor))
         constraints.append(confirmField.heightAnchor.constraint(equalTo: emailField.heightAnchor))
         
@@ -101,7 +98,7 @@ class SignUpViewController: UIViewController, Transitioner {
         
         signUpButton.translatesAutoresizingMaskIntoConstraints = false
         constraints.append(signUpButton.centerXAnchor.constraint(equalTo: confirmField.centerXAnchor))
-        constraints.append(signUpButton.topAnchor.constraint(equalTo: confirmField.bottomAnchor, constant: fieldSpacing * 1.75))
+        constraints.append(signUpButton.topAnchor.constraint(equalTo: confirmField.bottomAnchor, constant: Constants.Field.spacing * 1.75))
         constraints.append(signUpButton.widthAnchor.constraint(equalTo: emailField.widthAnchor))
         constraints.append(signUpButton.heightAnchor.constraint(equalTo: emailField.heightAnchor))
         

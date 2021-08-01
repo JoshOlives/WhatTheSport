@@ -82,7 +82,6 @@
 			isa = PBXGroup;
 			children = (
 				8FB6D34A26B4D01200FD4ECA /* enums */,
-				8FB6D34726B4CF1100FD4ECA /* Models */,
 				8F955FD22698E4A2003DD8F1 /* AppDelegate.swift */,
 				8F955FD42698E4A2003DD8F1 /* SceneDelegate.swift */,
 				8F955FD62698E4A2003DD8F1 /* ViewController.swift */,
@@ -99,13 +98,6 @@
 				8F955FEB2698E835003DD8F1 /* GoogleService-Info.plist */,
 			);
 			path = WhatTheSport;
-			sourceTree = "<group>";
-		};
-		8FB6D34726B4CF1100FD4ECA /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		8FB6D34A26B4D01200FD4ECA /* enums */ = {
