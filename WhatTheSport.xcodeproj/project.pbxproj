@@ -21,6 +21,11 @@
 		8F955FF2269A88DE003DD8F1 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F955FF1269A88DE003DD8F1 /* Helpers.swift */; };
 		8F955FF4269AB4FB003DD8F1 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F955FF3269AB4FB003DD8F1 /* ForgotPasswordViewController.swift */; };
 		8F955FF6269AB5B5003DD8F1 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F955FF5269AB5B5003DD8F1 /* ResetPasswordViewController.swift */; };
+		D30ED63E26B53507008BE245 /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30ED63D26B53507008BE245 /* CreatePostViewController.swift */; };
+		D36AB84F26AD39A3004C34CF /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36AB84E26AD39A3004C34CF /* FeedViewController.swift */; };
+		D39761F626AFBC900012FF1F /* FeedObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39761F526AFBC900012FF1F /* FeedObjects.swift */; };
+		D39761F826AFBCC70012FF1F /* TeamObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39761F726AFBCC70012FF1F /* TeamObjects.swift */; };
+		D39761FC26B0F6080012FF1F /* FeedCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39761FB26B0F6080012FF1F /* FeedCells.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +45,11 @@
 		8F955FF1269A88DE003DD8F1 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		8F955FF3269AB4FB003DD8F1 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		8F955FF5269AB5B5003DD8F1 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		D30ED63D26B53507008BE245 /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
+		D36AB84E26AD39A3004C34CF /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		D39761F526AFBC900012FF1F /* FeedObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedObjects.swift; sourceTree = "<group>"; };
+		D39761F726AFBCC70012FF1F /* TeamObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamObjects.swift; sourceTree = "<group>"; };
+		D39761FB26B0F6080012FF1F /* FeedCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCells.swift; sourceTree = "<group>"; };
 		F8E07A5013DEBC95359E872D /* Pods-WhatTheSport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatTheSport.release.xcconfig"; path = "Target Support Files/Pods-WhatTheSport/Pods-WhatTheSport.release.xcconfig"; sourceTree = "<group>"; };
 		FE5519523DB56ACCFCB5B20D /* Pods-WhatTheSport.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatTheSport.debug.xcconfig"; path = "Target Support Files/Pods-WhatTheSport/Pods-WhatTheSport.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,6 +91,11 @@
 				8F955FD42698E4A2003DD8F1 /* SceneDelegate.swift */,
 				8F955FD62698E4A2003DD8F1 /* ViewController.swift */,
 				8F955FED269A8443003DD8F1 /* SignUpViewController.swift */,
+				D36AB84E26AD39A3004C34CF /* FeedViewController.swift */,
+				D30ED63D26B53507008BE245 /* CreatePostViewController.swift */,
+				D39761F526AFBC900012FF1F /* FeedObjects.swift */,
+				D39761FB26B0F6080012FF1F /* FeedCells.swift */,
+				D39761F726AFBCC70012FF1F /* TeamObjects.swift */,
 				8F955FF1269A88DE003DD8F1 /* Helpers.swift */,
 				8F955FEF269A848C003DD8F1 /* SignInViewController.swift */,
 				8F955FF3269AB4FB003DD8F1 /* ForgotPasswordViewController.swift */,
@@ -228,12 +243,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F955FF6269AB5B5003DD8F1 /* ResetPasswordViewController.swift in Sources */,
+				D39761FC26B0F6080012FF1F /* FeedCells.swift in Sources */,
 				8F955FF4269AB4FB003DD8F1 /* ForgotPasswordViewController.swift in Sources */,
+				D36AB84F26AD39A3004C34CF /* FeedViewController.swift in Sources */,
 				8F955FF2269A88DE003DD8F1 /* Helpers.swift in Sources */,
 				8F955FD72698E4A2003DD8F1 /* ViewController.swift in Sources */,
 				8F955FD32698E4A2003DD8F1 /* AppDelegate.swift in Sources */,
+				D39761F626AFBC900012FF1F /* FeedObjects.swift in Sources */,
+				D30ED63E26B53507008BE245 /* CreatePostViewController.swift in Sources */,
 				8F955FF0269A848C003DD8F1 /* SignInViewController.swift in Sources */,
 				8F955FDD2698E4A2003DD8F1 /* WhatTheSport.xcdatamodeld in Sources */,
+				D39761F826AFBCC70012FF1F /* TeamObjects.swift in Sources */,
 				8F955FD52698E4A2003DD8F1 /* SceneDelegate.swift in Sources */,
 				8F955FEE269A8443003DD8F1 /* SignUpViewController.swift in Sources */,
 			);
