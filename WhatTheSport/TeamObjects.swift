@@ -7,24 +7,24 @@
 
 import Foundation
 
+
 enum Sport {
     case basketball, football, baseball
 }
 
+
 class Team {
-    private var name: String
-    private var sport: Sport
+    var name: String
+    var sport: Sport
+    var imageID: String
     
-    init(teamName: String, teamSport: Sport) {
+    init(_ teamName: String, _ teamSport: Sport, _ teamImageID: String) {
         self.name = teamName
         self.sport = teamSport
-    }
-    
-    func getName() -> String {
-        return self.name
-    }
-    
-    func getSport() -> Sport {
-        return self.sport
+        self.imageID = teamImageID
     }
 }
+
+let teamsList: [Team] = [Team("Phoenix Suns", Sport.basketball, "sunsLogo"), Team("Denver Nuggets", Sport.basketball, "nuggetsLogo"), Team("Los Angeles Lakers", Sport.basketball, "lakersLogo")]
+
+let sportsList: [Sport] = [Sport.basketball, Sport.football, Sport.baseball]

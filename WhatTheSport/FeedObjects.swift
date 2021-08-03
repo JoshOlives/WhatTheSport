@@ -8,26 +8,24 @@
 import Foundation
 
 class Post {
-    private var sport: Sport?
-    private var team: Team?
-    private var content: String
-    private var userID: String
+    var postID: String
+    var sport: Sport?
+    var team: Team?
+    var content: String
+    var userID: String
+    var username: String
+    var numLikes: Int
+    var numComments: Int
     
-    init(contentVal: String) {
+    init(postIDVal: String, sportVal: Sport, teamVal: Team?, contentVal: String, userIDVal: String, usernameVal: String, numLikesVal: Int, numCommentsVal: Int) {
+        self.postID = postIDVal
+        self.sport = sportVal
+        self.team = teamVal
         self.content = contentVal
-        self.userID = "testing"
-    }
-    
-    func getSport() -> Sport? {
-        return self.sport
-    }
-    
-    func getTeam() -> Team? {
-        return self.team
-    }
-    
-    func getContent() -> String {
-        return self.content
+        self.userID = userIDVal
+        self.username = usernameVal
+        self.numLikes = numLikesVal
+        self.numComments = numCommentsVal
     }
 }
 

@@ -16,54 +16,12 @@ let testContent = "This is some text content that I am writing so that I can see
 class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     private let feedDB = Firestore.firestore().collection("posts")
     
-    var feedStackView: UIStackView!
+    var createPostVC: CreatePostViewController!
     var feedSegmentedControl: UISegmentedControl!
     var feedTableView: UITableView!
     var addPostBarButton: UIBarButtonItem!
     var filterBarButton: UIBarButtonItem!
-    var posts: [String] = []
-    
-    override func loadView() {
-        super.loadView()
-        var constraints: [NSLayoutConstraint] = []
-        let safeArea = self.view.bounds.inset(by: view.safeAreaInsets)
-        print(safeArea.height)
-        print(safeArea.width)
-        self.feedStackView = UIStackView(frame: .zero)
-        self.feedStackView.translatesAutoresizingMaskIntoConstraints = false
-        self.feedStackView.distribution = .fillEqually
-        self.feedStackView.axis = .vertical
-        self.view.addSubview(feedStackView)
-        constraints.append(self.feedStackView.heightAnchor.constraint(equalToConstant: safeArea.height))
-        constraints.append(self.feedStackView.widthAnchor.constraint(equalToConstant: safeArea.width))
-        
-//        self.feedSegmentedControl = UISegmentedControl(frame: .zero)
-//        self.feedSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
-//        self.feedSegmentedControl.backgroundColor = UIColor(rgb: Constants.Colors.orange)
-//        self.feedSegmentedControl.insertSegment(withTitle: "Test1", at: 0, animated: true)
-//        self.feedSegmentedControl.insertSegment(withTitle: "Test2", at: 1, animated: true)
-//        self.feedSegmentedControl.setContentCompressionResistancePriority(UILayoutPriority(999), for: .vertical)
-//        self.feedSegmentedControl.setContentHuggingPriority(UILayoutPriority(999), for: .vertical)
-//        constraints.append(self.feedSegmentedControl.heightAnchor.constraint(equalToConstant: Constants.RadioControl.height))
-//        constraints.append(self.feedSegmentedControl.widthAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.widthAnchor))
-        
-        self.feedTableView = UITableView(frame: feedStackView.bounds)
-        self.feedTableView.translatesAutoresizingMaskIntoConstraints = false
-        self.feedTableView.register(PostCell.self, forCellReuseIdentifier: cellIdentifier)
-        self.feedTableView.dataSource = self
-        self.feedTableView.delegate = self
-        self.feedTableView.setContentCompressionResistancePriority(UILayoutPriority(50), for: .vertical)
-        self.feedTableView.setContentHuggingPriority(UILayoutPriority(50), for: .vertical)
-        constraints.append(self.feedTableView.heightAnchor.constraint(equalTo: self.feedStackView.heightAnchor))
-        constraints.append(self.feedTableView.widthAnchor.constraint(equalTo: self.feedStackView.widthAnchor))
-        
-        self.feedStackView.addArrangedSubview(self.feedTableView)
-//        self.feedStackView.addArrangedSubview(self.feedSegmentedControl)
-        
-        
-        
-        NSLayoutConstraint.activate(constraints)
-    }
+    var posts: [Post] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,13 +30,49 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.addPostBarButton.tintColor = UIColor.white
         self.navigationItem.setRightBarButtonItems([addPostBarButton], animated: true)
         getPosts()
+        self.view.backgroundColor = UIColor(rgb: Constants.Colors.orange)
+    }
+    
+    override func viewSafeAreaInsetsDidChange() {
+        var constraints: [NSLayoutConstraint] = []
+        let safeArea = self.view.safeAreaLayoutGuide
+        
+        self.feedSegmentedControl = UISegmentedControl(frame: .zero)
+        self.feedSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        self.feedSegmentedControl.backgroundColor = UIColor(rgb: Constants.Colors.orange)
+        self.feedSegmentedControl.insertSegment(withTitle: "Test1", at: 0, animated: true)
+        self.feedSegmentedControl.insertSegment(withTitle: "Test2", at: 1, animated: true)
+        self.view.addSubview(self.feedSegmentedControl)
+        constraints.append(self.feedSegmentedControl.heightAnchor.constraint(equalToConstant: Constants.RadioControl.height))
+        constraints.append(self.feedSegmentedControl.widthAnchor.constraint(equalTo: safeArea.widthAnchor))
+        constraints.append(self.feedSegmentedControl.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor))
+        
+        self.feedTableView = UITableView(frame: .zero)
+        self.feedTableView.translatesAutoresizingMaskIntoConstraints = false
+        self.feedTableView.register(PostCell.self, forCellReuseIdentifier: cellIdentifier)
+        self.feedTableView.dataSource = self
+        self.feedTableView.delegate = self
+        self.view.addSubview(self.feedTableView)
+        constraints.append(self.feedTableView.heightAnchor.constraint(equalTo: safeArea.heightAnchor, constant: -Constants.RadioControl.height))
+        constraints.append(self.feedTableView.widthAnchor.constraint(equalTo: safeArea.widthAnchor))
+        constraints.append(self.feedTableView.topAnchor.constraint(equalTo: safeArea.topAnchor))
+        
         self.feedTableView.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
-        self.view.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
+        
+        
+        
+        NSLayoutConstraint.activate(constraints)
     }
     
     @objc
     func queueCreatePost(_ _: UIBarButtonItem) {
-        present(CreatePostViewController(), animated: true, completion: nil)
+        if self.createPostVC == nil {
+            self.createPostVC = CreatePostViewController()
+        }
+        
+        if let navigator = navigationController {
+            navigator.pushViewController(self.createPostVC, animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -89,7 +83,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath as IndexPath) as! PostCell
         let row = indexPath.row
         let currPost = posts[row]
-        cell.setValues(usernameVal: currPost, contentVal: testContent)
+        cell.setValues(postArg: currPost)
         cell.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
         return cell
     }
@@ -104,7 +98,9 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 print(err)
             } else {
                 for post in querySnapshot!.documents {
-                    self.posts.append(post.documentID)
+                    let teamIndex = post.get("team") as! Int
+                    let team: Team? = teamIndex >= 0 ? teamsList[teamIndex] : nil
+                    self.posts.append(Post(postIDVal: post.documentID, sportVal: sportsList[post.get("sport") as! Int], teamVal: team, contentVal: post.get("content") as! String, userIDVal: post.get("userID") as! String, usernameVal: post.get("username") as! String, numLikesVal: post.get("numLikes") as! Int, numCommentsVal: post.get("numComments") as! Int))
                 }
                 self.feedTableView.reloadData()
             }
