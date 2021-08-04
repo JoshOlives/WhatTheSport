@@ -11,11 +11,7 @@ import Firebase
 import CoreData
 import FirebaseStorage
 
-protocol Transitioner {
-    func signIn (email: String, password: String)
-}
-
-class SignUpViewController: UIViewController, Transitioner {
+class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate {
 
     var emailField: UITextField!
     var usernameField: UITextField!
@@ -23,12 +19,11 @@ class SignUpViewController: UIViewController, Transitioner {
     var confirmField: UITextField!
     var signUpButton: UIButton!
     var signInVC: SignInViewController!
+    var nextVC: SettingViewController!
     var constraint: NSLayoutConstraint!
     var logo: UIImageView!
     var signInLabel: UIButton!
     var user: NSManagedObject?
-    
-    var urlString: String = "https://firebasestorage.googleapis.com/v0/b/whatthesport-59d4a.appspot.com/o/images%2Fsplash.png?alt=media&token=23281d6d-19cb-4278-83b9-d411df8917d4"
     
     override func loadView() {
         super.loadView()
@@ -39,6 +34,10 @@ class SignUpViewController: UIViewController, Transitioner {
         super.viewDidLoad()
         
         var constraints: [NSLayoutConstraint] = []
+        
+        if let navigator = navigationController {
+            navigator.navigationBar.tintColor = .white
+        }
         
         view.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
         self.title = "Sign Up"
@@ -75,6 +74,7 @@ class SignUpViewController: UIViewController, Transitioner {
         constraints.append(usernameField.heightAnchor.constraint(equalTo: emailField.heightAnchor))
         
         passwordField = SecureTextField(placeholder: "Choose password")
+        passwordField.delegate = self
         self.view.addSubview(passwordField)
         
         passwordField.translatesAutoresizingMaskIntoConstraints = false
@@ -84,6 +84,7 @@ class SignUpViewController: UIViewController, Transitioner {
         constraints.append(passwordField.heightAnchor.constraint(equalTo: emailField.heightAnchor))
         
         confirmField = SecureTextField(placeholder: "Repeat password")
+        confirmField.delegate = self
         self.view.addSubview(confirmField)
         
         confirmField.translatesAutoresizingMaskIntoConstraints = false
@@ -110,17 +111,37 @@ class SignUpViewController: UIViewController, Transitioner {
 //        signInLabel.isUserInteractionEnabled = true
 //        signInLabel.addGestureRecognizer(tap)
 //        self.view.addSubview(signInLabel)
+        
+        var stackList: [UIView] = []
+        
         signInLabel = LinkButton(title: "Sign In")
         signInLabel.addTarget(self, action: #selector(signInPress), for: .touchUpInside)
-        self.view.addSubview(signInLabel)
         
         signInLabel.translatesAutoresizingMaskIntoConstraints = false
-        constraints.append(signInLabel.centerXAnchor.constraint(equalTo: signUpButton.centerXAnchor))
-        constraints.append(signInLabel.topAnchor.constraint(equalTo: signUpButton.bottomAnchor, constant: Constants.Field.spacing))
-        constraints.append(signInLabel.widthAnchor.constraint(equalTo: signUpButton.widthAnchor, multiplier: 1/5.0))
-        constraints.append(signInLabel.heightAnchor.constraint(equalTo: signUpButton.heightAnchor))
+        
+        let signInText = UILabel(frame: .zero)
+        signInText.textAlignment = .right
+        signInText.text = "Already have an account?"
+        stackList.append(signInText)
+        stackList.append(signInLabel)
+        
+        let hStack = UIStackView(arrangedSubviews: stackList)
+        hStack.axis = .horizontal
+        hStack.alignment = .center
+        hStack.spacing = 5
+        hStack.translatesAutoresizingMaskIntoConstraints = false
+        
+        constraints.append(hStack.topAnchor.constraint(equalTo: signUpButton.bottomAnchor, constant: Constants.Field.spacing * 3))
+        constraints.append(hStack.centerXAnchor.constraint(equalTo: signUpButton.centerXAnchor))
+        constraints.append(hStack.heightAnchor.constraint(equalTo: signUpButton.heightAnchor))
+        
+        self.view.addSubview(hStack)
         
         NSLayoutConstraint.activate(constraints)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        inTransition = false
     }
     
     @objc func signInPress(sender: UIButton!) {
@@ -131,6 +152,12 @@ class SignUpViewController: UIViewController, Transitioner {
 
         if let navigator = navigationController {
             navigator.pushViewController(signInVC, animated: true)
+        }
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if(textField == self.passwordField || textField == self.confirmField) {
+            textField.isSecureTextEntry = true
         }
     }
 
@@ -154,9 +181,11 @@ class SignUpViewController: UIViewController, Transitioner {
                     let db = Firestore.firestore()
                     let userID = user!.user.uid
                     
-                    db.collection("users").addDocument(data: ["username": username, "sports": [String](),
+                    let docRef = db.collection("users").document(userID)
+                    docRef.setData( ["username": username, "sports": [String](),
                                                               "teams": [String](), "postIDs": [String](),
-                                                              "URL": "", "uid": userID ]) { (error) in
+                                                              "URL": Constants.Defaults.profilePicture , "uid": userID,
+                                                              "email": email]) { (error) in
                         if error != nil {
                             let controller = UI.createAlert(title: "Error", msg: error!.localizedDescription)
                             self.present(controller, animated: true, completion: nil)
@@ -164,8 +193,6 @@ class SignUpViewController: UIViewController, Transitioner {
                     }
                     self.user = self.createUser(userID: userID)
                     SignUpViewController.saveContext()
-                    
-                    self.printUserInfo(userID: userID)
 
                     self.signIn (email: email, password: password)
                 } else {
@@ -179,13 +206,30 @@ class SignUpViewController: UIViewController, Transitioner {
         }
     }
     
+    // MARK: -
     func signIn (email: String, password: String) {
+        if inTransition {
+            return
+        } else {
+            inTransition = true
+        }
         Auth.auth().signIn(withEmail: email, password: password) {
           user, error in
           if error == nil {
-            //TODO: segue to home page
-            print("signed in")
+            if self.nextVC == nil {
+                self.nextVC = SettingViewController()
+            }
+            let userID = user!.user.uid
+            
+            //TODO: only assign if not nil  ?
+            currentUser = IO.retrieveUser(userID: userID) as? User
+            IO.retrieveFireUser(userID: userID){
+                self.printUserInfo(userID: userID)
+                UI.transition(dest: self.nextVC, src: self)
+                print("signed in")
+            }
           } else {
+            inTransition = false
             let controller = UI.createAlert(title: "Error", msg: error!.localizedDescription)
             self.present(controller, animated: true, completion: nil)
           }
@@ -209,103 +253,17 @@ class SignUpViewController: UIViewController, Transitioner {
     }
     
     func printUserInfo(userID: String) {
-        let user  = retrieveUser(userID: userID) as! User
         print("core user info")
-        print("\tuserID: \(user.userID)")
-        print("\tsettings: \(user.settings)")
-        print("\tfilters: \(user.filters)")
         
-        let db = Firestore.firestore()
-        let ref = db.collection("users")
-        let docRef = ref.document(userID)
-        docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                print("Firestore user info")
-                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                print("\tDoc data: \(dataDescription)")
-            } else {
-                print ("user not in Firestore")
-            }
-        }
-    }
-    
-    func uploadImage(image: Data) {
-        let storage = Storage.storage()
-        let storageRef = storage.reference()
-        // Data in memory
-        let data = image
-
-        // Create a reference to the file you want to upload
-        let splashref = storageRef.child("images/splash.png")
-
-        // Upload the file to the path "images/rivers.jpg"
-        splashref.putData(data, metadata: nil) { (metadata, error) in
-          guard error == nil else {
-            // Uh-oh, an error occurred!
-            print("\n\n\n\nerror uploading picture")
-            return
-          }
-            splashref.downloadURL { (url, error) in
-                guard let url = url, error == nil else {
-                  // Uh-oh, an error occurred!
-                    print("\n\n\n\nerror downloading url")
-                  return
-                }
-                
-                self.urlString = url.absoluteString
-                print("\n\n\(self.urlString)\n\n")
-                
-                //put urlString in Firestore User
-            }
-        }
-        print("finish with uploading")
-    }
-    
-    func downloadImage(url: URL){
-        let task = URLSession.shared.dataTask(with: url) { ( data, _, error) in
-            guard let data = data, error == nil else {
-                print ("\n\n\n\nerror with downloading image")
-                return
-            }
-            DispatchQueue.main.async {
-                let image = UIImage(data: data)
-                let testImageView = UIImageView(frame: self.view.frame)
-                testImageView.image = image
-                
-                self.view.addSubview(testImageView)
-            }
+        print("\tuserID: \(currentUser!.userID)")
+        print("\tsettings: \(currentUser!.settings)")
+        print("\tfilters: \(currentUser!.filters)")
+        
+        if let fire = fireUser {
+            print("\tuserID: \(fire.get("uid") as! String)")
+            print("\tURL: \(fire.get("URL") as! String)")
         }
         
-        task.resume()
-    }
-    
-    func downloadImage(str: String){
-        guard let url = URL(string: str) else {
-            print("error with string: \(str)")
-            return
-        }
-        downloadImage(url: url)
-    }
-    
-    func retrieveUser(userID: String) -> NSManagedObject {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName:"User")
-        var fetchedResults:[NSManagedObject]? = nil
-        
-        let predicate = NSPredicate(format: "userID == '\(userID)'")
-        request.predicate = predicate
-        
-        do {
-            try fetchedResults = context.fetch(request) as? [NSManagedObject]
-        } catch {
-            // If an error occurs
-            let nserror = error as NSError
-            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-            abort()
-        }
-        return(fetchedResults)![0]
     }
     
     static func saveContext(){

@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		34CE93502368F3E0F1D46DE0 /* Pods_WhatTheSport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FEE4B31F510091F48CC5D5B /* Pods_WhatTheSport.framework */; };
+		8F6BED3426B9D34500F05A3D /* AccountPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6BED3326B9D34500F05A3D /* AccountPageViewController.swift */; };
+		8F6BED3726B9D3A100F05A3D /* SettingProfilePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6BED3626B9D3A100F05A3D /* SettingProfilePictureViewController.swift */; };
+		8F6BED3926B9D3C700F05A3D /* AccountPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6BED3826B9D3C700F05A3D /* AccountPageTableViewCell.swift */; };
+		8F6BED3B26B9D3E800F05A3D /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6BED3A26B9D3E800F05A3D /* SettingViewController.swift */; };
+		8F6BED3D26B9D40300F05A3D /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6BED3C26B9D40300F05A3D /* SettingTableViewCell.swift */; };
+		8F6BED3F26B9D43400F05A3D /* SettingToggleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6BED3E26B9D43400F05A3D /* SettingToggleTableViewCell.swift */; };
+		8F6BED4226B9D50800F05A3D /* Transitioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6BED4126B9D50800F05A3D /* Transitioner.swift */; };
 		8F955FD32698E4A2003DD8F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F955FD22698E4A2003DD8F1 /* AppDelegate.swift */; };
 		8F955FD52698E4A2003DD8F1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F955FD42698E4A2003DD8F1 /* SceneDelegate.swift */; };
 		8F955FD72698E4A2003DD8F1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F955FD62698E4A2003DD8F1 /* ViewController.swift */; };
@@ -27,6 +34,13 @@
 
 /* Begin PBXFileReference section */
 		1FEE4B31F510091F48CC5D5B /* Pods_WhatTheSport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WhatTheSport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F6BED3326B9D34500F05A3D /* AccountPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPageViewController.swift; sourceTree = "<group>"; };
+		8F6BED3626B9D3A100F05A3D /* SettingProfilePictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfilePictureViewController.swift; sourceTree = "<group>"; };
+		8F6BED3826B9D3C700F05A3D /* AccountPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPageTableViewCell.swift; sourceTree = "<group>"; };
+		8F6BED3A26B9D3E800F05A3D /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		8F6BED3C26B9D40300F05A3D /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
+		8F6BED3E26B9D43400F05A3D /* SettingToggleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingToggleTableViewCell.swift; sourceTree = "<group>"; };
+		8F6BED4126B9D50800F05A3D /* Transitioner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transitioner.swift; sourceTree = "<group>"; };
 		8F955FCF2698E4A2003DD8F1 /* WhatTheSport.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhatTheSport.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F955FD22698E4A2003DD8F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8F955FD42698E4A2003DD8F1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,6 +74,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8F6BED3526B9D35300F05A3D /* acount, settings, filters */ = {
+			isa = PBXGroup;
+			children = (
+				8F6BED3326B9D34500F05A3D /* AccountPageViewController.swift */,
+				8F6BED3626B9D3A100F05A3D /* SettingProfilePictureViewController.swift */,
+				8F6BED3826B9D3C700F05A3D /* AccountPageTableViewCell.swift */,
+				8F6BED3A26B9D3E800F05A3D /* SettingViewController.swift */,
+				8F6BED3C26B9D40300F05A3D /* SettingTableViewCell.swift */,
+				8F6BED3E26B9D43400F05A3D /* SettingToggleTableViewCell.swift */,
+			);
+			path = "acount, settings, filters";
+			sourceTree = "<group>";
+		};
+		8F6BED4026B9D48900F05A3D /* sign in, sign up, password recovery */ = {
+			isa = PBXGroup;
+			children = (
+				8F955FED269A8443003DD8F1 /* SignUpViewController.swift */,
+				8F955FEF269A848C003DD8F1 /* SignInViewController.swift */,
+				8F955FF3269AB4FB003DD8F1 /* ForgotPasswordViewController.swift */,
+				8F955FF5269AB5B5003DD8F1 /* ResetPasswordViewController.swift */,
+				8F6BED4126B9D50800F05A3D /* Transitioner.swift */,
+			);
+			path = "sign in, sign up, password recovery";
+			sourceTree = "<group>";
+		};
 		8F955FC62698E4A2003DD8F1 = {
 			isa = PBXGroup;
 			children = (
@@ -81,15 +120,13 @@
 		8F955FD12698E4A2003DD8F1 /* WhatTheSport */ = {
 			isa = PBXGroup;
 			children = (
+				8F6BED4026B9D48900F05A3D /* sign in, sign up, password recovery */,
+				8F6BED3526B9D35300F05A3D /* acount, settings, filters */,
 				8FB6D34A26B4D01200FD4ECA /* enums */,
 				8F955FD22698E4A2003DD8F1 /* AppDelegate.swift */,
 				8F955FD42698E4A2003DD8F1 /* SceneDelegate.swift */,
 				8F955FD62698E4A2003DD8F1 /* ViewController.swift */,
-				8F955FED269A8443003DD8F1 /* SignUpViewController.swift */,
 				8F955FF1269A88DE003DD8F1 /* Helpers.swift */,
-				8F955FEF269A848C003DD8F1 /* SignInViewController.swift */,
-				8F955FF3269AB4FB003DD8F1 /* ForgotPasswordViewController.swift */,
-				8F955FF5269AB5B5003DD8F1 /* ResetPasswordViewController.swift */,
 				8F955FD82698E4A2003DD8F1 /* Main.storyboard */,
 				8F955FDE2698E4A6003DD8F1 /* Assets.xcassets */,
 				8F955FE02698E4A6003DD8F1 /* LaunchScreen.storyboard */,
@@ -241,17 +278,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F6BED3926B9D3C700F05A3D /* AccountPageTableViewCell.swift in Sources */,
+				8F6BED4226B9D50800F05A3D /* Transitioner.swift in Sources */,
 				8F955FF6269AB5B5003DD8F1 /* ResetPasswordViewController.swift in Sources */,
 				8FC68E1126B4FC3C007B83A2 /* WhatTheSport.xcdatamodeld in Sources */,
 				8F955FF4269AB4FB003DD8F1 /* ForgotPasswordViewController.swift in Sources */,
+				8F6BED3F26B9D43400F05A3D /* SettingToggleTableViewCell.swift in Sources */,
 				8FB6D35026B4D0A300FD4ECA /* Setting.swift in Sources */,
+				8F6BED3B26B9D3E800F05A3D /* SettingViewController.swift in Sources */,
+				8F6BED3D26B9D40300F05A3D /* SettingTableViewCell.swift in Sources */,
 				8F955FF2269A88DE003DD8F1 /* Helpers.swift in Sources */,
 				8F955FD72698E4A2003DD8F1 /* ViewController.swift in Sources */,
 				8F955FD32698E4A2003DD8F1 /* AppDelegate.swift in Sources */,
+				8F6BED3726B9D3A100F05A3D /* SettingProfilePictureViewController.swift in Sources */,
 				8F955FF0269A848C003DD8F1 /* SignInViewController.swift in Sources */,
 				8F955FD52698E4A2003DD8F1 /* SceneDelegate.swift in Sources */,
 				8FB6D35426B4D0C300FD4ECA /* Filter.swift in Sources */,
 				8F955FEE269A8443003DD8F1 /* SignUpViewController.swift in Sources */,
+				8F6BED3426B9D34500F05A3D /* AccountPageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

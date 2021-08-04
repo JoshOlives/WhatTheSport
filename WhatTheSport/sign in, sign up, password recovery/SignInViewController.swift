@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class SignInViewController: UIViewController {
+class SignInViewController: UIViewController, UITextFieldDelegate {
 
     var emailField: UITextField!
     var passwordField: UITextField!
@@ -53,6 +53,7 @@ class SignInViewController: UIViewController {
         constraints.append(emailField.heightAnchor.constraint(equalToConstant: Constants.Field.height))
         
         passwordField = SecureTextField(placeholder: "Password")
+        passwordField.delegate = self
         self.view.addSubview(passwordField)
         
         passwordField.translatesAutoresizingMaskIntoConstraints = false
@@ -95,6 +96,15 @@ class SignInViewController: UIViewController {
         
         NSLayoutConstraint.activate(constraints)
     }
+    override func viewWillAppear(_ animated: Bool) {
+        inTransition = false
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if(textField == self.passwordField) {
+            textField.isSecureTextEntry = true
+        }
+    }
 
     @objc func signInPress(sender: UIButton!) {
         guard let email = emailField.text,
@@ -102,20 +112,25 @@ class SignInViewController: UIViewController {
               email.count > 0,
               password.count > 0
         else {
-          return
+            let controller = UI.createAlert(title: "Error", msg: "fields must not be blank")
+            self.present(controller, animated: true, completion: nil)
+            return
         }
         let delegate = signUpVC! as Transitioner
         delegate.signIn(email: email, password: password)
     }
     
     @objc func forgotPress(sender: UIButton!) {
+        if inTransition {
+            return
+        } else {
+            inTransition = true
+        }
         if forgotVC == nil {
             forgotVC = ForgotPasswordViewController()
         }
-
-        if let navigator = navigationController {
-            navigator.pushViewController(forgotVC, animated: true)
-        }
+        
+        UI.transition(dest: forgotVC, src: self)
     }
 }
 
