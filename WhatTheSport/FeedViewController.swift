@@ -39,9 +39,18 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         self.feedSegmentedControl = UISegmentedControl(frame: .zero)
         self.feedSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        self.feedSegmentedControl.backgroundColor = UIColor(rgb: Constants.Colors.orange)
-        self.feedSegmentedControl.insertSegment(withTitle: "Test1", at: 0, animated: true)
-        self.feedSegmentedControl.insertSegment(withTitle: "Test2", at: 1, animated: true)
+        self.feedSegmentedControl.setBackgroundImage(imageWithColor(color: UIColor(rgb: Constants.Colors.orange)), for: .normal, barMetrics: .default)
+        self.feedSegmentedControl.setBackgroundImage(imageWithColor(color: UIColor(rgb: Constants.Colors.orange)), for: .selected, barMetrics: .default)
+        self.feedSegmentedControl.setDividerImage(imageWithColor(color: UIColor.clear), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
+        let houseImage = UIImage(systemName: "house")
+        houseImage!.withTintColor(UIColor.white)
+        let calendarImage = UIImage(systemName: "calendar")
+        calendarImage!.withTintColor(UIColor.white)
+        let starImage = UIImage(systemName: "star.fill")
+        starImage!.withTintColor(UIColor.white)
+        self.feedSegmentedControl.insertSegment(with: houseImage, at: 0, animated: true)
+        self.feedSegmentedControl.insertSegment(with: calendarImage, at: 1, animated: true)
+        self.feedSegmentedControl.insertSegment(with: starImage, at: 2, animated: true)
         self.view.addSubview(self.feedSegmentedControl)
         constraints.append(self.feedSegmentedControl.heightAnchor.constraint(equalToConstant: Constants.RadioControl.height))
         constraints.append(self.feedSegmentedControl.widthAnchor.constraint(equalTo: safeArea.widthAnchor))
@@ -106,4 +115,17 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }
         }
     }
+    
+    // From https://stackoverflow.com/questions/31651983/how-to-remove-border-from-segmented-control
+    // create a 1x1 image with this color
+        private func imageWithColor(color: UIColor) -> UIImage {
+            let rect = CGRect(x: 0.0, y: 0.0, width:  1.0, height: 1.0)
+            UIGraphicsBeginImageContext(rect.size)
+            let context = UIGraphicsGetCurrentContext()
+            context!.setFillColor(color.cgColor);
+            context!.fill(rect);
+            let image = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            return image!
+        }
 }
