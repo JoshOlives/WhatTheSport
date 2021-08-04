@@ -35,6 +35,10 @@ struct Constants {
         static var spacing: CGFloat = 15.0
         static var height: CGFloat = 45.0
     }
+    struct RadioControl {
+        static let height: CGFloat = 50
+    }
+    
 }
 
 struct UI {
