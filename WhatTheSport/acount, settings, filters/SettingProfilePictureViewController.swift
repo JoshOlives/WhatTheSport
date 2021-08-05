@@ -9,16 +9,12 @@ import UIKit
 import AVFoundation
 
 class SettingProfilePictureViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-//    var titleLabel2: UILabel!
-//    var nameLabel2: UILabel!
-//    var textField2: UITextField!
     var button: UIButton!
     
     var photo: UIImage!
     
     var userPhoto : UIImageView = {
         let photo = UIImageView()
-       // photo.image = self.photo
         return photo
     }()
        
@@ -27,9 +23,7 @@ class SettingProfilePictureViewController: UIViewController, UIImagePickerContro
     
     var delegate: AccountPageViewController!
     
- //   var delegate: AccountPageViewController!
-   
-    //var vc2NewName = ""
+    var items: [UIBarButtonItem]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +33,8 @@ class SettingProfilePictureViewController: UIViewController, UIImagePickerContro
 
         let libraryButton : UIBarButtonItem = {
             let barButton = UIBarButtonItem()
-            barButton.title = "Library"
+            let attributes: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 18)]
+            button.setAttributedTitle(NSMutableAttributedString(string: "Library", attributes: attributes), for: .normal)
             barButton.target = self
             barButton.action =  #selector (libraryButtonSelected )
 
@@ -48,21 +43,20 @@ class SettingProfilePictureViewController: UIViewController, UIImagePickerContro
         
         let cameraButtton : UIBarButtonItem = {
             let barButton = UIBarButtonItem()
-            barButton.title = "Camera"
+            let attributes: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 18)]
+            button.setAttributedTitle(NSMutableAttributedString(string: "Camera", attributes: attributes), for: .normal)
             barButton.target = self
             barButton.action =  #selector (cameraButtonSelected)
 
             return barButton
         }()
 
-        var items = [UIBarButtonItem]()
+        items = [UIBarButtonItem]()
 
         items.append(libraryButton)
         items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil))
         items.append(cameraButtton)
         toolbarItems = items
-    
-        view.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
         
         var constraints: [NSLayoutConstraint] = []
         
@@ -83,7 +77,8 @@ class SettingProfilePictureViewController: UIViewController, UIImagePickerContro
         
         button = UIButton(type: .roundedRect)
         button.frame = CGRect(x:20, y:300, width:50, height:30)
-        button.setTitle("Save", for: .normal)
+        let attributes: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 18)]
+        button.setAttributedTitle(NSMutableAttributedString(string: "Save", attributes: attributes), for: .normal)
         button.center = CGPoint(x: view.bounds.midX, y: 630)
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         self.view.addSubview(button)
@@ -93,8 +88,21 @@ class SettingProfilePictureViewController: UIViewController, UIImagePickerContro
     
     override func viewWillAppear(_ animated: Bool) {
         inTransition = false
+        self.navigationController?.isToolbarHidden = false
+        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
+        let foreground: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.orange)
+        //let textColor: UIColor =  currentUser!.settings!.dark ? .blue : UIColor(rgb: Constants.Colors.orange)
+        self.navigationController!.navigationBar.barTintColor = foreground
+        self.view.backgroundColor = background
+        self.navigationController!.toolbar.barTintColor = foreground
+        self.navigationController!.toolbar.backgroundColor = foreground
+        self.navigationController!.toolbar.tintColor = .white
+        //button.tintColor = textColor
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.isToolbarHidden = true
+    }
     
     @objc func libraryButtonSelected (_ sender: Any) {
         

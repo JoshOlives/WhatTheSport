@@ -31,7 +31,6 @@ class FiltersViewController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor =  UIColor(rgb: Constants.Colors.lightOrange)
         self.title = "Filters"
         
         var constraints: [NSLayoutConstraint] = []

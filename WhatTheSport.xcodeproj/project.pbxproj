@@ -123,6 +123,7 @@
 		8F955FD12698E4A2003DD8F1 /* WhatTheSport */ = {
 			isa = PBXGroup;
 			children = (
+				8F99356826BC7B6D006FA04C /* Feed, schedueles, events */,
 				8F6BED4026B9D48900F05A3D /* sign in, sign up, password recovery */,
 				8F6BED3526B9D35300F05A3D /* acount, settings, filters */,
 				8FB6D34A26B4D01200FD4ECA /* enums */,
@@ -138,6 +139,13 @@
 				8F955FEB2698E835003DD8F1 /* GoogleService-Info.plist */,
 			);
 			path = WhatTheSport;
+			sourceTree = "<group>";
+		};
+		8F99356826BC7B6D006FA04C /* Feed, schedueles, events */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Feed, schedueles, events";
 			sourceTree = "<group>";
 		};
 		8FB6D34A26B4D01200FD4ECA /* enums */ = {

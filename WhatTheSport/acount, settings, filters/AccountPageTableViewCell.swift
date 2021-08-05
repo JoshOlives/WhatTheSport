@@ -25,9 +25,14 @@ class AccountPageTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        userInformationLabel.frame = CGRect(x: 200, y:0, width: 200, height: contentView.frame.size.height)
-        pageInformationLabel.frame = CGRect(x: 10, y:0, width: 200, height: contentView.frame.size.height)
         
+        pageInformationLabel.frame = CGRect(x: 10, y:0, width: 200, height: contentView.frame.size.height)
+        var constraints: [NSLayoutConstraint] = []
+        userInformationLabel.translatesAutoresizingMaskIntoConstraints = false
+        constraints.append(userInformationLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -15))
+        constraints.append( userInformationLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor))
+        
+        NSLayoutConstraint.activate(constraints)
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -37,7 +42,7 @@ class AccountPageTableViewCell: UITableViewCell {
         
         userInformationLabel.textAlignment = .right
         let width = CGFloat(2.0)
-        border.frame = CGRect(x: 0, y:  contentView.frame.size.height - width, width:   contentView.frame.size.width + 94, height:  contentView.frame.size.height)
+        border.frame = CGRect(x: 15, y:  contentView.frame.size.height - width, width:   contentView.frame.size.width + 94, height:  contentView.frame.size.height)
         border.borderWidth = width
         contentView.layer.addSublayer(border)
         contentView.layer.masksToBounds = true
