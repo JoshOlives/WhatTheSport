@@ -30,6 +30,7 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
     }
     
     override func viewDidLoad() {
+        //ONLY UNCOMMENT TO DELETE ALL OF CORE DATA FROM THIS APP
         //clearCoreData()
         super.viewDidLoad()
         
@@ -37,6 +38,9 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
         
         if let navigator = navigationController {
             navigator.navigationBar.tintColor = .white
+            navigator.navigationBar.barTintColor = UIColor(rgb: Constants.Colors.orange)
+            navigator.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
+            //navigator.navigationBar.backgroundColor = UIColor(rgb: Constants.Colors.orange)
         }
         
         view.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
@@ -192,7 +196,7 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
                         }
                     }
                     self.user = self.createUser(userID: userID)
-                    SignUpViewController.saveContext()
+                    IO.saveContext()
 
                     self.signIn (email: email, password: password)
                 } else {
@@ -213,6 +217,7 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
         } else {
             inTransition = true
         }
+        
         Auth.auth().signIn(withEmail: email, password: password) {
           user, error in
           if error == nil {
@@ -225,7 +230,11 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
             currentUser = IO.retrieveUser(userID: userID) as? User
             IO.retrieveFireUser(userID: userID){
                 self.printUserInfo(userID: userID)
-                UI.transition(dest: self.nextVC, src: self)
+                
+                let home = UINavigationController(rootViewController: self.nextVC)
+                home.modalPresentationStyle = .fullScreen
+                self.present(home, animated: true, completion: nil)
+                //UI.transition(dest: self.nextVC, src: self)
                 print("signed in")
             }
           } else {
@@ -266,20 +275,6 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
         
     }
     
-    static func saveContext(){
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        // Commit the changes
-        do {
-            try context.save()
-        } catch {
-            // If an error occurs
-            let nserror = error as NSError
-            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-            abort()
-        }
-    }
-    
     func clearEntity(entity: String) {
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -311,6 +306,7 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
         clearEntity(entity: "User")
         clearEntity(entity: "Setting")
         clearEntity(entity: "Filter")
+        print("\n\nCLEARED ALL CORED DATA\n\n")
     }
     
 }

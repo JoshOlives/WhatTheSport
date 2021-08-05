@@ -27,6 +27,7 @@
 		8F955FF2269A88DE003DD8F1 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F955FF1269A88DE003DD8F1 /* Helpers.swift */; };
 		8F955FF4269AB4FB003DD8F1 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F955FF3269AB4FB003DD8F1 /* ForgotPasswordViewController.swift */; };
 		8F955FF6269AB5B5003DD8F1 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F955FF5269AB5B5003DD8F1 /* ResetPasswordViewController.swift */; };
+		8F99356726BB2DF5006FA04C /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99356626BB2DF4006FA04C /* FiltersViewController.swift */; };
 		8FB6D35026B4D0A300FD4ECA /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB6D34F26B4D0A300FD4ECA /* Setting.swift */; };
 		8FB6D35426B4D0C300FD4ECA /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB6D35326B4D0C300FD4ECA /* Filter.swift */; };
 		8FC68E1126B4FC3C007B83A2 /* WhatTheSport.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8FC68E0F26B4FC3C007B83A2 /* WhatTheSport.xcdatamodeld */; };
@@ -55,6 +56,7 @@
 		8F955FF1269A88DE003DD8F1 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		8F955FF3269AB4FB003DD8F1 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		8F955FF5269AB5B5003DD8F1 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		8F99356626BB2DF4006FA04C /* FiltersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
 		8FB6D34F26B4D0A300FD4ECA /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		8FB6D35326B4D0C300FD4ECA /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		8FC68E1026B4FC3C007B83A2 /* WhatTheSport.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WhatTheSport.xcdatamodel; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				8F6BED3A26B9D3E800F05A3D /* SettingViewController.swift */,
 				8F6BED3C26B9D40300F05A3D /* SettingTableViewCell.swift */,
 				8F6BED3E26B9D43400F05A3D /* SettingToggleTableViewCell.swift */,
+				8F99356626BB2DF4006FA04C /* FiltersViewController.swift */,
 			);
 			path = "acount, settings, filters";
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				8F955FF4269AB4FB003DD8F1 /* ForgotPasswordViewController.swift in Sources */,
 				8F6BED3F26B9D43400F05A3D /* SettingToggleTableViewCell.swift in Sources */,
 				8FB6D35026B4D0A300FD4ECA /* Setting.swift in Sources */,
+				8F99356726BB2DF5006FA04C /* FiltersViewController.swift in Sources */,
 				8F6BED3B26B9D3E800F05A3D /* SettingViewController.swift in Sources */,
 				8F6BED3D26B9D40300F05A3D /* SettingTableViewCell.swift in Sources */,
 				8F955FF2269A88DE003DD8F1 /* Helpers.swift in Sources */,

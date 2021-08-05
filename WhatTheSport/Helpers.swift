@@ -287,4 +287,18 @@ struct IO {
             }
         }
     }
+    
+    static func saveContext(){
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        // Commit the changes
+        do {
+            try context.save()
+        } catch {
+            // If an error occurs
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+    }
 }

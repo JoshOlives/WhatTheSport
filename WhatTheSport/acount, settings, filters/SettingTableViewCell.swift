@@ -8,15 +8,15 @@
 import UIKit
 
 class SettingTableViewCell: UITableViewCell {
-    static let identifier = "SettingCell"
     
     let displayLabel = UILabel()
+    
+    var border = CALayer()
     
     override func layoutSubviews() {
         super.layoutSubviews()
        
         displayLabel.frame = CGRect(x: 250, y:0, width: 150, height: contentView.frame.size.height)
-        
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -24,16 +24,11 @@ class SettingTableViewCell: UITableViewCell {
         contentView.addSubview(displayLabel)
       
         displayLabel.textAlignment = .right
-        contentView.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
-        let border = CALayer()
         let width = CGFloat(2.0)
-        border.borderColor = UIColor(rgb: Constants.Colors.orange).cgColor
         border.frame = CGRect(x: 20, y:  contentView.frame.size.height - width, width:   contentView.frame.size.width + 74, height:  contentView.frame.size.height)
         border.borderWidth = width
         contentView.layer.addSublayer(border)
         contentView.layer.masksToBounds = true
-
-        //userInformationLabel.text = " user Infor"
     }
     
     required init?(coder: NSCoder) {

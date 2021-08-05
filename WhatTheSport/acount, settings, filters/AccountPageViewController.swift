@@ -29,7 +29,6 @@ class AccountPageViewController: UIViewController, UITableViewDelegate, UITableV
         
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        tableView.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
         tableView.frame = CGRect(x: 0, y: 250, width: view.bounds.width, height: view.bounds.height - 250)
         self.tableView.tableFooterView = UIView(frame: .zero)
     }
@@ -39,7 +38,7 @@ class AccountPageViewController: UIViewController, UITableViewDelegate, UITableV
       
         view.addSubview(tableView)
         tableView.frame = CGRect(x: 0, y: 250, width: view.bounds.width, height: view.bounds.height - 500)
-        tableView.register(AccountPageTableViewCell.self, forCellReuseIdentifier: AccountPageTableViewCell.identifier)
+        tableView.register(AccountPageTableViewCell.self, forCellReuseIdentifier: "accountCell")
         
         userName = fireUser!.get("username") as! String
         self.title = userName
@@ -56,7 +55,6 @@ class AccountPageViewController: UIViewController, UITableViewDelegate, UITableV
         self.view.addSubview(profilePhoto)
         
         self.navigationController?.navigationBar.barTintColor = UIColor(rgb: Constants.Colors.orange)
-        self.view.backgroundColor = UIColor(rgb: Constants.Colors.orange)
        
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -65,6 +63,12 @@ class AccountPageViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewWillAppear(_ animated: Bool) {
         inTransition = false
+        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
+        let foreground: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.orange)
+        self.navigationController!.navigationBar.barTintColor = foreground
+        tableView.backgroundColor = background
+        view.backgroundColor = background
+        tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -72,8 +76,20 @@ class AccountPageViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: AccountPageTableViewCell.identifier, for: indexPath) as! AccountPageTableViewCell
-                if indexPath.row > 3 {
+        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
+        let lineColor : UIColor = currentUser!.settings!.dark ? .white : UIColor(rgb: Constants.Colors.orange)
+        let textColor: UIColor =  currentUser!.settings!.dark ? .white : .black
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "accountCell", for: indexPath) as! AccountPageTableViewCell
+        
+        cell.textLabel?.textColor = textColor
+        cell.userInformationLabel.textColor = textColor
+        cell.pageInformationLabel.textColor = textColor
+        cell.contentView.backgroundColor = background
+        cell.border.borderColor = lineColor.cgColor
+        
+        
+        if indexPath.row > 3 {
             cell.userInformationLabel.isHidden = true
         }
         cell.configuer(pageInfo: setting[indexPath.row], information: userInformation[indexPath.row])
@@ -144,7 +160,9 @@ class AccountPageViewController: UIViewController, UITableViewDelegate, UITableV
             print("this is row \(row)")
             
         case 8:
-         
+            let home = UINavigationController(rootViewController: SignUpViewController())
+            home.modalPresentationStyle = .fullScreen
+            self.present(home, animated: true, completion: nil)
             print("this is row \(row)")
         default:
           

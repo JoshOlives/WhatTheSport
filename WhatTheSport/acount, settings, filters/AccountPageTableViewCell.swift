@@ -9,13 +9,13 @@ import UIKit
 
 class AccountPageTableViewCell: UITableViewCell {
     
-    static let identifier = "AccountInforCell"
-    
     public let userInformationLabel = UILabel()
    // var nextVC: UIViewController!
      
     
     public let pageInformationLabel = UILabel()
+    
+    var border = CALayer()
  
     public func configuer (pageInfo: String, information: String){
       
@@ -34,16 +34,13 @@ class AccountPageTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(userInformationLabel)
         contentView.addSubview(pageInformationLabel)
+        
         userInformationLabel.textAlignment = .right
-        contentView.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
-        let border = CALayer()
         let width = CGFloat(2.0)
-        border.borderColor = UIColor(rgb: Constants.Colors.orange).cgColor
         border.frame = CGRect(x: 0, y:  contentView.frame.size.height - width, width:   contentView.frame.size.width + 94, height:  contentView.frame.size.height)
         border.borderWidth = width
         contentView.layer.addSublayer(border)
         contentView.layer.masksToBounds = true
-
     }
     
     required init?(coder: NSCoder) {

@@ -7,11 +7,7 @@
 
 import UIKit
 
-class SettingToggleTableViewCell: UITableViewCell {
-    
-    static let identifier = "ToggleCell"
-    
-    let displayLabel = UILabel()
+class SettingToggleTableViewCell: SettingTableViewCell {
     
     let toggle = UISwitch()
     
@@ -23,15 +19,7 @@ class SettingToggleTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(toggle)
-        toggle.isOn = false
-      
-        displayLabel.textAlignment = .right
-        contentView.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
-        let border = CALayer()
-        let width = CGFloat(2.0)
-        border.borderColor = UIColor(rgb: Constants.Colors.orange).cgColor
-        border.frame = CGRect(x: 20, y:  contentView.frame.size.height - width, width:   contentView.frame.size.width + 74, height:  contentView.frame.size.height)
-        border.borderWidth = width
+
         contentView.layer.addSublayer(border)
         contentView.layer.masksToBounds = true
 
