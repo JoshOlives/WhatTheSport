@@ -1,3 +1,9 @@
+import Foundation
+import UIKit
+import FirebaseStorage
+import Firebase
+import CoreData
+
 class ViewControllerWithMenu: UIViewController {
     var delegate: TabBarViewController!
     
