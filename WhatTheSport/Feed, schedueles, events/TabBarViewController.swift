@@ -18,9 +18,23 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     var moreButton: UIBarButtonItem!
     var nextVC: FiltersViewController!
     
+    var isSlide = false
+    
+    @objc
+    func menuBarButtonTapped() {
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut){
+            let currentViewController = UIApplication.getTopViewController() as! ViewControllerWithMenu
+            currentViewController.containerView.frame.origin.x = self.isSlide ? 0 : currentViewController.containerView.frame.width - currentViewController.slideInMenuPadding
+            print("in animation")
+        } completion: { (didFinish) in
+            print("finished")
+            self.isSlide.toggle()
+        }
+    }
+    
     override func viewWillLayoutSubviews() {
         
-        moreButton = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3"), style: .plain, target:self, action: #selector(rightHandAction))
+        moreButton = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3"), style: .plain, target:self, action: #selector(menuBarButtonTapped))
         
         self.navigationItem.leftBarButtonItem = moreButton
     }
@@ -37,10 +51,14 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         
         vc1 = UINavigationController(rootViewController: GameScheduleViewController())
         vc1.isNavigationBarHidden = true
+        vc1.title = "Games"
+        
         vc2 = UINavigationController(rootViewController: SecondViewController())
         vc2.isNavigationBarHidden = true
+        vc2.title = "Feed"
         vc3 = UINavigationController(rootViewController: ThirdViewController())
         vc3.isNavigationBarHidden = true
+        vc3.title = "Events"
         self.setViewControllers([vc1, vc2, vc3], animated: false)
         
         guard let items = self.tabBar.items else {

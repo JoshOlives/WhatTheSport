@@ -40,6 +40,7 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
             navigator.navigationBar.tintColor = .white
             navigator.navigationBar.barTintColor = UIColor(rgb: Constants.Colors.orange)
             navigator.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
+            navigator.navigationBar.barStyle = .black
             //navigator.navigationBar.backgroundColor = UIColor(rgb: Constants.Colors.orange)
         }
         

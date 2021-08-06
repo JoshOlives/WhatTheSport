@@ -7,10 +7,14 @@
 
 import UIKit
 
-class SecondViewController: UIViewController {
+class SecondViewController: ViewControllerWithMenu {
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
         self.title = "Feed"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.containerView.backgroundColor = .blue
     }
 }

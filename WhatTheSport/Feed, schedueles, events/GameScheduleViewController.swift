@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GameScheduleViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class GameScheduleViewController: ViewControllerWithMenu, UITableViewDelegate, UITableViewDataSource {
     
     struct Game {
         var date: String
@@ -58,7 +58,6 @@ class GameScheduleViewController: UIViewController, UITableViewDelegate, UITable
         return tableView
     }()
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Games"
@@ -97,7 +96,7 @@ class GameScheduleViewController: UIViewController, UITableViewDelegate, UITable
         var constraints: [NSLayoutConstraint] = []
 
        
-        view.addSubview(tableView)
+        containerView.addSubview(tableView)
 
         self.tableView.tableFooterView = UIView(frame: .zero)
         
@@ -105,21 +104,20 @@ class GameScheduleViewController: UIViewController, UITableViewDelegate, UITable
         tableView.register(GameDateTableViewCell.self, forCellReuseIdentifier: GameDateTableViewCell.identifier)
       
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        constraints.append(tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor))
-        constraints.append( tableView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor))
-        constraints.append(tableView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor))
-        constraints.append(tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor))
+        constraints.append(tableView.topAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.topAnchor))
+        constraints.append( tableView.leadingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.leadingAnchor))
+        constraints.append(tableView.trailingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.trailingAnchor))
+        constraints.append(tableView.bottomAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.bottomAnchor))
         NSLayoutConstraint.activate(constraints)
         tableView.delegate = self
         tableView.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        inTransition = false
+        super.viewWillAppear(animated)
         let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
         
         tableView.backgroundColor = background
-        view.backgroundColor = background
         tableView.reloadData()
     }
     

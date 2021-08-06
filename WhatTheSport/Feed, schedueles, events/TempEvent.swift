@@ -7,11 +7,15 @@
 
 import UIKit
 
-class ThirdViewController: UIViewController {
+class ThirdViewController: ViewControllerWithMenu {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .yellow
         self.title = "Events"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.containerView.backgroundColor = .blue
     }
 }
