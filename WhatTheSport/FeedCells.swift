@@ -132,7 +132,7 @@ class PostCell: UITableViewCell {
         self.contentLabel.text = postArg.content
         self.viewCommentsButton.setTitle("\(postArg.numComments) comments", for: .normal)
         self.likeCount.text = String(postArg.numLikes)
-        self.teamLogo.image = UIImage(named: postArg.team!.imageID)
+        self.teamLogo.image = postArg.teamIndex != nil ? UIImage(named: teamsList[postArg.teamIndex!].imageID) : UIImage(systemName: "house")
     }
     
     @objc
@@ -142,16 +142,18 @@ class PostCell: UITableViewCell {
     
     @objc
     func likeButtonPressed() {
-        let feedDB = Firestore.firestore().collection("posts")
-        feedDB.document(self.post!.postID).updateData([
-            "numLikes": self.post!.numLikes + 1
-        ]) { err in
-            if let err = err {
-                print("Error updating document: \(err)")
-            } else {
-                self.post!.numLikes += 1
-                self.likeCount.text = String(self.post!.numLikes)
-                self.likeButton.tintColor = UIColor.red
+        if post != nil && post!.userLikedPost {
+            let feedDB = Firestore.firestore().collection("posts")
+            feedDB.document(self.post!.postID).updateData([
+                "numLikes": self.post!.numLikes + 1
+            ]) { err in
+                if let err = err {
+                    print("Error updating document: \(err)")
+                } else {
+                    self.post!.numLikes += 1
+                    self.likeCount.text = String(self.post!.numLikes)
+                    self.likeButton.tintColor = UIColor.red
+                }
             }
         }
     }

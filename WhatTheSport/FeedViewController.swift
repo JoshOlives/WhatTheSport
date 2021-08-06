@@ -11,9 +11,12 @@ import FirebaseFirestore
 
 let ops: [Int] = []
 let cellIdentifier = "FeedCell"
-let testContent = "This is some text content that I am writing so that I can see how it looks in a post on our application. I am still typing so that it will be long. I hope that it turns out ok"
 
-class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+protocol PostAddition {
+    func addCreatedPost(newPost: Post)
+}
+
+class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PostAddition {
     private let feedDB = Firestore.firestore().collection("posts")
     
     var createPostVC: CreatePostViewController!
@@ -26,9 +29,9 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Feed"
-        self.addPostBarButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(queueCreatePost(_:)))
+        self.addPostBarButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(queueCreatePost))
         self.addPostBarButton.tintColor = UIColor.white
-        self.navigationItem.setRightBarButtonItems([addPostBarButton], animated: true)
+        self.navigationItem.setRightBarButtonItems([self.addPostBarButton], animated: true)
         getPosts()
         self.view.backgroundColor = UIColor(rgb: Constants.Colors.orange)
     }
@@ -68,15 +71,14 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         self.feedTableView.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
         
-        
-        
         NSLayoutConstraint.activate(constraints)
     }
     
     @objc
-    func queueCreatePost(_ _: UIBarButtonItem) {
+    func queueCreatePost() {
         if self.createPostVC == nil {
             self.createPostVC = CreatePostViewController()
+            self.createPostVC.delegate = self
         }
         
         if let navigator = navigationController {
@@ -107,17 +109,21 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 print(err)
             } else {
                 for post in querySnapshot!.documents {
-                    let teamIndex = post.get("team") as! Int
-                    let team: Team? = teamIndex >= 0 ? teamsList[teamIndex] : nil
-                    self.posts.append(Post(postIDVal: post.documentID, sportVal: sportsList[post.get("sport") as! Int], teamVal: team, contentVal: post.get("content") as! String, userIDVal: post.get("userID") as! String, usernameVal: post.get("username") as! String, numLikesVal: post.get("numLikes") as! Int, numCommentsVal: post.get("numComments") as! Int))
+                    self.posts.append(Post(postIDArg: post.documentID, sportIndexArg: post.get("sportIndex") as! Int, teamIndexArg: post.get("teamIndex") as? Int, contentArg: post.get("content") as! String, userIDArg: post.get("userID") as! String, usernameArg: post.get("username") as! String, numLikesArg: post.get("numLikes") as! Int, numCommentsArg: post.get("numComments") as! Int, userLikedPostArg: (post.get("likeUserIDs") as! [String]).contains(TestUser.userID)))
                 }
                 self.feedTableView.reloadData()
             }
         }
     }
     
+    // Protocol function for create post view controller
+    func addCreatedPost(newPost: Post) {
+        self.posts.append(newPost)
+    }
+    
     // From https://stackoverflow.com/questions/31651983/how-to-remove-border-from-segmented-control
     // create a 1x1 image with this color
+    // Used to set background of segmented controller tabs
         private func imageWithColor(color: UIColor) -> UIImage {
             let rect = CGRect(x: 0.0, y: 0.0, width:  1.0, height: 1.0)
             UIGraphicsBeginImageContext(rect.size)
@@ -128,4 +134,10 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
             UIGraphicsEndImageContext();
             return image!
         }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if self.feedTableView != nil {
+            self.feedTableView.reloadData()
+        }
+    }
 }

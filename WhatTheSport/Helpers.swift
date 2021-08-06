@@ -8,6 +8,13 @@
 import Foundation
 import UIKit
 
+struct TestUser {
+    static var userID = "6wnjcRlROt7KQQIqOdHG"
+    static var username = "LakersFan123"
+    static var postIDs: [String] = []
+    
+}
+
 extension UIColor {
    convenience init(red: Int, green: Int, blue: Int) {
        assert(red >= 0 && red <= 255, "Invalid red component")
