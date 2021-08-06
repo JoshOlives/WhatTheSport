@@ -40,15 +40,13 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     }
     
     override func viewWillLayoutSubviews() {
-        print("hehe")
+        
         moreButton = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3"), style: .plain, target:self, action: #selector(menuBarButtonTapped))
         
         self.navigationItem.leftBarButtonItem = moreButton
     }
 
     override func viewDidLoad() {
-        
-        print("haha")
         
         super.viewDidLoad()
         

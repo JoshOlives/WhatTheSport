@@ -194,20 +194,12 @@ class ViewControllerWithMenu: UIViewController {
         menuView.backgroundColor = menuBackground
         containerView.backgroundColor = background
         
-        print("isslide \(delegate.isSlide)")
-        print((containerView.frame.width - self.slideInMenuPadding))
-        print(containerView.frame.width)
-        print(self.slideInMenuPadding)
         containerView.frame.origin.x = self.delegate.isSlide ? (containerView.frame.width - self.slideInMenuPadding) : 0
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        print("LAYOUT")
-        print((containerView.frame.width - self.slideInMenuPadding))
-        print(containerView.frame.width)
-        print(self.slideInMenuPadding)
         containerView.frame.origin.x = self.delegate.isSlide ? (containerView.frame.width - self.slideInMenuPadding) : 0
     }
 }
