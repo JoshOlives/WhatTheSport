@@ -35,6 +35,7 @@
 		8F99357226BCA5F6006FA04C /* GameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99357126BCA5F6006FA04C /* GameTableViewCell.swift */; };
 		8F99357426BCA82C006FA04C /* GameDateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99357326BCA82C006FA04C /* GameDateTableViewCell.swift */; };
 		8F99357626BD1559006FA04C /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99357526BD1558006FA04C /* TestViewController.swift */; };
+		8F99357826BDB95F006FA04C /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99357726BDB95E006FA04C /* MenuView.swift */; };
 		8FB6D35026B4D0A300FD4ECA /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB6D34F26B4D0A300FD4ECA /* Setting.swift */; };
 		8FB6D35426B4D0C300FD4ECA /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB6D35326B4D0C300FD4ECA /* Filter.swift */; };
 		8FC68E1126B4FC3C007B83A2 /* WhatTheSport.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8FC68E0F26B4FC3C007B83A2 /* WhatTheSport.xcdatamodeld */; };
@@ -71,6 +72,7 @@
 		8F99357126BCA5F6006FA04C /* GameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTableViewCell.swift; sourceTree = "<group>"; };
 		8F99357326BCA82C006FA04C /* GameDateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDateTableViewCell.swift; sourceTree = "<group>"; };
 		8F99357526BD1558006FA04C /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		8F99357726BDB95E006FA04C /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		8FB6D34F26B4D0A300FD4ECA /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		8FB6D35326B4D0C300FD4ECA /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		8FC68E1026B4FC3C007B83A2 /* WhatTheSport.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WhatTheSport.xcdatamodel; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				8F99357126BCA5F6006FA04C /* GameTableViewCell.swift */,
 				8F99357326BCA82C006FA04C /* GameDateTableViewCell.swift */,
 				8F99357526BD1558006FA04C /* TestViewController.swift */,
+				8F99357726BDB95E006FA04C /* MenuView.swift */,
 			);
 			path = "Feed, schedueles, events";
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				8F99356E26BCA59D006FA04C /* TempEvent.swift in Sources */,
 				8F955FF0269A848C003DD8F1 /* SignInViewController.swift in Sources */,
 				8F955FD52698E4A2003DD8F1 /* SceneDelegate.swift in Sources */,
+				8F99357826BDB95F006FA04C /* MenuView.swift in Sources */,
 				8FB6D35426B4D0C300FD4ECA /* Filter.swift in Sources */,
 				8F955FEE269A8443003DD8F1 /* SignUpViewController.swift in Sources */,
 				8F6BED3426B9D34500F05A3D /* AccountPageViewController.swift in Sources */,

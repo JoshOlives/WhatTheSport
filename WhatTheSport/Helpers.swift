@@ -167,7 +167,7 @@ class ViewControllerWithMenu: UIViewController {
     
     lazy var menuView: UIView = {
         //TODO: add custom menu
-        let view = UIView()
+        let view = MenuView()
         return view
     }()
     
