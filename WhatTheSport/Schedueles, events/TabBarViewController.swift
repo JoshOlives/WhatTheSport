@@ -17,6 +17,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     var filterButton: UIBarButtonItem!
     var moreButton: UIBarButtonItem!
     var nextVC: FiltersViewController!
+    var createPostVC: CreatePostViewController!
     
     var isSlide = false
     var inAnimation = false
@@ -54,7 +55,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         
         filterButton = UIBarButtonItem(image: UIImage(systemName: "arrowtriangle.down.circle.fill"), style: .plain, target:self, action: #selector(filterTransition))
         
-        plusButton = UIBarButtonItem(image: UIImage(systemName: "plus.circle.fill"), style: .plain, target: self, action: #selector(rightHandAction))
+        plusButton = UIBarButtonItem(image: UIImage(systemName: "plus.circle.fill"), style: .plain, target: self, action: #selector(queueCreatePost(_:)))
         
         let gameController = GameScheduleViewController()
         gameController.delegate = self
@@ -62,7 +63,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         vc1.isNavigationBarHidden = true
         vc1.title = "Games"
         
-        let feedController = SecondViewController()
+        let feedController = FeedViewController()
         feedController.delegate = self
         vc2 = UINavigationController(rootViewController: feedController)
         vc2.isNavigationBarHidden = true
@@ -161,7 +162,19 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     }
     
     @objc
-    func rightHandAction() {
-        print("yoo")
+    func queueCreatePost(_ _: UIBarButtonItem) {
+        if inTransition {
+            return
+        } else {
+            inTransition = true
+        }
+        
+        if self.createPostVC == nil {
+            self.createPostVC = CreatePostViewController()
+        }
+        
+        if let navigator = navigationController {
+            navigator.pushViewController(self.createPostVC, animated: true)
+        }
     }
 }
