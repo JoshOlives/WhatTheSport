@@ -124,9 +124,9 @@ class FiltersViewController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         inTransition = false
         let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
-        let foreground: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.orange)
         let textColor: UIColor =  currentUser!.settings!.dark ? .white : .black
-        self.navigationController!.navigationBar.barTintColor = foreground
+        let navImage: UIImage? = currentUser!.settings!.dark ? UIImage() : nil
+        self.navigationController?.navigationBar.setBackgroundImage(navImage, for: .default)
         view.backgroundColor = background
         for label in labels {
             label.textColor = textColor

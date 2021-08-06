@@ -33,8 +33,9 @@ class SettingProfilePictureViewController: UIViewController, UIImagePickerContro
 
         let libraryButton : UIBarButtonItem = {
             let barButton = UIBarButtonItem()
+            barButton.title = "Library"
             let attributes: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 18)]
-            button.setAttributedTitle(NSMutableAttributedString(string: "Library", attributes: attributes), for: .normal)
+            barButton.setTitleTextAttributes(attributes, for: .normal)
             barButton.target = self
             barButton.action =  #selector (libraryButtonSelected )
 
@@ -43,8 +44,9 @@ class SettingProfilePictureViewController: UIViewController, UIImagePickerContro
         
         let cameraButtton : UIBarButtonItem = {
             let barButton = UIBarButtonItem()
+            barButton.title = "Camera"
             let attributes: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 18)]
-            button.setAttributedTitle(NSMutableAttributedString(string: "Camera", attributes: attributes), for: .normal)
+            barButton.setTitleTextAttributes(attributes, for: .normal)
             barButton.target = self
             barButton.action =  #selector (cameraButtonSelected)
 
@@ -90,12 +92,12 @@ class SettingProfilePictureViewController: UIViewController, UIImagePickerContro
         inTransition = false
         self.navigationController?.isToolbarHidden = false
         let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
-        let foreground: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.orange)
         //let textColor: UIColor =  currentUser!.settings!.dark ? .blue : UIColor(rgb: Constants.Colors.orange)
-        self.navigationController!.navigationBar.barTintColor = foreground
+        let navImage: UIImage? = currentUser!.settings!.dark ? UIImage() : nil
+        self.navigationController?.navigationBar.setBackgroundImage(navImage, for: .default)
         self.view.backgroundColor = background
-        self.navigationController!.toolbar.barTintColor = foreground
-        self.navigationController!.toolbar.backgroundColor = foreground
+        self.navigationController!.toolbar.setBackgroundImage(navImage, forToolbarPosition: .any, barMetrics: .default)
+        self.navigationController!.toolbar.barTintColor = UIColor(rgb: Constants.Colors.orange)
         self.navigationController!.toolbar.tintColor = .white
         //button.tintColor = textColor
     }

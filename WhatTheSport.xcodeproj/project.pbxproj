@@ -28,6 +28,12 @@
 		8F955FF4269AB4FB003DD8F1 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F955FF3269AB4FB003DD8F1 /* ForgotPasswordViewController.swift */; };
 		8F955FF6269AB5B5003DD8F1 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F955FF5269AB5B5003DD8F1 /* ResetPasswordViewController.swift */; };
 		8F99356726BB2DF5006FA04C /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99356626BB2DF4006FA04C /* FiltersViewController.swift */; };
+		8F99356A26BCA4F4006FA04C /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99356926BCA4F4006FA04C /* TabBarViewController.swift */; };
+		8F99356C26BCA575006FA04C /* TempFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99356B26BCA575006FA04C /* TempFeed.swift */; };
+		8F99356E26BCA59D006FA04C /* TempEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99356D26BCA59D006FA04C /* TempEvent.swift */; };
+		8F99357026BCA5DF006FA04C /* GameScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99356F26BCA5DF006FA04C /* GameScheduleViewController.swift */; };
+		8F99357226BCA5F6006FA04C /* GameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99357126BCA5F6006FA04C /* GameTableViewCell.swift */; };
+		8F99357426BCA82C006FA04C /* GameDateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99357326BCA82C006FA04C /* GameDateTableViewCell.swift */; };
 		8FB6D35026B4D0A300FD4ECA /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB6D34F26B4D0A300FD4ECA /* Setting.swift */; };
 		8FB6D35426B4D0C300FD4ECA /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB6D35326B4D0C300FD4ECA /* Filter.swift */; };
 		8FC68E1126B4FC3C007B83A2 /* WhatTheSport.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8FC68E0F26B4FC3C007B83A2 /* WhatTheSport.xcdatamodeld */; };
@@ -57,6 +63,12 @@
 		8F955FF3269AB4FB003DD8F1 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		8F955FF5269AB5B5003DD8F1 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		8F99356626BB2DF4006FA04C /* FiltersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
+		8F99356926BCA4F4006FA04C /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		8F99356B26BCA575006FA04C /* TempFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempFeed.swift; sourceTree = "<group>"; };
+		8F99356D26BCA59D006FA04C /* TempEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempEvent.swift; sourceTree = "<group>"; };
+		8F99356F26BCA5DF006FA04C /* GameScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScheduleViewController.swift; sourceTree = "<group>"; };
+		8F99357126BCA5F6006FA04C /* GameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTableViewCell.swift; sourceTree = "<group>"; };
+		8F99357326BCA82C006FA04C /* GameDateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDateTableViewCell.swift; sourceTree = "<group>"; };
 		8FB6D34F26B4D0A300FD4ECA /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		8FB6D35326B4D0C300FD4ECA /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		8FC68E1026B4FC3C007B83A2 /* WhatTheSport.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WhatTheSport.xcdatamodel; sourceTree = "<group>"; };
@@ -144,6 +156,12 @@
 		8F99356826BC7B6D006FA04C /* Feed, schedueles, events */ = {
 			isa = PBXGroup;
 			children = (
+				8F99356926BCA4F4006FA04C /* TabBarViewController.swift */,
+				8F99356B26BCA575006FA04C /* TempFeed.swift */,
+				8F99356D26BCA59D006FA04C /* TempEvent.swift */,
+				8F99356F26BCA5DF006FA04C /* GameScheduleViewController.swift */,
+				8F99357126BCA5F6006FA04C /* GameTableViewCell.swift */,
+				8F99357326BCA82C006FA04C /* GameDateTableViewCell.swift */,
 			);
 			path = "Feed, schedueles, events";
 			sourceTree = "<group>";
@@ -292,22 +310,28 @@
 				8F6BED3926B9D3C700F05A3D /* AccountPageTableViewCell.swift in Sources */,
 				8F6BED4226B9D50800F05A3D /* Transitioner.swift in Sources */,
 				8F955FF6269AB5B5003DD8F1 /* ResetPasswordViewController.swift in Sources */,
+				8F99357426BCA82C006FA04C /* GameDateTableViewCell.swift in Sources */,
+				8F99356C26BCA575006FA04C /* TempFeed.swift in Sources */,
 				8FC68E1126B4FC3C007B83A2 /* WhatTheSport.xcdatamodeld in Sources */,
 				8F955FF4269AB4FB003DD8F1 /* ForgotPasswordViewController.swift in Sources */,
 				8F6BED3F26B9D43400F05A3D /* SettingToggleTableViewCell.swift in Sources */,
 				8FB6D35026B4D0A300FD4ECA /* Setting.swift in Sources */,
+				8F99357026BCA5DF006FA04C /* GameScheduleViewController.swift in Sources */,
 				8F99356726BB2DF5006FA04C /* FiltersViewController.swift in Sources */,
+				8F99356A26BCA4F4006FA04C /* TabBarViewController.swift in Sources */,
 				8F6BED3B26B9D3E800F05A3D /* SettingViewController.swift in Sources */,
 				8F6BED3D26B9D40300F05A3D /* SettingTableViewCell.swift in Sources */,
 				8F955FF2269A88DE003DD8F1 /* Helpers.swift in Sources */,
 				8F955FD72698E4A2003DD8F1 /* ViewController.swift in Sources */,
 				8F955FD32698E4A2003DD8F1 /* AppDelegate.swift in Sources */,
 				8F6BED3726B9D3A100F05A3D /* SettingProfilePictureViewController.swift in Sources */,
+				8F99356E26BCA59D006FA04C /* TempEvent.swift in Sources */,
 				8F955FF0269A848C003DD8F1 /* SignInViewController.swift in Sources */,
 				8F955FD52698E4A2003DD8F1 /* SceneDelegate.swift in Sources */,
 				8FB6D35426B4D0C300FD4ECA /* Filter.swift in Sources */,
 				8F955FEE269A8443003DD8F1 /* SignUpViewController.swift in Sources */,
 				8F6BED3426B9D34500F05A3D /* AccountPageViewController.swift in Sources */,
+				8F99357226BCA5F6006FA04C /* GameTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

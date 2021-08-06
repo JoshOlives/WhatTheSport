@@ -13,7 +13,6 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     let settingDisplay = ["Account", "Push Notifications", "DarkMode", "Post Color", "App version"]
     var nextVC: AccountPageViewController!
-    var nextVC1: FiltersViewController!
     
     private let tableView : UITableView = {
         let tableView = UITableView()
@@ -25,12 +24,15 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewDidLoad()
         
         let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
-        let foreground: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.orange)
+        let navImage: UIImage? = currentUser!.settings!.dark ? UIImage() : nil
         
         if let navigator = navigationController {
-            navigator.navigationBar.barTintColor = foreground
+            self.navigationController?.navigationBar.setBackgroundImage(navImage, for: .default)
+            //self.navigationController?.navigationBar.shadowImage = UIImage()
+            navigator.navigationBar.barTintColor = UIColor(rgb: Constants.Colors.orange)
             navigator.navigationBar.tintColor = .white
             navigator.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
+            navigator.navigationBar.isTranslucent = true
         }
         
         self.title = "Settings"
@@ -68,8 +70,8 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         currentUser!.settings!.dark = !(currentUser!.settings!.dark)
         IO.saveContext()
         let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
-        let foreground: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.orange)
-        self.navigationController?.navigationBar.barTintColor = foreground
+        let navImage: UIImage? = currentUser!.settings!.dark ? UIImage() : nil
+        self.navigationController?.navigationBar.setBackgroundImage(navImage, for: .default)
         view.backgroundColor = background
         tableView.backgroundColor = background
         tableView.reloadData()
@@ -204,18 +206,7 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
             
             
         case 4:
-            if inTransition {
-                return
-            } else {
-                inTransition = true
-            }
-            
             print("this is row \(row)")
-            if nextVC1 == nil{
-                print("this is row at \(indexPath.row)")
-                nextVC1 = FiltersViewController()
-            }
-            UI.transition(dest: nextVC1, src: self)
 
         default:
             print("This should not happen.")

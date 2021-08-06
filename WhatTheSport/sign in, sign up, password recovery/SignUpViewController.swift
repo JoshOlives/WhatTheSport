@@ -19,7 +19,7 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
     var confirmField: UITextField!
     var signUpButton: UIButton!
     var signInVC: SignInViewController!
-    var nextVC: SettingViewController!
+    var nextVC: TabBarViewController!
     var constraint: NSLayoutConstraint!
     var logo: UIImageView!
     var signInLabel: UIButton!
@@ -222,7 +222,7 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
           user, error in
           if error == nil {
             if self.nextVC == nil {
-                self.nextVC = SettingViewController()
+                self.nextVC = TabBarViewController()
             }
             let userID = user!.user.uid
             
