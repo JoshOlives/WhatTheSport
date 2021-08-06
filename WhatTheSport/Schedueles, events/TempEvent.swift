@@ -16,6 +16,5 @@ class ThirdViewController: ViewControllerWithMenu {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.containerView.backgroundColor = .blue
     }
 }
