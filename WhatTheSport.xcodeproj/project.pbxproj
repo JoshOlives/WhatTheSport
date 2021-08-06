@@ -41,6 +41,7 @@
 		8F99358026BDCBB1006FA04C /* FeedObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99357F26BDCBB1006FA04C /* FeedObjects.swift */; };
 		8F99358226BDCBD3006FA04C /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99358126BDCBD3006FA04C /* CreatePostViewController.swift */; };
 		8F99358426BDCBEF006FA04C /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99358326BDCBEF006FA04C /* FeedViewController.swift */; };
+		8F99358626BDE530006FA04C /* ViewControllerWithMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99358526BDE530006FA04C /* ViewControllerWithMenu.swift */; };
 		8FB6D35026B4D0A300FD4ECA /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB6D34F26B4D0A300FD4ECA /* Setting.swift */; };
 		8FB6D35426B4D0C300FD4ECA /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB6D35326B4D0C300FD4ECA /* Filter.swift */; };
 		8FC68E1126B4FC3C007B83A2 /* WhatTheSport.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8FC68E0F26B4FC3C007B83A2 /* WhatTheSport.xcdatamodeld */; };
@@ -83,6 +84,7 @@
 		8F99357F26BDCBB1006FA04C /* FeedObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedObjects.swift; sourceTree = "<group>"; };
 		8F99358126BDCBD3006FA04C /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
 		8F99358326BDCBEF006FA04C /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		8F99358526BDE530006FA04C /* ViewControllerWithMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerWithMenu.swift; sourceTree = "<group>"; };
 		8FB6D34F26B4D0A300FD4ECA /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		8FB6D35326B4D0C300FD4ECA /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		8FC68E1026B4FC3C007B83A2 /* WhatTheSport.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WhatTheSport.xcdatamodel; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				8F99357326BCA82C006FA04C /* GameDateTableViewCell.swift */,
 				8F99357526BD1558006FA04C /* TestViewController.swift */,
 				8F99357726BDB95E006FA04C /* MenuView.swift */,
+				8F99358526BDE530006FA04C /* ViewControllerWithMenu.swift */,
 			);
 			path = "Schedueles, events";
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F99358626BDE530006FA04C /* ViewControllerWithMenu.swift in Sources */,
 				8F6BED3926B9D3C700F05A3D /* AccountPageTableViewCell.swift in Sources */,
 				8F6BED4226B9D50800F05A3D /* Transitioner.swift in Sources */,
 				8F955FF6269AB5B5003DD8F1 /* ResetPasswordViewController.swift in Sources */,
