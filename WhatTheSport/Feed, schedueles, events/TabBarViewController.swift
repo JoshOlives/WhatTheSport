@@ -19,15 +19,22 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     var nextVC: FiltersViewController!
     
     var isSlide = false
+    var inAnimation = false
     
     @objc
     func menuBarButtonTapped() {
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut){
+        if inAnimation {
+            return
+        }
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut){
+            self.inAnimation = true
             let currentViewController = UIApplication.getTopViewController() as! ViewControllerWithMenu
             currentViewController.containerView.frame.origin.x = self.isSlide ? 0 : currentViewController.containerView.frame.width - currentViewController.slideInMenuPadding
             print("in animation")
         } completion: { (didFinish) in
             print("finished")
+            self.inAnimation = false
             self.isSlide.toggle()
         }
     }
@@ -49,16 +56,24 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         
         plusButton = UIBarButtonItem(image: UIImage(systemName: "plus.circle.fill"), style: .plain, target: self, action: #selector(rightHandAction))
         
-        vc1 = UINavigationController(rootViewController: GameScheduleViewController())
+        let gameController = GameScheduleViewController()
+        gameController.delegate = self
+        vc1 = UINavigationController(rootViewController: gameController)
         vc1.isNavigationBarHidden = true
         vc1.title = "Games"
         
-        vc2 = UINavigationController(rootViewController: SecondViewController())
+        let feedController = SecondViewController()
+        feedController.delegate = self
+        vc2 = UINavigationController(rootViewController: feedController)
         vc2.isNavigationBarHidden = true
         vc2.title = "Feed"
-        vc3 = UINavigationController(rootViewController: ThirdViewController())
+        
+        let eventsController = ThirdViewController()
+        eventsController.delegate = self
+        vc3 = UINavigationController(rootViewController: eventsController)
         vc3.isNavigationBarHidden = true
         vc3.title = "Events"
+        
         self.setViewControllers([vc1, vc2, vc3], animated: false)
         
         guard let items = self.tabBar.items else {

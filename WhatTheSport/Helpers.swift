@@ -163,6 +163,8 @@ extension UIApplication {
 }
 
 class ViewControllerWithMenu: UIViewController {
+    var delegate: TabBarViewController!
+    
     lazy var menuView: UIView = {
         //TODO: add custom menu
         let view = UIView()
@@ -189,6 +191,8 @@ class ViewControllerWithMenu: UIViewController {
         
         menuView.backgroundColor = menuBackground
         containerView.backgroundColor = background
+        
+        containerView.frame.origin.x = self.delegate.isSlide ? containerView.frame.width - slideInMenuPadding : 0
     }
 }
 
