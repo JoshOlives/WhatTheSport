@@ -185,14 +185,30 @@ class ViewControllerWithMenu: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         inTransition = false
         let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
-        let menuBackground: UIColor = currentUser!.settings!.dark ? .black : .white
+        let menuBackground: UIColor = currentUser!.settings!.dark ? .white : .white
         
         menuView.backgroundColor = menuBackground
         containerView.backgroundColor = background
         
-        containerView.frame.origin.x = self.delegate.isSlide ? containerView.frame.width - slideInMenuPadding : 0
+        print("isslide \(delegate.isSlide)")
+        print((containerView.frame.width - self.slideInMenuPadding))
+        print(containerView.frame.width)
+        print(self.slideInMenuPadding)
+        containerView.frame.origin.x = self.delegate.isSlide ? (containerView.frame.width - self.slideInMenuPadding) : 0
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        print("LAYOUT")
+        print((containerView.frame.width - self.slideInMenuPadding))
+        print(containerView.frame.width)
+        print(self.slideInMenuPadding)
+        containerView.frame.origin.x = self.delegate.isSlide ? (containerView.frame.width - self.slideInMenuPadding) : 0
     }
 }
 

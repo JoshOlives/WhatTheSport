@@ -10,11 +10,13 @@ import UIKit
 class SecondViewController: ViewControllerWithMenu {
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("BOOGA")
         self.title = "Feed"
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.containerView.backgroundColor = .blue
+        print("DSADAS")
+        //self.containerView.backgroundColor = .blue
     }
 }
