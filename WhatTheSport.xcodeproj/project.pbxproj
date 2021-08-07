@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		068A1D3826B769450097886D /* RegisterTeamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068A1D3726B769450097886D /* RegisterTeamController.swift */; };
+		068A1D3E26B7DA340097886D /* SportCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068A1D3D26B7DA340097886D /* SportCell.swift */; };
+		068A1D4026B8CA270097886D /* SportCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 068A1D3F26B8CA270097886D /* SportCell.xib */; };
+		068A1D4626BBEB810097886D /* TeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068A1D4526BBEB810097886D /* TeamCell.swift */; };
+		068A1D4826BBECD30097886D /* FranchiseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068A1D4726BBECD30097886D /* FranchiseCell.swift */; };
+		068A1D4A26BD0EB00097886D /* TeamCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 068A1D4926BD0EB00097886D /* TeamCell.xib */; };
+		068A1D4E26BD13F70097886D /* FranchiseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 068A1D4D26BD13F70097886D /* FranchiseCell.xib */; };
+		06A0E5F226AF974D00E577AF /* RegisterSportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A0E5F126AF974D00E577AF /* RegisterSportController.swift */; };
 		34CE93502368F3E0F1D46DE0 /* Pods_WhatTheSport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FEE4B31F510091F48CC5D5B /* Pods_WhatTheSport.framework */; };
 		8F955FD32698E4A2003DD8F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F955FD22698E4A2003DD8F1 /* AppDelegate.swift */; };
 		8F955FD52698E4A2003DD8F1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F955FD42698E4A2003DD8F1 /* SceneDelegate.swift */; };
@@ -24,6 +32,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		068A1D3726B769450097886D /* RegisterTeamController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTeamController.swift; sourceTree = "<group>"; };
+		068A1D3D26B7DA340097886D /* SportCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportCell.swift; sourceTree = "<group>"; };
+		068A1D3F26B8CA270097886D /* SportCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SportCell.xib; sourceTree = "<group>"; };
+		068A1D4526BBEB810097886D /* TeamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamCell.swift; sourceTree = "<group>"; };
+		068A1D4726BBECD30097886D /* FranchiseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FranchiseCell.swift; sourceTree = "<group>"; };
+		068A1D4926BD0EB00097886D /* TeamCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TeamCell.xib; sourceTree = "<group>"; };
+		068A1D4D26BD13F70097886D /* FranchiseCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FranchiseCell.xib; sourceTree = "<group>"; };
+		06A0E5F126AF974D00E577AF /* RegisterSportController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterSportController.swift; sourceTree = "<group>"; };
 		1FEE4B31F510091F48CC5D5B /* Pods_WhatTheSport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WhatTheSport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F955FCF2698E4A2003DD8F1 /* WhatTheSport.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhatTheSport.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F955FD22698E4A2003DD8F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -77,20 +93,28 @@
 		8F955FD12698E4A2003DD8F1 /* WhatTheSport */ = {
 			isa = PBXGroup;
 			children = (
+				068A1D3F26B8CA270097886D /* SportCell.xib */,
+				068A1D4526BBEB810097886D /* TeamCell.swift */,
+				068A1D4926BD0EB00097886D /* TeamCell.xib */,
 				8F955FD22698E4A2003DD8F1 /* AppDelegate.swift */,
 				8F955FD42698E4A2003DD8F1 /* SceneDelegate.swift */,
 				8F955FD62698E4A2003DD8F1 /* ViewController.swift */,
 				8F955FED269A8443003DD8F1 /* SignUpViewController.swift */,
+				06A0E5F126AF974D00E577AF /* RegisterSportController.swift */,
+				068A1D3726B769450097886D /* RegisterTeamController.swift */,
 				8F955FF1269A88DE003DD8F1 /* Helpers.swift */,
 				8F955FEF269A848C003DD8F1 /* SignInViewController.swift */,
 				8F955FF3269AB4FB003DD8F1 /* ForgotPasswordViewController.swift */,
 				8F955FF5269AB5B5003DD8F1 /* ResetPasswordViewController.swift */,
 				8F955FD82698E4A2003DD8F1 /* Main.storyboard */,
+				068A1D4726BBECD30097886D /* FranchiseCell.swift */,
+				068A1D4D26BD13F70097886D /* FranchiseCell.xib */,
 				8F955FDE2698E4A6003DD8F1 /* Assets.xcassets */,
 				8F955FE02698E4A6003DD8F1 /* LaunchScreen.storyboard */,
 				8F955FE32698E4A6003DD8F1 /* Info.plist */,
 				8F955FDB2698E4A2003DD8F1 /* WhatTheSport.xcdatamodeld */,
 				8F955FEB2698E835003DD8F1 /* GoogleService-Info.plist */,
+				068A1D3D26B7DA340097886D /* SportCell.swift */,
 			);
 			path = WhatTheSport;
 			sourceTree = "<group>";
@@ -173,6 +197,9 @@
 			files = (
 				8F955FE22698E4A6003DD8F1 /* LaunchScreen.storyboard in Resources */,
 				8F955FEC2698E835003DD8F1 /* GoogleService-Info.plist in Resources */,
+				068A1D4A26BD0EB00097886D /* TeamCell.xib in Resources */,
+				068A1D4E26BD13F70097886D /* FranchiseCell.xib in Resources */,
+				068A1D4026B8CA270097886D /* SportCell.xib in Resources */,
 				8F955FDF2698E4A6003DD8F1 /* Assets.xcassets in Resources */,
 				8F955FDA2698E4A2003DD8F1 /* Main.storyboard in Resources */,
 			);
@@ -228,8 +255,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F955FF6269AB5B5003DD8F1 /* ResetPasswordViewController.swift in Sources */,
+				068A1D3826B769450097886D /* RegisterTeamController.swift in Sources */,
+				068A1D3E26B7DA340097886D /* SportCell.swift in Sources */,
 				8F955FF4269AB4FB003DD8F1 /* ForgotPasswordViewController.swift in Sources */,
 				8F955FF2269A88DE003DD8F1 /* Helpers.swift in Sources */,
+				06A0E5F226AF974D00E577AF /* RegisterSportController.swift in Sources */,
+				068A1D4626BBEB810097886D /* TeamCell.swift in Sources */,
+				068A1D4826BBECD30097886D /* FranchiseCell.swift in Sources */,
 				8F955FD72698E4A2003DD8F1 /* ViewController.swift in Sources */,
 				8F955FD32698E4A2003DD8F1 /* AppDelegate.swift in Sources */,
 				8F955FF0269A848C003DD8F1 /* SignInViewController.swift in Sources */,

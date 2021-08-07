@@ -166,6 +166,18 @@ class SignUpViewController: UIViewController, Transitioner {
         }
     }
     
+    func signUp (email: String, password: String) {
+        Auth.auth().signIn(withEmail: email, password: password) {
+          user, error in
+          if error == nil {
+            //TODO: segue to register sport page
+          } else {
+            let controller = UI.createAlert(title: "Error", msg: error!.localizedDescription)
+            self.present(controller, animated: true, completion: nil)
+          }
+        }
+    }
+    
     func signIn (email: String, password: String) {
         Auth.auth().signIn(withEmail: email, password: password) {
           user, error in
