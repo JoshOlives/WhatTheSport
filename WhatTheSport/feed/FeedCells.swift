@@ -40,7 +40,7 @@ class PostCell: UITableViewCell {
         
         self.contentLabel = UILabel(frame: .zero)
         self.contentLabel.translatesAutoresizingMaskIntoConstraints = false
-        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.orange)
+        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
         self.contentLabel.backgroundColor = background
         
         self.reactButton = UIButton(frame: .zero)

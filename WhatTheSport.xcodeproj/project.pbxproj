@@ -42,8 +42,6 @@
 		8F99358226BDCBD3006FA04C /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99358126BDCBD3006FA04C /* CreatePostViewController.swift */; };
 		8F99358426BDCBEF006FA04C /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99358326BDCBEF006FA04C /* FeedViewController.swift */; };
 		8F99358626BDE530006FA04C /* ViewControllerWithMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99358526BDE530006FA04C /* ViewControllerWithMenu.swift */; };
-		8FB6D35026B4D0A300FD4ECA /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB6D34F26B4D0A300FD4ECA /* Setting.swift */; };
-		8FB6D35426B4D0C300FD4ECA /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB6D35326B4D0C300FD4ECA /* Filter.swift */; };
 		8FC68E1126B4FC3C007B83A2 /* WhatTheSport.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8FC68E0F26B4FC3C007B83A2 /* WhatTheSport.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -85,8 +83,6 @@
 		8F99358126BDCBD3006FA04C /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
 		8F99358326BDCBEF006FA04C /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		8F99358526BDE530006FA04C /* ViewControllerWithMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerWithMenu.swift; sourceTree = "<group>"; };
-		8FB6D34F26B4D0A300FD4ECA /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
-		8FB6D35326B4D0C300FD4ECA /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		8FC68E1026B4FC3C007B83A2 /* WhatTheSport.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WhatTheSport.xcdatamodel; sourceTree = "<group>"; };
 		F8E07A5013DEBC95359E872D /* Pods-WhatTheSport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatTheSport.release.xcconfig"; path = "Target Support Files/Pods-WhatTheSport/Pods-WhatTheSport.release.xcconfig"; sourceTree = "<group>"; };
 		FE5519523DB56ACCFCB5B20D /* Pods-WhatTheSport.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatTheSport.debug.xcconfig"; path = "Target Support Files/Pods-WhatTheSport/Pods-WhatTheSport.debug.xcconfig"; sourceTree = "<group>"; };
@@ -155,7 +151,6 @@
 				8F99356826BC7B6D006FA04C /* Schedueles, events */,
 				8F6BED4026B9D48900F05A3D /* sign in, sign up, password recovery */,
 				8F6BED3526B9D35300F05A3D /* acount, settings, filters */,
-				8FB6D34A26B4D01200FD4ECA /* enums */,
 				8F955FD22698E4A2003DD8F1 /* AppDelegate.swift */,
 				8F955FD42698E4A2003DD8F1 /* SceneDelegate.swift */,
 				8F955FD62698E4A2003DD8F1 /* ViewController.swift */,
@@ -196,15 +191,6 @@
 				8F99358326BDCBEF006FA04C /* FeedViewController.swift */,
 			);
 			path = feed;
-			sourceTree = "<group>";
-		};
-		8FB6D34A26B4D01200FD4ECA /* enums */ = {
-			isa = PBXGroup;
-			children = (
-				8FB6D34F26B4D0A300FD4ECA /* Setting.swift */,
-				8FB6D35326B4D0C300FD4ECA /* Filter.swift */,
-			);
-			path = enums;
 			sourceTree = "<group>";
 		};
 		A1684AE59EBBBA1E256D7BFC /* Pods */ = {
@@ -350,7 +336,6 @@
 				8F99358026BDCBB1006FA04C /* FeedObjects.swift in Sources */,
 				8F955FF4269AB4FB003DD8F1 /* ForgotPasswordViewController.swift in Sources */,
 				8F6BED3F26B9D43400F05A3D /* SettingToggleTableViewCell.swift in Sources */,
-				8FB6D35026B4D0A300FD4ECA /* Setting.swift in Sources */,
 				8F99357C26BDCB6E006FA04C /* TeamObjects.swift in Sources */,
 				8F99357026BCA5DF006FA04C /* GameScheduleViewController.swift in Sources */,
 				8F99357E26BDCB90006FA04C /* FeedCells.swift in Sources */,
@@ -367,7 +352,6 @@
 				8F955FF0269A848C003DD8F1 /* SignInViewController.swift in Sources */,
 				8F955FD52698E4A2003DD8F1 /* SceneDelegate.swift in Sources */,
 				8F99357826BDB95F006FA04C /* MenuView.swift in Sources */,
-				8FB6D35426B4D0C300FD4ECA /* Filter.swift in Sources */,
 				8F99358226BDCBD3006FA04C /* CreatePostViewController.swift in Sources */,
 				8F955FEE269A8443003DD8F1 /* SignUpViewController.swift in Sources */,
 				8F6BED3426B9D34500F05A3D /* AccountPageViewController.swift in Sources */,
