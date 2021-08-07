@@ -27,6 +27,7 @@
 		8F955FF2269A88DE003DD8F1 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F955FF1269A88DE003DD8F1 /* Helpers.swift */; };
 		8F955FF4269AB4FB003DD8F1 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F955FF3269AB4FB003DD8F1 /* ForgotPasswordViewController.swift */; };
 		8F955FF6269AB5B5003DD8F1 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F955FF5269AB5B5003DD8F1 /* ResetPasswordViewController.swift */; };
+<<<<<<< HEAD
 		8F99356726BB2DF5006FA04C /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99356626BB2DF4006FA04C /* FiltersViewController.swift */; };
 		8F99356A26BCA4F4006FA04C /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99356926BCA4F4006FA04C /* TabBarViewController.swift */; };
 		8F99356C26BCA575006FA04C /* TempFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99356B26BCA575006FA04C /* TempFeed.swift */; };
