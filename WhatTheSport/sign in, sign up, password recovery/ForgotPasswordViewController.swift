@@ -27,9 +27,7 @@ class ForgotPasswordViewController: UIViewController {
         view.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
         self.title = "Forgot Password"
         
-        emailField = UITextField(frame: .zero)
-        emailField.placeholder = "  Email"
-        emailField.backgroundColor = .white
+        emailField = TextField(placeholder: "Email")
         self.view.addSubview(emailField)
         
         emailField.translatesAutoresizingMaskIntoConstraints = false
@@ -38,11 +36,7 @@ class ForgotPasswordViewController: UIViewController {
         constraints.append(emailField.widthAnchor.constraint(equalToConstant: view.bounds.width-50))
         constraints.append(emailField.heightAnchor.constraint(equalToConstant: Constants.Field.height))
         
-        sendResetButton = UIButton(type: .roundedRect)
-        sendResetButton.setTitle("Send", for: .normal)
-        sendResetButton.backgroundColor = UIColor(rgb: Constants.Colors.orange)
-        sendResetButton.setTitleColor(.white, for: .normal)
-        sendResetButton.layer.cornerRadius = 20.0
+        sendResetButton = Button(title: "Send")
         sendResetButton.addTarget(self, action: #selector(sendResetEmail), for: .touchUpInside)
         self.view.addSubview(sendResetButton)
         

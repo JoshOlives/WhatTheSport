@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class SignInViewController: UIViewController {
+class SignInViewController: UIViewController, UITextFieldDelegate {
 
     var emailField: UITextField!
     var passwordField: UITextField!
@@ -43,9 +43,7 @@ class SignInViewController: UIViewController {
         constraints.append(logo.widthAnchor.constraint(equalToConstant: view.bounds.width-50))
         constraints.append(logo.heightAnchor.constraint(equalToConstant: 125))
         
-        emailField = UITextField(frame: .zero)
-        emailField.placeholder = "  Email"
-        emailField.backgroundColor = .white
+        emailField = TextField(placeholder: "Email")
         self.view.addSubview(emailField)
         
         emailField.translatesAutoresizingMaskIntoConstraints = false
@@ -54,9 +52,8 @@ class SignInViewController: UIViewController {
         constraints.append(emailField.widthAnchor.constraint(equalToConstant: view.bounds.width-50))
         constraints.append(emailField.heightAnchor.constraint(equalToConstant: Constants.Field.height))
         
-        passwordField = UITextField(frame: .zero)
-        passwordField.placeholder = "  Password"
-        passwordField.backgroundColor = .white
+        passwordField = SecureTextField(placeholder: "Password")
+        passwordField.delegate = self
         self.view.addSubview(passwordField)
         
         passwordField.translatesAutoresizingMaskIntoConstraints = false
@@ -77,12 +74,8 @@ class SignInViewController: UIViewController {
 //        constraints.append(forgotPassword.widthAnchor.constraint(equalTo: emailField.widthAnchor))
 //        constraints.append(forgotPassword.heightAnchor.constraint(equalTo: emailField.heightAnchor))
         
-        forgotButton = UIButton(type: .roundedRect)
-        forgotButton.backgroundColor = UIColor(rgb: Constants.Colors.orange).withAlphaComponent(0)
-        forgotButton.setTitleColor(.blue, for: .normal)
+        forgotButton = LinkButton(title: "Forgot Password?")
         forgotButton.addTarget(self, action: #selector(forgotPress), for: .touchUpInside)
-        let signInAttributes: [NSAttributedString.Key: Any] = [/*.underlineStyle: NSUnderlineStyle.single.rawValue,*/ .font: UIFont.systemFont(ofSize: 18)]
-        forgotButton.setAttributedTitle(NSMutableAttributedString(string: "Forgot Password?", attributes: signInAttributes), for: .normal)
         self.view.addSubview(forgotButton)
         
         forgotButton.translatesAutoresizingMaskIntoConstraints = false
@@ -91,11 +84,7 @@ class SignInViewController: UIViewController {
         constraints.append(forgotButton.widthAnchor.constraint(equalTo: passwordField.widthAnchor, multiplier: 0.4))
         constraints.append(forgotButton.heightAnchor.constraint(equalTo: passwordField.heightAnchor))
         
-        signInButton = UIButton(type: .roundedRect)
-        signInButton.setTitle("Sign In", for: .normal)
-        signInButton.backgroundColor = UIColor(rgb: Constants.Colors.orange)
-        signInButton.setTitleColor(.white, for: .normal)
-        signInButton.layer.cornerRadius = 20.0
+        signInButton = Button(title: "Sign In")
         signInButton.addTarget(self, action: #selector(signInPress), for: .touchUpInside)
         self.view.addSubview(signInButton)
         
@@ -107,6 +96,15 @@ class SignInViewController: UIViewController {
         
         NSLayoutConstraint.activate(constraints)
     }
+    override func viewWillAppear(_ animated: Bool) {
+        inTransition = false
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if(textField == self.passwordField) {
+            textField.isSecureTextEntry = true
+        }
+    }
 
     @objc func signInPress(sender: UIButton!) {
         guard let email = emailField.text,
@@ -114,20 +112,25 @@ class SignInViewController: UIViewController {
               email.count > 0,
               password.count > 0
         else {
-          return
+            let controller = UI.createAlert(title: "Error", msg: "fields must not be blank")
+            self.present(controller, animated: true, completion: nil)
+            return
         }
         let delegate = signUpVC! as Transitioner
         delegate.signIn(email: email, password: password)
     }
     
     @objc func forgotPress(sender: UIButton!) {
+        if inTransition {
+            return
+        } else {
+            inTransition = true
+        }
         if forgotVC == nil {
             forgotVC = ForgotPasswordViewController()
         }
-
-        if let navigator = navigationController {
-            navigator.pushViewController(forgotVC, animated: true)
-        }
+        
+        UI.transition(dest: forgotVC, src: self)
     }
 }
 
