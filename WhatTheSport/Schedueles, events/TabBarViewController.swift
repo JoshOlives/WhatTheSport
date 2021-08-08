@@ -22,6 +22,27 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     var isSlide = false
     var inAnimation = false
     
+    func acountPageTapped() {
+        let nextViewController = AccountPageViewController()
+             
+        if let navigator = navigationController {
+              navigator.pushViewController(nextViewController, animated: true)
+        }
+    }
+    func settingsPageTapped() {
+        let nextViewController = SettingViewController()
+             
+        if let navigator = navigationController {
+              navigator.pushViewController(nextViewController, animated: true)
+        }
+    }
+    
+    func signOutPageTapped() {
+        let home = UINavigationController(rootViewController: SignUpViewController())
+        home.modalPresentationStyle = .fullScreen
+        self.present(home, animated: true, completion: nil)
+    }
+    
     @objc
     func menuBarButtonTapped() {
         if inAnimation {
@@ -59,18 +80,21 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         
         let gameController = GameScheduleViewController()
         gameController.delegate = self
+        gameController.menuView.delegate = self
         vc1 = UINavigationController(rootViewController: gameController)
         vc1.isNavigationBarHidden = true
         vc1.title = "Games"
         
         let feedController = FeedViewController()
         feedController.delegate = self
+        feedController.menuView.delegate = self
         vc2 = UINavigationController(rootViewController: feedController)
         vc2.isNavigationBarHidden = true
         vc2.title = "Feed"
         
         let eventsController = ThirdViewController()
         eventsController.delegate = self
+        eventsController.menuView.delegate = self
         vc3 = UINavigationController(rootViewController: eventsController)
         vc3.isNavigationBarHidden = true
         vc3.title = "Events"

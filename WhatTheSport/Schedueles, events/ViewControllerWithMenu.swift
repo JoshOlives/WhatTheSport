@@ -7,7 +7,7 @@ import CoreData
 class ViewControllerWithMenu: UIViewController {
     var delegate: TabBarViewController!
     
-    lazy var menuView: UIView = {
+    lazy var menuView: MenuView = {
         //TODO: add custom menu
         let view = MenuView()
         return view
@@ -22,14 +22,15 @@ class ViewControllerWithMenu: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        menuView.pinMenuTo(self.view, with: slideInMenuPadding)
-        containerView.edgeTo(self.view)
+        self.menuView.pinMenuTo(self.view, with: self.slideInMenuPadding)
+        self.containerView.edgeTo(self.view)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         inTransition = false
+        print("APPEARED")
         let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
         let menuBackground: UIColor = currentUser!.settings!.dark ? .white : .white
         
@@ -37,6 +38,16 @@ class ViewControllerWithMenu: UIViewController {
         containerView.backgroundColor = background
         
         containerView.frame.origin.x = self.delegate.isSlide ? (containerView.frame.width - self.slideInMenuPadding) : 0
+        
+        menuView.username.text = fireUser!.get("username") as? String
+        menuView.profile.text = fireUser!.get("username") as? String
+        guard let urlstring = fireUser!.get("URL") as? String else{
+                print("error retreiving urlstring")
+                inTransition = false
+                return
+        }
+
+        IO.downloadImage(str: urlstring, imageView: menuView.userPhoto){}
     }
     
     override func viewDidLayoutSubviews() {

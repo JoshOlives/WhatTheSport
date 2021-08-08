@@ -148,21 +148,7 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
                 nextVC = AccountPageViewController()
             }
             
-            if self.nextVC.profilePhoto.currentImage == nil {
-                guard let urlstring = fireUser!.get("URL") as? String else{
-                    print("error retreiving urlstring")
-                    inTransition = false
-                    return
-                }
-                let imageView = UIImageView()
-                IO.downloadImage(str: urlstring, imageView: imageView){
-                    self.nextVC.profilePhoto.setImage(imageView.image, for: .normal)
-                    UI.transition(dest: self.nextVC, src: self)
-                }
-            } else {
-                UI.transition(dest: self.nextVC, src: self)
-                print("account view")
-            }
+            UI.transition(dest: self.nextVC, src: self)
         case 3:
             let controller = UIAlertController(
                 title: "Choose Color",

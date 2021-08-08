@@ -126,7 +126,8 @@ class Button: UIButton {
 }
 
 extension UIApplication {
-
+    
+    //get the current view controller
     class func getTopViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
 
         if let nav = base as? UINavigationController {
@@ -156,9 +157,6 @@ struct Constants {
     }
     struct RadioControl {
             static let height: CGFloat = 50
-    }
-    struct RadioControl {
-        static let height: CGFloat = 50
     }
     
 }

@@ -222,15 +222,16 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
         Auth.auth().signIn(withEmail: email, password: password) {
           user, error in
           if error == nil {
-            if self.nextVC == nil {
-                self.nextVC = TabBarViewController()
-            }
             let userID = user!.user.uid
             
             //TODO: only assign if not nil  ?
             currentUser = IO.retrieveUser(userID: userID) as? User
             IO.retrieveFireUser(userID: userID){
                 self.printUserInfo(userID: userID)
+                
+                if self.nextVC == nil {
+                    self.nextVC = TabBarViewController()
+                }
                 
                 let home = UINavigationController(rootViewController: self.nextVC)
                 home.modalPresentationStyle = .fullScreen
