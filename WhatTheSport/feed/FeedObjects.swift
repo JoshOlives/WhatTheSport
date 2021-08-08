@@ -32,3 +32,19 @@ class Post {
         self.likeUserIDs = likeUserIDsArg
     }
 }
+
+class Comment {
+    var commentID: String
+    var postID: String
+    var username: String
+    var userID: String
+    var content: String
+    
+    init(commentIDArg: String, postIDArg: String, usernameArg: String, userIDArg: String, contentArg: String) {
+        self.commentID = commentIDArg
+        self.postID = postIDArg
+        self.username = usernameArg
+        self.userID = userIDArg
+        self.content = contentArg
+    }
+}

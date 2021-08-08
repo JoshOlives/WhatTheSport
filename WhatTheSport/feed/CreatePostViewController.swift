@@ -16,7 +16,6 @@ class CreatePostViewController: UIViewController {
     override func loadView() {
         super.loadView()
         
-        var constaints: [NSLayoutConstraint] = []
         let safeArea = self.view.bounds.inset(by: view.safeAreaInsets)
         self.postTextView = UITextView(frame:
                                         CGRect(x: 0, y: 0, width: safeArea.width, height: safeArea.height / 2))
@@ -65,8 +64,6 @@ class CreatePostViewController: UIViewController {
                     otherVC.addCreatedPost(newPost: newPost)
                 }
             })
-            
-                        
         }
     }
 }

@@ -8,8 +8,6 @@
 import UIKit
 import FirebaseFirestore
 
-
-let ops: [Int] = []
 let cellIdentifier = "FeedCell"
 
 protocol PostAddition {
