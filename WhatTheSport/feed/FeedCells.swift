@@ -40,8 +40,8 @@ class PostCell: UITableViewCell {
         
         self.contentLabel = UILabel(frame: .zero)
         self.contentLabel.translatesAutoresizingMaskIntoConstraints = false
-        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
-        self.contentLabel.backgroundColor = background
+//        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
+//        self.contentLabel.backgroundColor = background
         
         self.reactButton = UIButton(frame: .zero)
         self.reactButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
@@ -117,7 +117,6 @@ class PostCell: UITableViewCell {
         
         // Add constraints and edit subview attributes for like button
         self.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-        self.likeButton.tintColor = UIColor.gray
         self.likeButton.addTarget(self, action: #selector(likeButtonPressed), for: .touchUpInside)
         cellConstraints.append(self.likeButton.widthAnchor.constraint(equalToConstant: 20))
         cellConstraints.append(self.likeButton.heightAnchor.constraint(equalToConstant: 20))
@@ -134,6 +133,7 @@ class PostCell: UITableViewCell {
         self.viewCommentsButton.setTitle("\(postArg.numComments) comments", for: .normal)
         self.likeCount.text = String(postArg.numLikes)
         self.teamLogo.image = postArg.teamIndex != nil ? UIImage(named: teamsList[postArg.teamIndex!].imageID) : UIImage(systemName: "house")
+        self.likeButton.tintColor = postArg.userLikedPost ? UIColor.red : UIColor.gray
     }
     
     func changeTextColor(color: UIColor) {
@@ -149,17 +149,41 @@ class PostCell: UITableViewCell {
     
     @objc
     func likeButtonPressed() {
-        if post != nil && post!.userLikedPost {
-            let feedDB = Firestore.firestore().collection("posts")
+        var newArray = post!.likeUserIDs
+        newArray.append(TestUser.userID)
+        let feedDB = Firestore.firestore().collection("posts")
+        if self.post != nil && !self.post!.userLikedPost {
             feedDB.document(self.post!.postID).updateData([
-                "numLikes": self.post!.numLikes + 1
+                "numLikes": self.post!.numLikes + 1,
+                "likeUserIDs": newArray
             ]) { err in
                 if let err = err {
                     print("Error updating document: \(err)")
                 } else {
                     self.post!.numLikes += 1
+                    self.post!.likeUserIDs = newArray
+                    self.post!.userLikedPost = true
                     self.likeCount.text = String(self.post!.numLikes)
                     self.likeButton.tintColor = UIColor.red
+                }
+            }
+        } else {
+            var newArray = self.post!.likeUserIDs
+            if let valIndex = self.post!.likeUserIDs.firstIndex(of: TestUser.userID) {
+                _ = newArray.remove(at: valIndex)
+            }
+            feedDB.document(self.post!.postID).updateData([
+                "numLikes": self.post!.numLikes - 1,
+                "likeUserIDs": newArray
+            ]) { err in
+                if let err = err {
+                    print("Error updating document: \(err)")
+                } else {
+                    self.post!.numLikes -= 1
+                    self.post!.likeUserIDs = newArray
+                    self.post!.userLikedPost = false
+                    self.likeCount.text = String(self.post!.numLikes)
+                    self.likeButton.tintColor = UIColor.gray
                 }
             }
         }

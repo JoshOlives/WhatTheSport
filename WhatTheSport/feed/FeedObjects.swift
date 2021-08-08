@@ -17,8 +17,9 @@ class Post {
     var numLikes: Int
     var numComments: Int
     var userLikedPost: Bool
+    var likeUserIDs: [String]
     
-    init(postIDArg: String, sportIndexArg: Int, teamIndexArg: Int?, contentArg: String, userIDArg: String, usernameArg: String, numLikesArg: Int, numCommentsArg: Int, userLikedPostArg: Bool) {
+    init(postIDArg: String, sportIndexArg: Int, teamIndexArg: Int?, contentArg: String, userIDArg: String, usernameArg: String, numLikesArg: Int, numCommentsArg: Int, userLikedPostArg: Bool, likeUserIDsArg: [String]) {
         self.postID = postIDArg
         self.sportIndex = sportIndexArg
         self.teamIndex = teamIndexArg
@@ -28,5 +29,6 @@ class Post {
         self.numLikes = numLikesArg
         self.numComments = numCommentsArg
         self.userLikedPost = userLikedPostArg
+        self.likeUserIDs = likeUserIDsArg
     }
 }

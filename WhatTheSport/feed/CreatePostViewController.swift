@@ -44,7 +44,7 @@ class CreatePostViewController: UIViewController {
                                                  msg: "Please enter some text for your post")
                         present(alertController, animated: true, completion: nil)
         } else {
-            let comments: [String] = []
+            let likeUserIDs: [String] = []
             let fsPost: [String: Any] = ["userID": TestUser.userID,
                                          "username": TestUser.username,
                                          "teamIndex": 1,
@@ -52,7 +52,7 @@ class CreatePostViewController: UIViewController {
                                          "numLikes": 0,
                                          "numComments": 0,
                                          "content": self.postTextView.text!,
-                                         "likeUserIDs": comments]
+                                         "likeUserIDs": likeUserIDs]
             
             let feedDB = Firestore.firestore().collection("posts")
             var ref: DocumentReference? = nil
@@ -60,7 +60,7 @@ class CreatePostViewController: UIViewController {
                 if let err = err {
                     print("Error adding document: \(err)")
                 } else {
-                    let newPost = Post(postIDArg: ref!.documentID, sportIndexArg: 0, teamIndexArg: 1, contentArg: self.postTextView.text, userIDArg: TestUser.userID, usernameArg: TestUser.username, numLikesArg: 0, numCommentsArg: 0, userLikedPostArg: false)
+                    let newPost = Post(postIDArg: ref!.documentID, sportIndexArg: 0, teamIndexArg: 1, contentArg: self.postTextView.text, userIDArg: TestUser.userID, usernameArg: TestUser.username, numLikesArg: 0, numCommentsArg: 0, userLikedPostArg: false, likeUserIDsArg: [])
                     let otherVC = self.delegate as! PostAddition
                     otherVC.addCreatedPost(newPost: newPost)
                 }

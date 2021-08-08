@@ -12,8 +12,8 @@ import Firebase
 import CoreData
 
 struct TestUser {
-    static var userID = "6wnjcRlROt7KQQIqOdHG"
-    static var username = "LakersFan123"
+    static var userID = "dUO568cy98TUZMDwlHj9tQilWLE2"
+    static var username = "Test"
     static var postIDs: [String] = []
     
 }

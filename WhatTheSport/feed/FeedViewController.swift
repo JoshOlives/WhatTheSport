@@ -12,30 +12,25 @@ import FirebaseFirestore
 let ops: [Int] = []
 let cellIdentifier = "FeedCell"
 
-<<<<<<< HEAD:WhatTheSport/FeedViewController.swift
 protocol PostAddition {
     func addCreatedPost(newPost: Post)
 }
 
 class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PostAddition {
-=======
-class FeedViewController: ViewControllerWithMenu, UITableViewDataSource, UITableViewDelegate {
->>>>>>> 3c35ef7355ffff38100534f70c8c50011c9a4667:WhatTheSport/feed/FeedViewController.swift
     private let feedDB = Firestore.firestore().collection("posts")
     
     var createPostVC: CreatePostViewController!
     var feedTableView: UITableView!
+    var addPostBarButton: UIBarButtonItem!
     var posts: [Post] = []
+    var delegate: UIViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Feed"
-<<<<<<< HEAD:WhatTheSport/FeedViewController.swift
         self.addPostBarButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(queueCreatePost))
         self.addPostBarButton.tintColor = UIColor.white
         self.navigationItem.setRightBarButtonItems([self.addPostBarButton], animated: true)
-=======
->>>>>>> 3c35ef7355ffff38100534f70c8c50011c9a4667:WhatTheSport/feed/FeedViewController.swift
         getPosts()
     }
     
@@ -49,38 +44,28 @@ class FeedViewController: ViewControllerWithMenu, UITableViewDataSource, UITable
         self.feedTableView.register(PostCell.self, forCellReuseIdentifier: cellIdentifier)
         self.feedTableView.dataSource = self
         self.feedTableView.delegate = self
-        containerView.addSubview(self.feedTableView)
+        self.view.addSubview(self.feedTableView)
         constraints.append(self.feedTableView.heightAnchor.constraint(equalTo: safeArea.heightAnchor))
         constraints.append(self.feedTableView.widthAnchor.constraint(equalTo: safeArea.widthAnchor))
         constraints.append(self.feedTableView.topAnchor.constraint(equalTo: safeArea.topAnchor))
         
-<<<<<<< HEAD:WhatTheSport/FeedViewController.swift
         self.feedTableView.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
         
-=======
->>>>>>> 3c35ef7355ffff38100534f70c8c50011c9a4667:WhatTheSport/feed/FeedViewController.swift
         NSLayoutConstraint.activate(constraints)
         
-        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
-        feedTableView.backgroundColor = background
+//        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
+//        feedTableView.backgroundColor = background
         feedTableView.reloadData()
     }
     
-<<<<<<< HEAD:WhatTheSport/FeedViewController.swift
     @objc
     func queueCreatePost() {
         if self.createPostVC == nil {
             self.createPostVC = CreatePostViewController()
             self.createPostVC.delegate = self
         }
-=======
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
->>>>>>> 3c35ef7355ffff38100534f70c8c50011c9a4667:WhatTheSport/feed/FeedViewController.swift
         
-//        feedTableView.backgroundColor = background
-//        feedTableView.reloadData()
+        self.navigationController?.pushViewController(self.createPostVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -93,12 +78,13 @@ class FeedViewController: ViewControllerWithMenu, UITableViewDataSource, UITable
         let currPost = posts[row]
         cell.setValues(postArg: currPost)
         
-        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
-        let textColor: UIColor =  currentUser!.settings!.dark ? .white : .black
+        cell.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
+//        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
+//        let textColor: UIColor =  currentUser!.settings!.dark ? .white : .black
         
         
-        cell.backgroundColor = background
-        cell.changeTextColor(color: textColor)
+//        cell.backgroundColor = background
+//        cell.changeTextColor(color: textColor)
         
         return cell
     }
@@ -113,13 +99,7 @@ class FeedViewController: ViewControllerWithMenu, UITableViewDataSource, UITable
                 print(err)
             } else {
                 for post in querySnapshot!.documents {
-<<<<<<< HEAD:WhatTheSport/FeedViewController.swift
-                    self.posts.append(Post(postIDArg: post.documentID, sportIndexArg: post.get("sportIndex") as! Int, teamIndexArg: post.get("teamIndex") as? Int, contentArg: post.get("content") as! String, userIDArg: post.get("userID") as! String, usernameArg: post.get("username") as! String, numLikesArg: post.get("numLikes") as! Int, numCommentsArg: post.get("numComments") as! Int, userLikedPostArg: (post.get("likeUserIDs") as! [String]).contains(TestUser.userID)))
-=======
-                    let teamIndex = post.get("teamIndex") as! Int
-                    let team: Team? = teamIndex >= 0 ? teamsList[teamIndex] : nil
-                    self.posts.append(Post(postIDVal: post.documentID, sportVal: sportsList[post.get("sportIndex") as! Int], teamVal: team, contentVal: post.get("content") as! String, userIDVal: post.get("userID") as! String, usernameVal: post.get("username") as! String, numLikesVal: post.get("numLikes") as! Int, numCommentsVal: post.get("numComments") as! Int))
->>>>>>> 3c35ef7355ffff38100534f70c8c50011c9a4667:WhatTheSport/feed/FeedViewController.swift
+                    self.posts.append(Post(postIDArg: post.documentID, sportIndexArg: post.get("sportIndex") as! Int, teamIndexArg: post.get("teamIndex") as? Int, contentArg: post.get("content") as! String, userIDArg: post.get("userID") as! String, usernameArg: post.get("username") as! String, numLikesArg: post.get("numLikes") as! Int, numCommentsArg: post.get("numComments") as! Int, userLikedPostArg: (post.get("likeUserIDs") as! [String]).contains(TestUser.userID), likeUserIDsArg: post.get("likeUserIDs") as! [String]))
                 }
                 self.feedTableView.reloadData()
             }
