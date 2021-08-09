@@ -56,12 +56,12 @@ class MenuView: UIView {
                 print("\n\n\n IN MENUUU!\n\n\n")
                 //print("Current data: \(data)")
                 self.username.text = data["username"] as? String
-                
-                guard let urlstring = data["URL"] as? String else {
-                        print("error retreiving urlstring")
-                        return
-                }
-                IO.downloadImage(str: urlstring, imageView: self.userPhoto){}
+//
+//                guard let urlstring = data["URL"] as? String else {
+//                        print("error retreiving urlstring")
+//                        return
+//                }
+//                IO.downloadImage(str: urlstring, imageView: self.userPhoto){}
         }
 
         userPhoto.backgroundColor = .lightGray

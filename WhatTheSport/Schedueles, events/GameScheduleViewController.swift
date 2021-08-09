@@ -90,7 +90,6 @@ class GameScheduleViewController: ViewControllerWithMenu, UITableViewDelegate, U
         
         var constraints: [NSLayoutConstraint] = []
 
-        //let containerView = self.view!
         containerView.addSubview(tableView)
 
         self.tableView.tableFooterView = UIView(frame: .zero)

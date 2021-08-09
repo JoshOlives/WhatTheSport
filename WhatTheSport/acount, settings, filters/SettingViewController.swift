@@ -13,6 +13,7 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     let settingDisplay = ["Account", "Push Notifications", "DarkMode", "Post Color", "App version"]
     var nextVC: AccountPageViewController!
+    var profilePic: UIImage!
     
     private let tableView : UITableView = {
         let tableView = UITableView()
@@ -146,6 +147,9 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
             if nextVC == nil{
                 print("this is row at \(indexPath.row)")
                 nextVC = AccountPageViewController()
+                if let image = profilePic {
+                    nextVC.profilePhoto.setImage(image, for: .normal)
+                }
             }
             
             UI.transition(dest: self.nextVC, src: self)

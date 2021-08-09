@@ -4,8 +4,8 @@ import FirebaseStorage
 import Firebase
 import CoreData
 
-class ViewControllerWithMenu: UITabBarController {
-    var delegat: TabBarViewController!
+class ViewControllerWithMenu: UIViewController {
+    var delegate: TabBarViewController!
     
     lazy var menuView: MenuView = {
         //TODO: add custom menu
@@ -38,13 +38,13 @@ class ViewControllerWithMenu: UITabBarController {
         containerView.backgroundColor = background
         menuView.changeTextColor(color: textColor)
         
-        containerView.frame.origin.x = self.delegat.isSlide ? (containerView.frame.width - self.slideInMenuPadding) : 0
+        containerView.frame.origin.x = self.delegate.isSlide ? (containerView.frame.width - self.slideInMenuPadding) : 0
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        containerView.frame.origin.x = self.delegat.isSlide ? (containerView.frame.width - self.slideInMenuPadding) : 0
+        containerView.frame.origin.x = self.delegate.isSlide ? (containerView.frame.width - self.slideInMenuPadding) : 0
     }
 }
 

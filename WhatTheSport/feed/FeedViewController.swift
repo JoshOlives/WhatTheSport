@@ -36,8 +36,6 @@ class FeedViewController: ViewControllerWithMenu, UITableViewDataSource, UITable
         self.feedTableView.dataSource = self
         self.feedTableView.delegate = self
         
-        
-        //let containerView = self.view!
         containerView.addSubview(self.feedTableView)
         constraints.append(self.feedTableView.heightAnchor.constraint(equalTo: safeArea.heightAnchor))
         constraints.append(self.feedTableView.widthAnchor.constraint(equalTo: safeArea.widthAnchor))

@@ -41,31 +41,36 @@ class AccountPageViewController: UIViewController, UITableViewDelegate, UITableV
             //ADD LOADING ICON?
             IO.downloadImage(str: urlstring, imageView: imageView){
                 self.profilePhoto.setImage(imageView.image, for: .normal)
-                
-                self.view.addSubview(self.tableView)
-                self.tableView.frame = CGRect(x: 0, y: 250, width: self.view.bounds.width, height: self.view.bounds.height - 500)
-                self.tableView.register(AccountPageTableViewCell.self, forCellReuseIdentifier: "accountCell")
-                
-                self.title = fireUser!.get("username") as? String
-                self.userInformation[0] = fireUser!.get("username") as! String
-                self.userInformation[3] = fireUser!.get("email") as! String
-                
-                
-                self.profilePhoto.contentMode = .scaleToFill
-                self.profilePhoto.backgroundColor = .white
-                self.profilePhoto.layer.masksToBounds = true
-                self.profilePhoto.layer.cornerRadius = 50.0
-                self.profilePhoto.frame = CGRect(x: self.view.bounds.width / 2 - 50, y: 125, width: 100, height: 100)
-                self.profilePhoto.addTarget(self, action: #selector(self.changePicture), for: .touchUpInside)
-                self.view.addSubview(self.profilePhoto)
-                
-                self.navigationController?.navigationBar.barTintColor = UIColor(rgb: Constants.Colors.orange)
-               
-                self.tableView.delegate = self
-                self.tableView.dataSource = self
-                self.tableView.reloadData()
+                self.setup()
             }
+        } else {
+            setup()
         }
+    }
+    
+    func setup () {
+        self.view.addSubview(self.tableView)
+        self.tableView.frame = CGRect(x: 0, y: 250, width: self.view.bounds.width, height: self.view.bounds.height - 500)
+        self.tableView.register(AccountPageTableViewCell.self, forCellReuseIdentifier: "accountCell")
+        
+        self.title = fireUser!.get("username") as? String
+        self.userInformation[0] = fireUser!.get("username") as! String
+        self.userInformation[3] = fireUser!.get("email") as! String
+        
+        
+        self.profilePhoto.contentMode = .scaleToFill
+        self.profilePhoto.backgroundColor = .white
+        self.profilePhoto.layer.masksToBounds = true
+        self.profilePhoto.layer.cornerRadius = 50.0
+        self.profilePhoto.frame = CGRect(x: self.view.bounds.width / 2 - 50, y: 125, width: 100, height: 100)
+        self.profilePhoto.addTarget(self, action: #selector(self.changePicture), for: .touchUpInside)
+        self.view.addSubview(self.profilePhoto)
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor(rgb: Constants.Colors.orange)
+       
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
