@@ -24,18 +24,20 @@ class FeedViewController: ViewControllerWithMenu, UITableViewDataSource, UITable
         super.viewDidLoad()
         self.title = "Feed"
         getPosts()
+        self.feedTableView = UITableView(frame: .zero)
     }
     
     override func viewSafeAreaInsetsDidChange() {
         var constraints: [NSLayoutConstraint] = []
         let safeArea = self.view.safeAreaLayoutGuide
         
-        
-        self.feedTableView = UITableView(frame: .zero)
         self.feedTableView.translatesAutoresizingMaskIntoConstraints = false
         self.feedTableView.register(PostCell.self, forCellReuseIdentifier: cellIdentifier)
         self.feedTableView.dataSource = self
         self.feedTableView.delegate = self
+        
+        
+        //let containerView = self.view!
         containerView.addSubview(self.feedTableView)
         constraints.append(self.feedTableView.heightAnchor.constraint(equalTo: safeArea.heightAnchor))
         constraints.append(self.feedTableView.widthAnchor.constraint(equalTo: safeArea.widthAnchor))
@@ -50,10 +52,10 @@ class FeedViewController: ViewControllerWithMenu, UITableViewDataSource, UITable
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
+        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
         
-//        feedTableView.backgroundColor = background
-//        feedTableView.reloadData()
+        feedTableView.backgroundColor = background
+        feedTableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -72,6 +74,7 @@ class FeedViewController: ViewControllerWithMenu, UITableViewDataSource, UITable
         
         cell.backgroundColor = background
         cell.changeTextColor(color: textColor)
+        cell.changeContentColor(color: background)
         
         return cell
     }

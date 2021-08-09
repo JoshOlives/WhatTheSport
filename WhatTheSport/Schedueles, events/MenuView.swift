@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import Firebase
 
 
-class MenuView: UIView{
+class MenuView: UIView {
  
     var delegate : TabBarViewController!
     
@@ -23,9 +24,6 @@ class MenuView: UIView{
     let profileButton = UIButton()
     let settingButton = UIButton()
     let signOutButton = UIButton()
-    
-    let user = fireUser!.get("username") as! String
-    let Email = fireUser!.get("email") as! String
     
     public var userPhoto = UIImageView()
     
@@ -43,14 +41,29 @@ class MenuView: UIView{
         
         var constraints: [NSLayoutConstraint] = []
         
+        let db = Firestore.firestore()
         
-        guard let urlstring = fireUser!.get("URL") as? String else {
-                print("error retreiving urlstring")
-                inTransition = false
-                return
+        db.collection("users").document((currentUser?.userID)!)
+            .addSnapshotListener { documentSnapshot, error in
+                  guard let document = documentSnapshot, error == nil else {
+                    print("Error fetching document: \(error!)")
+                    return
+                  }
+                  guard let data = document.data() else {
+                    print("Document data was empty.")
+                    return
+                  }
+                print("\n\n\n IN MENUUU!\n\n\n")
+                //print("Current data: \(data)")
+                self.username.text = data["username"] as? String
+                
+                guard let urlstring = data["URL"] as? String else {
+                        print("error retreiving urlstring")
+                        return
+                }
+                IO.downloadImage(str: urlstring, imageView: self.userPhoto){}
         }
 
-        IO.downloadImage(str: urlstring, imageView: userPhoto){}
         userPhoto.backgroundColor = .lightGray
         userPhoto.contentMode = .scaleToFill
         userPhoto.layer.masksToBounds = true
@@ -67,7 +80,7 @@ class MenuView: UIView{
         
         //email label
         email.translatesAutoresizingMaskIntoConstraints = false
-        email.text = Email
+        email.text = fireUser!.get("email") as? String
         constraints.append(email.topAnchor.constraint(equalTo: username.bottomAnchor, constant: 10))
         constraints.append(email.leadingAnchor.constraint(equalTo: username.leadingAnchor))
         self.addSubview(email)
@@ -133,6 +146,20 @@ class MenuView: UIView{
         constraints.append(signOut.leadingAnchor.constraint(equalTo: signOutButton.trailingAnchor, constant: 50))
         self.addSubview(signOut)
         NSLayoutConstraint.activate(constraints)
+    }
+    
+    func changeTextColor(color: UIColor) {
+        username.textColor = color
+        email.textColor = color
+        profile.textColor = color
+        setting.textColor = color
+        signOut.textColor = color
+    }
+    
+    func changeButtonColor(color: UIColor) {
+        profileButton.tintColor = color
+        settingButton.tintColor = color
+        signOutButton.tintColor = color
     }
     
     @objc func profileButtonPressed() {

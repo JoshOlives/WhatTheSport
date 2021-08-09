@@ -18,11 +18,6 @@ class AccountPageViewController: UIViewController, UITableViewDelegate, UITableV
     var nextVC: SettingProfilePictureViewController!
     
     
-    //variable to test the code you can delete them if you need to
-    var firstName = "default"
-    var lastName = "default"
-    var userName = "default"
-    
     var profilePhoto = UIButton()
     
     private let tableView = UITableView()
@@ -51,8 +46,7 @@ class AccountPageViewController: UIViewController, UITableViewDelegate, UITableV
                 self.tableView.frame = CGRect(x: 0, y: 250, width: self.view.bounds.width, height: self.view.bounds.height - 500)
                 self.tableView.register(AccountPageTableViewCell.self, forCellReuseIdentifier: "accountCell")
                 
-                self.userName = fireUser!.get("username") as! String
-                self.title = self.userName
+                self.title = fireUser!.get("username") as? String
                 self.userInformation[0] = fireUser!.get("username") as! String
                 self.userInformation[3] = fireUser!.get("email") as! String
                 
@@ -119,11 +113,7 @@ class AccountPageViewController: UIViewController, UITableViewDelegate, UITableV
             updateUserInforAlert(titleString: "Change Username", messageString: "Please enter your username", placeholderString: "username", index: 0)
         //firstname
         case 1:
-            print("hehe, before change your firstname is \(firstName)")
             updateUserInforAlert(titleString: "Change First Name", messageString: "Please enter your first name", placeholderString: "firstname", index: 1)
-            firstName = userInformation[1]
-            print("haha, after change your firstname is \(firstName)")
-            print("this is the row \(row)")
         //lastname
         case 2:
             updateUserInforAlert(titleString: "Change last name", messageString: "Please enter your last name", placeholderString: "last name", index: 2)
@@ -210,6 +200,7 @@ class AccountPageViewController: UIViewController, UITableViewDelegate, UITableV
                                         self.userInformation[index] = enteredText
                                         self.tableView.reloadData()
                                         if (index == 0) {
+                                            self.title = enteredText
                                             print("about to update \(self.userInformation[0])")
                                             IO.updateFireUser(field: "username", str: self.userInformation[0], completion: nil)
                                         }

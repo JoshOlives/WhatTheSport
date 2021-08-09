@@ -29,12 +29,10 @@
 		8F955FF6269AB5B5003DD8F1 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F955FF5269AB5B5003DD8F1 /* ResetPasswordViewController.swift */; };
 		8F99356726BB2DF5006FA04C /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99356626BB2DF4006FA04C /* FiltersViewController.swift */; };
 		8F99356A26BCA4F4006FA04C /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99356926BCA4F4006FA04C /* TabBarViewController.swift */; };
-		8F99356C26BCA575006FA04C /* TempFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99356B26BCA575006FA04C /* TempFeed.swift */; };
 		8F99356E26BCA59D006FA04C /* TempEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99356D26BCA59D006FA04C /* TempEvent.swift */; };
 		8F99357026BCA5DF006FA04C /* GameScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99356F26BCA5DF006FA04C /* GameScheduleViewController.swift */; };
 		8F99357226BCA5F6006FA04C /* GameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99357126BCA5F6006FA04C /* GameTableViewCell.swift */; };
 		8F99357426BCA82C006FA04C /* GameDateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99357326BCA82C006FA04C /* GameDateTableViewCell.swift */; };
-		8F99357626BD1559006FA04C /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99357526BD1558006FA04C /* TestViewController.swift */; };
 		8F99357826BDB95F006FA04C /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99357726BDB95E006FA04C /* MenuView.swift */; };
 		8F99357C26BDCB6E006FA04C /* TeamObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99357B26BDCB6E006FA04C /* TeamObjects.swift */; };
 		8F99357E26BDCB90006FA04C /* FeedCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99357D26BDCB90006FA04C /* FeedCells.swift */; };
@@ -70,12 +68,10 @@
 		8F955FF5269AB5B5003DD8F1 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		8F99356626BB2DF4006FA04C /* FiltersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
 		8F99356926BCA4F4006FA04C /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
-		8F99356B26BCA575006FA04C /* TempFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempFeed.swift; sourceTree = "<group>"; };
 		8F99356D26BCA59D006FA04C /* TempEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempEvent.swift; sourceTree = "<group>"; };
 		8F99356F26BCA5DF006FA04C /* GameScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScheduleViewController.swift; sourceTree = "<group>"; };
 		8F99357126BCA5F6006FA04C /* GameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTableViewCell.swift; sourceTree = "<group>"; };
 		8F99357326BCA82C006FA04C /* GameDateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDateTableViewCell.swift; sourceTree = "<group>"; };
-		8F99357526BD1558006FA04C /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		8F99357726BDB95E006FA04C /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		8F99357B26BDCB6E006FA04C /* TeamObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamObjects.swift; sourceTree = "<group>"; };
 		8F99357D26BDCB90006FA04C /* FeedCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCells.swift; sourceTree = "<group>"; };
@@ -169,12 +165,10 @@
 			isa = PBXGroup;
 			children = (
 				8F99356926BCA4F4006FA04C /* TabBarViewController.swift */,
-				8F99356B26BCA575006FA04C /* TempFeed.swift */,
 				8F99356D26BCA59D006FA04C /* TempEvent.swift */,
 				8F99356F26BCA5DF006FA04C /* GameScheduleViewController.swift */,
 				8F99357126BCA5F6006FA04C /* GameTableViewCell.swift */,
 				8F99357326BCA82C006FA04C /* GameDateTableViewCell.swift */,
-				8F99357526BD1558006FA04C /* TestViewController.swift */,
 				8F99357726BDB95E006FA04C /* MenuView.swift */,
 				8F99358526BDE530006FA04C /* ViewControllerWithMenu.swift */,
 			);
@@ -330,7 +324,6 @@
 				8F6BED4226B9D50800F05A3D /* Transitioner.swift in Sources */,
 				8F955FF6269AB5B5003DD8F1 /* ResetPasswordViewController.swift in Sources */,
 				8F99357426BCA82C006FA04C /* GameDateTableViewCell.swift in Sources */,
-				8F99356C26BCA575006FA04C /* TempFeed.swift in Sources */,
 				8FC68E1126B4FC3C007B83A2 /* WhatTheSport.xcdatamodeld in Sources */,
 				8F99358426BDCBEF006FA04C /* FeedViewController.swift in Sources */,
 				8F99358026BDCBB1006FA04C /* FeedObjects.swift in Sources */,
@@ -347,7 +340,6 @@
 				8F955FD72698E4A2003DD8F1 /* ViewController.swift in Sources */,
 				8F955FD32698E4A2003DD8F1 /* AppDelegate.swift in Sources */,
 				8F6BED3726B9D3A100F05A3D /* SettingProfilePictureViewController.swift in Sources */,
-				8F99357626BD1559006FA04C /* TestViewController.swift in Sources */,
 				8F99356E26BCA59D006FA04C /* TempEvent.swift in Sources */,
 				8F955FF0269A848C003DD8F1 /* SignInViewController.swift in Sources */,
 				8F955FD52698E4A2003DD8F1 /* SceneDelegate.swift in Sources */,

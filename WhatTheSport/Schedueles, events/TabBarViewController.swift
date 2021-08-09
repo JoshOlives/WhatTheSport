@@ -16,29 +16,45 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     var plusButton: UIBarButtonItem!
     var filterButton: UIBarButtonItem!
     var moreButton: UIBarButtonItem!
-    var nextVC: FiltersViewController!
+    
+    var filtersVC: FiltersViewController!
     var createPostVC: CreatePostViewController!
+    var accountPageVC: AccountPageViewController!
+    var settingsVC: SettingViewController!
+    
     
     var isSlide = false
     var inAnimation = false
     
     func acountPageTapped() {
-        let nextViewController = AccountPageViewController()
+        if let settings = settingsVC, let account = settings.nextVC {
+            accountPageVC = account
+        }
+        else if accountPageVC == nil{
+            accountPageVC = AccountPageViewController()
+        }
              
         if let navigator = navigationController {
-              navigator.pushViewController(nextViewController, animated: true)
+              navigator.pushViewController(accountPageVC, animated: true)
         }
     }
     func settingsPageTapped() {
-        let nextViewController = SettingViewController()
-             
+        if settingsVC == nil {
+            settingsVC = SettingViewController()
+            
+            if accountPageVC != nil {
+                settingsVC.nextVC = accountPageVC
+            }
+        }
+        
         if let navigator = navigationController {
-              navigator.pushViewController(nextViewController, animated: true)
+              navigator.pushViewController(settingsVC, animated: true)
         }
     }
     
     func signOutPageTapped() {
         let home = UINavigationController(rootViewController: SignUpViewController())
+        
         home.modalPresentationStyle = .fullScreen
         self.present(home, animated: true, completion: nil)
     }
@@ -79,22 +95,22 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         plusButton = UIBarButtonItem(image: UIImage(systemName: "plus.circle.fill"), style: .plain, target: self, action: #selector(queueCreatePost(_:)))
         
         let gameController = GameScheduleViewController()
-        gameController.delegate = self
-        gameController.menuView.delegate = self
+        //gameController.delegate = self
+        //gameController.menuView.delegate = self
         vc1 = UINavigationController(rootViewController: gameController)
         vc1.isNavigationBarHidden = true
         vc1.title = "Games"
         
         let feedController = FeedViewController()
-        feedController.delegate = self
-        feedController.menuView.delegate = self
+        //feedController.delegate = self
+        //feedController.menuView.delegate = self
         vc2 = UINavigationController(rootViewController: feedController)
         vc2.isNavigationBarHidden = true
         vc2.title = "Feed"
         
         let eventsController = ThirdViewController()
-        eventsController.delegate = self
-        eventsController.menuView.delegate = self
+        //eventsController.delegate = self
+        //eventsController.menuView.delegate = self
         vc3 = UINavigationController(rootViewController: eventsController)
         vc3.isNavigationBarHidden = true
         vc3.title = "Events"
@@ -118,7 +134,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         super.viewWillAppear(animated)
         inTransition = false
         
-        print(currentUser!.settings!.dark)
+        print("in dark mode?: \(currentUser!.settings!.dark)")
         let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
         let navImage: UIImage? = currentUser!.settings!.dark ? UIImage() : nil
 
@@ -179,10 +195,10 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
             inTransition = true
         }
         
-        if nextVC == nil{
-            nextVC = FiltersViewController()
+        if filtersVC == nil{
+            filtersVC = FiltersViewController()
         }
-        UI.transition(dest: nextVC, src: self)
+        UI.transition(dest: filtersVC, src: self)
     }
     
     @objc

@@ -4,8 +4,8 @@ import FirebaseStorage
 import Firebase
 import CoreData
 
-class ViewControllerWithMenu: UIViewController {
-    var delegate: TabBarViewController!
+class ViewControllerWithMenu: UITabBarController {
+    var delegat: TabBarViewController!
     
     lazy var menuView: MenuView = {
         //TODO: add custom menu
@@ -30,30 +30,21 @@ class ViewControllerWithMenu: UIViewController {
         super.viewWillAppear(animated)
         
         inTransition = false
-        print("APPEARED")
         let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
-        let menuBackground: UIColor = currentUser!.settings!.dark ? .white : .white
+        let menuBackground: UIColor = currentUser!.settings!.dark ? .black : .white
+        let textColor: UIColor = currentUser!.settings!.dark ? .white : .black
         
         menuView.backgroundColor = menuBackground
         containerView.backgroundColor = background
+        menuView.changeTextColor(color: textColor)
         
-        containerView.frame.origin.x = self.delegate.isSlide ? (containerView.frame.width - self.slideInMenuPadding) : 0
-        
-        menuView.username.text = fireUser!.get("username") as? String
-        menuView.profile.text = fireUser!.get("username") as? String
-        guard let urlstring = fireUser!.get("URL") as? String else{
-                print("error retreiving urlstring")
-                inTransition = false
-                return
-        }
-
-        IO.downloadImage(str: urlstring, imageView: menuView.userPhoto){}
+        containerView.frame.origin.x = self.delegat.isSlide ? (containerView.frame.width - self.slideInMenuPadding) : 0
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        containerView.frame.origin.x = self.delegate.isSlide ? (containerView.frame.width - self.slideInMenuPadding) : 0
+        containerView.frame.origin.x = self.delegat.isSlide ? (containerView.frame.width - self.slideInMenuPadding) : 0
     }
 }
 
