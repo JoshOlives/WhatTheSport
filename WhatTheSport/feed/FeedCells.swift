@@ -20,6 +20,7 @@ class PostCell: UITableViewCell {
     private var teamLogo: UIImageView!
     private var profilePic: UIImageView!
     private var post: Post? = nil
+    private var commentVC: CommentViewController? = nil
     
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -143,7 +144,11 @@ class PostCell: UITableViewCell {
     
     @objc
     func commentsButtonPressed() {
-        print("COMMENTS")
+        if self.commentVC == nil {
+            self.commentVC = CommentViewController()
+        }
+        
+        self.commentVC!.post = self.post
     }
     
     @objc

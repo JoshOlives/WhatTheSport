@@ -10,13 +10,15 @@ import UIKit
 let commentCellIdentifier = "CommentCell"
 
 class CommentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    var comments: [Comment] = [Comment(commentIDArg: "Test", postIDArg: "knicksLogo", usernameArg: "TestUser", userIDArg: "Test", contentArg: "Here is some test data")]
+    var comments: [Comment] = [Comment(commentIDArg: "Test", postIDArg: "knicksLogo", usernameArg: "TestUser", userIDArg: "Test", contentArg: "Here is some test data I am typing some more so that this comment takes up multiple lines. While I am here I guess I will actually write about a sports team. My prediction for the NBA finals this year is the Brooklyn Nets"), Comment(commentIDArg: "Test", postIDArg: "knicksLogo", usernameArg: "TestUser2", userIDArg: "Test", contentArg: "Lakers all the wayyyyyyyyy")]
     
     private var commentTableView: UITableView!
     private var createCommentView: UIView!
     private var writeView: UIView!
     private var profilePicView: UIImageView!
     private var writeSomethingLabel: UILabel!
+    
+    var post: Post? = nil
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         self.comments.count
