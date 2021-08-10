@@ -46,7 +46,7 @@
         <!--Register Sport Controller-->
         <scene sceneID="NDr-vU-nzb">
             <objects>
-                <viewController id="8Md-xJ-UE7" customClass="RegisterSportController" customModule="WhatTheSport" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="registerSportID" id="8Md-xJ-UE7" customClass="RegisterSportController" customModule="WhatTheSport" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="T0O-R0-Ffg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -191,7 +191,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="bjt-6p-q5k"/>
                     <connections>
-                        <outlet property="nextButton" destination="FHZ-Er-FNd" id="u7Q-vW-gis"/>
+                        <outlet property="nextButton" destination="FHZ-Er-FNd" id="Ym7-MH-hg1"/>
                         <outletCollection property="sportViewArray" destination="qic-18-Iwl" collectionClass="NSMutableArray" id="DbR-ce-rJn"/>
                         <outletCollection property="sportViewArray" destination="oTX-O2-VNl" collectionClass="NSMutableArray" id="Tll-MX-qh8"/>
                         <outletCollection property="sportViewArray" destination="dpe-2d-wJu" collectionClass="NSMutableArray" id="EjI-ZI-Dwy"/>
@@ -204,12 +204,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ORa-kJ-Bxm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1421.7391304347827" y="-556.47321428571422"/>
+            <point key="canvasLocation" x="3720.289855072464" y="116.51785714285714"/>
         </scene>
         <!--Register Team Controller-->
         <scene sceneID="udb-EA-bfO">
             <objects>
-                <viewController id="YOz-r7-DIY" customClass="RegisterTeamController" customModule="WhatTheSport" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="registerTeamID" id="YOz-r7-DIY" customClass="RegisterTeamController" customModule="WhatTheSport" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0xT-tm-Wbn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -229,6 +229,9 @@
                                 <state key="normal" title="Next">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="nextButtonPressed:" destination="YOz-r7-DIY" eventType="touchUpInside" id="ozC-I0-NbG"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="m7A-1i-c5Z">
                                 <rect key="frame" x="20" y="168" width="374" height="500"/>
@@ -268,26 +271,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m0y-NW-Wgo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2139.130434782609" y="-556.47321428571422"/>
+            <point key="canvasLocation" x="4494.202898550725" y="116.51785714285714"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="cTs-UF-vBc">
+        <scene sceneID="Q7i-XI-tdJ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sON-gf-h8q" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="phj-gA-kH3" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xlj-qQ-YBR">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="z8h-fT-pZI">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="1" green="0.58255845309999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="8Md-xJ-UE7" kind="relationship" relationship="rootViewController" id="QOg-lb-IVl"/>
+                        <segue destination="8Md-xJ-UE7" kind="relationship" relationship="rootViewController" id="kGW-TQ-Ztm"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cIj-uN-A8I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gXc-8s-238" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="511.59420289855075" y="-556.47321428571422"/>
+            <point key="canvasLocation" x="2810.144927536232" y="116.51785714285714"/>
         </scene>
     </scenes>
     <resources>
