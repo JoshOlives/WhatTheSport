@@ -246,11 +246,10 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     
     @objc
     func queueCreatePost(_ _: UIBarButtonItem) {
-        
         if self.createPostVC == nil {
             self.createPostVC = CreatePostViewController()
         }
-        
+        self.createPostVC.delegate = self.feedController
         if let navigator = navigationController {
             navigator.pushViewController(self.createPostVC, animated: true)
         }

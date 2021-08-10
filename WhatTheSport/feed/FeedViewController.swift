@@ -14,21 +14,16 @@ protocol PostAddition {
     func addCreatedPost(newPost: Post)
 }
 
-class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PostAddition {
+class FeedViewController: ViewControllerWithMenu, UITableViewDataSource, UITableViewDelegate, PostAddition {
     private let feedDB = Firestore.firestore().collection("posts")
     
     var createPostVC: CreatePostViewController!
     var feedTableView: UITableView!
-    var addPostBarButton: UIBarButtonItem!
     var posts: [Post] = []
-    var delegate: UIViewController!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Feed"
-        self.addPostBarButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(queueCreatePost))
-        self.addPostBarButton.tintColor = UIColor.white
-        self.navigationItem.setRightBarButtonItems([self.addPostBarButton], animated: true)
         getPosts()
         self.feedTableView = UITableView(frame: .zero)
     }
@@ -56,16 +51,6 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         feedTableView.reloadData()
     }
     
-    @objc
-    func queueCreatePost() {
-        if self.createPostVC == nil {
-            self.createPostVC = CreatePostViewController()
-            self.createPostVC.delegate = self
-        }
-        
-        self.navigationController?.pushViewController(self.createPostVC, animated: true)
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
@@ -87,12 +72,12 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.setValues(postArg: currPost)
         
         cell.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
-//        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
-//        let textColor: UIColor =  currentUser!.settings!.dark ? .white : .black
+        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
+        let textColor: UIColor =  currentUser!.settings!.dark ? .white : .black
         
-//        cell.backgroundColor = background
-//        cell.changeTextColor(color: textColor)
-//        cell.changeContentColor(color: background)
+        cell.backgroundColor = background
+        cell.changeTextColor(color: textColor)
+        cell.changeContentColor(color: background)
         
         return cell
     }
