@@ -10,11 +10,7 @@ import FirebaseFirestore
 
 let commentCellIdentifier = "CommentCell"
 
-protocol CommentAddition {
-    func addCreatedComment(newComment: Comment)
-}
-
-class CommentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CommentAddition {
+class CommentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var comments: [Comment] = []
     
     private var commentTableView: UITableView!
@@ -33,7 +29,7 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath as IndexPath) as! CommentCell
         let row = indexPath.row
-        let currComment = comments[row]
+        let currComment = self.comments[row]
         cell.setValues(commentArg: currComment)
         
         cell.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
@@ -117,16 +113,17 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.comments = []
+        getComments()
+        if self.commentTableView != nil {
+            self.commentTableView.reloadData()
+        }
         let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
         if self.commentTableView != nil {
             self.commentTableView.backgroundColor = background
             self.commentTableView.reloadData()
         }
 
-    }
-    
-    func addCreatedComment(newComment: Comment) {
-        self.comments.append(newComment)
     }
     
     @objc
@@ -149,6 +146,7 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
                     self.comments.append(Comment(commentIDArg: comment.documentID, postIDArg: comment.get("postID") as! String, usernameArg: comment.get("username") as! String, userIDArg: comment.get("userID") as! String, contentArg: comment.get("content") as! String))
                 }
             }
+            self.commentTableView.reloadData()
         }
     }
 }

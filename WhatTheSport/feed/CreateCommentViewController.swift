@@ -51,14 +51,9 @@ class CreateCommentViewController: UIViewController {
                                             "username": fireUser!.get("username")!]
             
             let feedDB = Firestore.firestore().collection("comments")
-            var ref: DocumentReference? = nil
-            ref = feedDB.addDocument(data: fsComment, completion: { err in
+            _ = feedDB.addDocument(data: fsComment, completion: { err in
                 if let err = err {
                     print("Error adding document: \(err)")
-                } else {
-                    let newComment = Comment(commentIDArg: ref!.documentID, postIDArg: currPost!.postID, usernameArg: fireUser!.get("username")! as! String, userIDArg: fireUser!.documentID, contentArg: self.commentTextView.text)
-                    let otherVC = self.delegate as! CommentAddition
-                    otherVC.addCreatedComment(newComment: newComment)
                 }
             })
         }
