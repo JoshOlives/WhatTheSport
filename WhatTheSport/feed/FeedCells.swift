@@ -21,6 +21,7 @@ class PostCell: UITableViewCell {
     private var profilePic: UIImageView!
     private var post: Post? = nil
     private var commentVC: CommentViewController? = nil
+    private var navController: UINavigationController!
     
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -40,8 +41,8 @@ class PostCell: UITableViewCell {
         
         self.contentLabel = UILabel(frame: .zero)
         self.contentLabel.translatesAutoresizingMaskIntoConstraints = false
-//        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
-//        self.contentLabel.backgroundColor = background
+        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
+        self.contentLabel.backgroundColor = background
         
         self.reactButton = UIButton(frame: .zero)
         self.reactButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
@@ -126,8 +127,9 @@ class PostCell: UITableViewCell {
         NSLayoutConstraint.activate(cellConstraints)    // Activate constraints
     }
     
-    func setValues(postArg: Post) {
+    func setValues(postArg: Post, nav: UINavigationController) {
         self.post = postArg
+        self.navController = nav
         self.usernameLabel.text = postArg.username
         self.contentLabel.text = postArg.content
         self.viewCommentsButton.setTitle("\(postArg.numComments) comments", for: .normal)
@@ -153,6 +155,7 @@ class PostCell: UITableViewCell {
         }
         
         self.commentVC!.post = self.post
+        self.navController.pushViewController(self.commentVC!, animated: true)
     }
     
     @objc

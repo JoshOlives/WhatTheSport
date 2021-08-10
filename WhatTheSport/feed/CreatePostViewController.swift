@@ -44,8 +44,8 @@ class CreatePostViewController: UIViewController {
                         present(alertController, animated: true, completion: nil)
         } else {
             let likeUserIDs: [String] = []
-            let fsPost: [String: Any] = ["userID": TestUser.userID,
-                                         "username": TestUser.username,
+            let fsPost: [String: Any] = ["userID": fireUser!.documentID,
+                                         "username": fireUser!.get("username")!,
                                          "teamIndex": 1,
                                          "sportIndex": 0,
                                          "numLikes": 0,
@@ -59,7 +59,7 @@ class CreatePostViewController: UIViewController {
                 if let err = err {
                     print("Error adding document: \(err)")
                 } else {
-                    let newPost = Post(postIDArg: ref!.documentID, sportIndexArg: 0, teamIndexArg: 1, contentArg: self.postTextView.text, userIDArg: TestUser.userID, usernameArg: TestUser.username, numLikesArg: 0, numCommentsArg: 0, userLikedPostArg: false, likeUserIDsArg: [])
+                    let newPost = Post(postIDArg: ref!.documentID, sportIndexArg: 0, teamIndexArg: 1, contentArg: self.postTextView.text, userIDArg: fireUser!.documentID, usernameArg: fireUser!.get("username") as! String, numLikesArg: 0, numCommentsArg: 0, userLikedPostArg: false, likeUserIDsArg: [])
                     let otherVC = self.delegate as! PostAddition
                     otherVC.addCreatedPost(newPost: newPost)
                     _ = self.navigationController?.popViewController(animated: true)

@@ -21,7 +21,6 @@ class FeedViewController: ViewControllerWithMenu, UITableViewDataSource, UITable
     var feedTableView: UITableView!
     var posts: [Post] = []
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         getPosts()
@@ -69,7 +68,7 @@ class FeedViewController: ViewControllerWithMenu, UITableViewDataSource, UITable
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath as IndexPath) as! PostCell
         let row = indexPath.row
         let currPost = posts[row]
-        cell.setValues(postArg: currPost)
+        cell.setValues(postArg: currPost, nav: delegate.navigationController!)
         
         cell.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
         let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)

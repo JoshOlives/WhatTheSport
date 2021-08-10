@@ -6,17 +6,23 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 let commentCellIdentifier = "CommentCell"
 
-class CommentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    var comments: [Comment] = [Comment(commentIDArg: "Test", postIDArg: "knicksLogo", usernameArg: "TestUser", userIDArg: "Test", contentArg: "Here is some test data I am typing some more so that this comment takes up multiple lines. While I am here I guess I will actually write about a sports team. My prediction for the NBA finals this year is the Brooklyn Nets"), Comment(commentIDArg: "Test", postIDArg: "knicksLogo", usernameArg: "TestUser2", userIDArg: "Test", contentArg: "Lakers all the wayyyyyyyyy")]
+protocol CommentAddition {
+    func addCreatedComment(newComment: Comment)
+}
+
+class CommentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CommentAddition {
+    var comments: [Comment] = []
     
     private var commentTableView: UITableView!
     private var createCommentView: UIView!
     private var writeView: UIView!
     private var profilePicView: UIImageView!
     private var writeSomethingLabel: UILabel!
+    private var createCommentVC: CreateCommentViewController? = nil
     
     var post: Post? = nil
     
@@ -61,6 +67,7 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         self.createCommentView.backgroundColor = UIColor(rgb: Constants.Colors.orange)
         
         self.writeView = UIView(frame: .zero)
+        self.writeView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(writeViewPressed)))
         self.writeView.translatesAutoresizingMaskIntoConstraints = false
         self.writeView.backgroundColor = UIColor.systemGray5
         
@@ -103,8 +110,45 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         
         NSLayoutConstraint.activate(constraints)
         
-//        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
-//        commentTableView.backgroundColor = background
+        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
+        commentTableView.backgroundColor = background
         commentTableView.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
+        if self.commentTableView != nil {
+            self.commentTableView.backgroundColor = background
+            self.commentTableView.reloadData()
+        }
+
+    }
+    
+    func addCreatedComment(newComment: Comment) {
+        self.comments.append(newComment)
+    }
+    
+    @objc
+    func writeViewPressed() {
+        if self.createCommentVC == nil {
+            self.createCommentVC = CreateCommentViewController()
+        }
+        self.createCommentVC!.delegate = self
+        self.navigationController?.pushViewController(self.createCommentVC!, animated: true)
+    }
+    
+    func getComments() {
+        let commentsDB = Firestore.firestore().collection("comments")
+        commentsDB.whereField("postID", isEqualTo: post!.postID).getDocuments() {
+            (querySnapshot, err) in
+            if let err = err {
+                print("Error getting comments: \(err)")
+            } else {
+                for comment in querySnapshot!.documents {
+                    self.comments.append(Comment(commentIDArg: comment.documentID, postIDArg: comment.get("postID") as! String, usernameArg: comment.get("username") as! String, userIDArg: comment.get("userID") as! String, contentArg: comment.get("content") as! String))
+                }
+            }
+        }
     }
 }
