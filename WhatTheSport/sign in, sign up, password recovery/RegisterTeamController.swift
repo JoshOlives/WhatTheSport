@@ -130,6 +130,9 @@ class RegisterTeamController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //navigator.navigationBar.backgroundColor = UIColor(rgb: Constants.Colors.orange)
+    
         self.title = "Register"
         view.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
         nextButton.backgroundColor = UIColor(rgb: Constants.Colors.orange)
@@ -141,4 +144,11 @@ class RegisterTeamController: UIViewController, UITableViewDataSource, UITableVi
         tableView.register(UINib(nibName: "FranchiseCell", bundle: nil), forCellReuseIdentifier: "franchiseCellIdentifier")
     }
 
+    @IBAction func nextButtonPressed(_ sender: Any) {
+        //update firestore
+        IO.updateFireUserArray(field: "sports", collection: orderedSports, completion: nil)
+        IO.updateFireUserArray(field: "teams", collection: selectedTeams, completion: nil)
+        let tabBarVC = TabBarViewController()
+        navigationController?.pushViewController(tabBarVC, animated: true)
+    }
 }
