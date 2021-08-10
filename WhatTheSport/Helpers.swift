@@ -316,6 +316,34 @@ struct IO {
         }
     }
     
+        static func updateFireUserArray(field: String, collection: [String], completion: CompletionMethod?) {
+        let db = Firestore.firestore()
+        let ref = db.collection("users")
+        guard let userID = currentUser?.userID else {
+            print("error updating fire user")
+            return
+        }
+        let docRef = ref.document(userID)
+        print("field: \(field)")
+        print("new: \(collection)")
+        docRef.updateData([field: collection]){ error in
+            if let e = error {
+                print("error updating fire user \(e.localizedDescription)")
+            }
+        }
+        print("updating\n\n")
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                fireUser = document
+            } else {
+                print("error updating fire user")
+            }
+            if completion != nil {
+                completion?()
+            }
+        }
+    }
+    
     static func saveContext(){
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
