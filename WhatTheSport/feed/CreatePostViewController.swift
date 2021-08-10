@@ -62,6 +62,7 @@ class CreatePostViewController: UIViewController {
                     let newPost = Post(postIDArg: ref!.documentID, sportIndexArg: 0, teamIndexArg: 1, contentArg: self.postTextView.text, userIDArg: TestUser.userID, usernameArg: TestUser.username, numLikesArg: 0, numCommentsArg: 0, userLikedPostArg: false, likeUserIDsArg: [])
                     let otherVC = self.delegate as! PostAddition
                     otherVC.addCreatedPost(newPost: newPost)
+                    _ = self.navigationController?.popViewController(animated: true)
                 }
             })
         }
