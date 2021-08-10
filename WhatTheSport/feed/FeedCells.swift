@@ -142,6 +142,10 @@ class PostCell: UITableViewCell {
         likeCount.textColor = color
     }
     
+    func changeContentColor(color: UIColor) {
+        self.contentLabel.backgroundColor = color
+    }
+    
     @objc
     func commentsButtonPressed() {
         if self.commentVC == nil {

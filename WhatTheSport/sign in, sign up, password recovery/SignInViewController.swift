@@ -81,7 +81,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         forgotButton.translatesAutoresizingMaskIntoConstraints = false
         constraints.append(forgotButton.centerXAnchor.constraint(equalTo: passwordField.centerXAnchor))
         constraints.append(forgotButton.topAnchor.constraint(equalTo: passwordField.bottomAnchor, constant: Constants.Field.spacing * 1.75))
-        constraints.append(forgotButton.widthAnchor.constraint(equalTo: passwordField.widthAnchor, multiplier: 0.4))
+        constraints.append(forgotButton.widthAnchor.constraint(equalTo: passwordField.widthAnchor, multiplier: 0.8))
         constraints.append(forgotButton.heightAnchor.constraint(equalTo: passwordField.heightAnchor))
         
         signInButton = Button(title: "Sign In")

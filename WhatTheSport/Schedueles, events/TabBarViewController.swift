@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     
@@ -16,11 +17,57 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     var plusButton: UIBarButtonItem!
     var filterButton: UIBarButtonItem!
     var moreButton: UIBarButtonItem!
-    var nextVC: FiltersViewController!
+    
+    var filtersVC: FiltersViewController!
     var createPostVC: CreatePostViewController!
+    var accountPageVC: AccountPageViewController!
+    var settingsVC: SettingViewController!
+    
+    var gameController: GameScheduleViewController!
+    var feedController: FeedViewController!
+    var eventsController: ThirdViewController!
+    
+    var userPhoto: UIImageView!
     
     var isSlide = false
     var inAnimation = false
+    var stringURL = ""
+    
+    func acountPageTapped() {
+        if let settings = settingsVC, let account = settings.nextVC {
+            accountPageVC = account
+        }
+        else if accountPageVC == nil {
+            accountPageVC = AccountPageViewController()
+            accountPageVC.profilePhoto.setImage(userPhoto.image, for: .normal)
+        }
+             
+        if let navigator = navigationController {
+              navigator.pushViewController(accountPageVC, animated: true)
+        }
+    }
+    func settingsPageTapped() {
+        if settingsVC == nil {
+            settingsVC = SettingViewController()
+            
+            if accountPageVC != nil {
+                settingsVC.nextVC = accountPageVC
+            } else {
+                settingsVC.profilePic = userPhoto.image
+            }
+        }
+        
+        if let navigator = navigationController {
+              navigator.pushViewController(settingsVC, animated: true)
+        }
+    }
+    
+    func signOutPageTapped() {
+        let home = UINavigationController(rootViewController: SignUpViewController())
+        
+        home.modalPresentationStyle = .fullScreen
+        self.present(home, animated: true, completion: nil)
+    }
     
     @objc
     func menuBarButtonTapped() {
@@ -53,24 +100,56 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         
         self.delegate = self
         
+        let db = Firestore.firestore()
+        
+        userPhoto = UIImageView()
+        
+        db.collection("users").document((currentUser?.userID)!)
+            .addSnapshotListener { documentSnapshot, error in
+                  guard let document = documentSnapshot, error == nil else {
+                    print("Error fetching document: \(error!)")
+                    return
+                  }
+                  guard let data = document.data() else {
+                    print("Document data was empty.")
+                    return
+                  }
+                print("\n\n\n IN TABBAR!\n\n\n")
+                
+                guard let urlstring = data["URL"] as? String else {
+                        print("error retreiving urlstring")
+                        return
+                }
+                
+                if (urlstring != self.stringURL) {
+                    IO.downloadImage(str: urlstring, imageView: self.userPhoto){
+                        self.updatePic()
+                    }
+                    self.stringURL = urlstring
+                }
+        }
+        
         filterButton = UIBarButtonItem(image: UIImage(systemName: "arrowtriangle.down.circle.fill"), style: .plain, target:self, action: #selector(filterTransition))
         
         plusButton = UIBarButtonItem(image: UIImage(systemName: "plus.circle.fill"), style: .plain, target: self, action: #selector(queueCreatePost(_:)))
         
-        let gameController = GameScheduleViewController()
+        gameController = GameScheduleViewController()
         gameController.delegate = self
+        gameController.menuView.delegate = self
         vc1 = UINavigationController(rootViewController: gameController)
         vc1.isNavigationBarHidden = true
         vc1.title = "Games"
         
-        let feedController = FeedViewController()
+        feedController = FeedViewController()
         feedController.delegate = self
+        feedController.menuView.delegate = self
         vc2 = UINavigationController(rootViewController: feedController)
         vc2.isNavigationBarHidden = true
         vc2.title = "Feed"
         
-        let eventsController = ThirdViewController()
+        eventsController = ThirdViewController()
         eventsController.delegate = self
+        eventsController.menuView.delegate = self
         vc3 = UINavigationController(rootViewController: eventsController)
         vc3.isNavigationBarHidden = true
         vc3.title = "Events"
@@ -94,7 +173,8 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         super.viewWillAppear(animated)
         inTransition = false
         
-        print(currentUser!.settings!.dark)
+        updatePic()
+        print("in dark mode?: \(currentUser!.settings!.dark)")
         let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
         let navImage: UIImage? = currentUser!.settings!.dark ? UIImage() : nil
 
@@ -107,6 +187,14 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         self.tabBar.backgroundImage = navImage
         self.tabBar.barTintColor = UIColor(rgb: Constants.Colors.orange)
         self.tabBar.tintColor = .white
+    }
+    
+    func updatePic() {
+        if (gameController.menuView.userPhoto.image != self.userPhoto.image) {
+            gameController.menuView.userPhoto.image = self.userPhoto.image
+            feedController.menuView.userPhoto.image = self.userPhoto.image
+            eventsController.menuView.userPhoto.image = self.userPhoto.image
+        }
     }
 
     func configureNavigator (navigator: UINavigationController) {
@@ -149,25 +237,15 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     
     @objc
     func filterTransition() {
-        if inTransition {
-            return
-        } else {
-            inTransition = true
-        }
         
-        if nextVC == nil{
-            nextVC = FiltersViewController()
+        if filtersVC == nil{
+            filtersVC = FiltersViewController()
         }
-        UI.transition(dest: nextVC, src: self)
+        UI.transition(dest: filtersVC, src: self)
     }
     
     @objc
     func queueCreatePost(_ _: UIBarButtonItem) {
-        if inTransition {
-            return
-        } else {
-            inTransition = true
-        }
         
         if self.createPostVC == nil {
             self.createPostVC = CreatePostViewController()

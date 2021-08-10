@@ -48,11 +48,6 @@ class GameScheduleViewController: ViewControllerWithMenu, UITableViewDelegate, U
     
     var gameList = [Game]()
     
-    var colorList = [UIColor.red,  UIColor.yellow, UIColor.gray, UIColor.purple, UIColor.blue, UIColor.lightGray]
-    
-    var colorIndex = 0
-    var gameIndex = 0
-    
     private let tableView : UITableView = {
         let tableView = UITableView()
         return tableView
@@ -95,7 +90,6 @@ class GameScheduleViewController: ViewControllerWithMenu, UITableViewDelegate, U
         
         var constraints: [NSLayoutConstraint] = []
 
-       
         containerView.addSubview(tableView)
 
         self.tableView.tableFooterView = UIView(frame: .zero)
@@ -138,7 +132,7 @@ class GameScheduleViewController: ViewControllerWithMenu, UITableViewDelegate, U
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let background: UIColor = currentUser!.settings!.dark ? .black : colorList[colorIndex]
+        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
         let textColor: UIColor =  currentUser!.settings!.dark ? .white : .black
         
         if indexPath.row % 2 == 0 {
@@ -156,14 +150,7 @@ class GameScheduleViewController: ViewControllerWithMenu, UITableViewDelegate, U
         cell.displayLabel.textColor = textColor
         
         cell.updateColor(color: background)
-        colorIndex += 1
-        if colorIndex == colorList.count {
-            colorIndex = 0
-        }
-//        gameIndex += 1
-//        if gameIndex == gameList.count {
-//            gameIndex = 0
-//        }
+        
         return cell
       
     }

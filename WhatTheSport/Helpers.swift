@@ -133,7 +133,8 @@ class Button: UIButton {
 }
 
 extension UIApplication {
-
+    
+    //get the current view controller
     class func getTopViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
 
         if let nav = base as? UINavigationController {

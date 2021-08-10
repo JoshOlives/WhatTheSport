@@ -7,7 +7,7 @@ import CoreData
 class ViewControllerWithMenu: UIViewController {
     var delegate: TabBarViewController!
     
-    lazy var menuView: UIView = {
+    lazy var menuView: MenuView = {
         //TODO: add custom menu
         let view = MenuView()
         return view
@@ -22,8 +22,8 @@ class ViewControllerWithMenu: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        menuView.pinMenuTo(self.view, with: slideInMenuPadding)
-        containerView.edgeTo(self.view)
+        self.menuView.pinMenuTo(self.view, with: self.slideInMenuPadding)
+        self.containerView.edgeTo(self.view)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -31,10 +31,12 @@ class ViewControllerWithMenu: UIViewController {
         
         inTransition = false
         let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
-        let menuBackground: UIColor = currentUser!.settings!.dark ? .white : .white
+        let menuBackground: UIColor = currentUser!.settings!.dark ? .black : .white
+        let textColor: UIColor = currentUser!.settings!.dark ? .white : .black
         
         menuView.backgroundColor = menuBackground
         containerView.backgroundColor = background
+        menuView.changeTextColor(color: textColor)
         
         containerView.frame.origin.x = self.delegate.isSlide ? (containerView.frame.width - self.slideInMenuPadding) : 0
     }

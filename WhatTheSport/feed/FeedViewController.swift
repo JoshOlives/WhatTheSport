@@ -30,18 +30,18 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.addPostBarButton.tintColor = UIColor.white
         self.navigationItem.setRightBarButtonItems([self.addPostBarButton], animated: true)
         getPosts()
+        self.feedTableView = UITableView(frame: .zero)
     }
     
     override func viewSafeAreaInsetsDidChange() {
         var constraints: [NSLayoutConstraint] = []
         let safeArea = self.view.safeAreaLayoutGuide
         
-        
-        self.feedTableView = UITableView(frame: .zero)
         self.feedTableView.translatesAutoresizingMaskIntoConstraints = false
         self.feedTableView.register(PostCell.self, forCellReuseIdentifier: cellIdentifier)
         self.feedTableView.dataSource = self
         self.feedTableView.delegate = self
+        
         self.view.addSubview(self.feedTableView)
         constraints.append(self.feedTableView.heightAnchor.constraint(equalTo: safeArea.heightAnchor))
         constraints.append(self.feedTableView.widthAnchor.constraint(equalTo: safeArea.widthAnchor))
@@ -51,8 +51,8 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         NSLayoutConstraint.activate(constraints)
         
-//        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
-//        feedTableView.backgroundColor = background
+        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
+        feedTableView.backgroundColor = background
         feedTableView.reloadData()
     }
     
@@ -64,6 +64,16 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         
         self.navigationController?.pushViewController(self.createPostVC, animated: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
+        
+        feedTableView.backgroundColor = background
+        if self.feedTableView != nil {
+            self.feedTableView.reloadData()
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -80,9 +90,9 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
 //        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
 //        let textColor: UIColor =  currentUser!.settings!.dark ? .white : .black
         
-        
 //        cell.backgroundColor = background
 //        cell.changeTextColor(color: textColor)
+//        cell.changeContentColor(color: background)
         
         return cell
     }
@@ -122,10 +132,4 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
             UIGraphicsEndImageContext();
             return image!
         }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        if self.feedTableView != nil {
-            self.feedTableView.reloadData()
-        }
-    }
 }

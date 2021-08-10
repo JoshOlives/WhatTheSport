@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06D2B0CD26C09B69008D2DE6 /* TeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D2B0CC26C09B69008D2DE6 /* TeamCell.swift */; };
+		06D2B0CF26C09B6C008D2DE6 /* TeamCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06D2B0CE26C09B6C008D2DE6 /* TeamCell.xib */; };
+		06D2B0D126C09B72008D2DE6 /* FranchiseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D2B0D026C09B72008D2DE6 /* FranchiseCell.swift */; };
+		06D2B0D326C09B76008D2DE6 /* FranchiseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06D2B0D226C09B76008D2DE6 /* FranchiseCell.xib */; };
 		34CE93502368F3E0F1D46DE0 /* Pods_WhatTheSport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FEE4B31F510091F48CC5D5B /* Pods_WhatTheSport.framework */; };
 		8F6BED3426B9D34500F05A3D /* AccountPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6BED3326B9D34500F05A3D /* AccountPageViewController.swift */; };
 		8F6BED3726B9D3A100F05A3D /* SettingProfilePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6BED3626B9D3A100F05A3D /* SettingProfilePictureViewController.swift */; };
@@ -29,12 +33,10 @@
 		8F955FF6269AB5B5003DD8F1 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F955FF5269AB5B5003DD8F1 /* ResetPasswordViewController.swift */; };
 		8F99356726BB2DF5006FA04C /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99356626BB2DF4006FA04C /* FiltersViewController.swift */; };
 		8F99356A26BCA4F4006FA04C /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99356926BCA4F4006FA04C /* TabBarViewController.swift */; };
-		8F99356C26BCA575006FA04C /* TempFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99356B26BCA575006FA04C /* TempFeed.swift */; };
 		8F99356E26BCA59D006FA04C /* TempEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99356D26BCA59D006FA04C /* TempEvent.swift */; };
 		8F99357026BCA5DF006FA04C /* GameScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99356F26BCA5DF006FA04C /* GameScheduleViewController.swift */; };
 		8F99357226BCA5F6006FA04C /* GameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99357126BCA5F6006FA04C /* GameTableViewCell.swift */; };
 		8F99357426BCA82C006FA04C /* GameDateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99357326BCA82C006FA04C /* GameDateTableViewCell.swift */; };
-		8F99357626BD1559006FA04C /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99357526BD1558006FA04C /* TestViewController.swift */; };
 		8F99357826BDB95F006FA04C /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99357726BDB95E006FA04C /* MenuView.swift */; };
 		8F99357C26BDCB6E006FA04C /* TeamObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99357B26BDCB6E006FA04C /* TeamObjects.swift */; };
 		8F99357E26BDCB90006FA04C /* FeedCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99357D26BDCB90006FA04C /* FeedCells.swift */; };
@@ -49,6 +51,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		06D2B0CC26C09B69008D2DE6 /* TeamCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamCell.swift; sourceTree = "<group>"; };
+		06D2B0CE26C09B6C008D2DE6 /* TeamCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeamCell.xib; sourceTree = "<group>"; };
+		06D2B0D026C09B72008D2DE6 /* FranchiseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FranchiseCell.swift; sourceTree = "<group>"; };
+		06D2B0D226C09B76008D2DE6 /* FranchiseCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FranchiseCell.xib; sourceTree = "<group>"; };
 		1FEE4B31F510091F48CC5D5B /* Pods_WhatTheSport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WhatTheSport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F6BED3326B9D34500F05A3D /* AccountPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPageViewController.swift; sourceTree = "<group>"; };
 		8F6BED3626B9D3A100F05A3D /* SettingProfilePictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfilePictureViewController.swift; sourceTree = "<group>"; };
@@ -73,12 +79,10 @@
 		8F955FF5269AB5B5003DD8F1 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		8F99356626BB2DF4006FA04C /* FiltersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
 		8F99356926BCA4F4006FA04C /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
-		8F99356B26BCA575006FA04C /* TempFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempFeed.swift; sourceTree = "<group>"; };
 		8F99356D26BCA59D006FA04C /* TempEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempEvent.swift; sourceTree = "<group>"; };
 		8F99356F26BCA5DF006FA04C /* GameScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScheduleViewController.swift; sourceTree = "<group>"; };
 		8F99357126BCA5F6006FA04C /* GameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTableViewCell.swift; sourceTree = "<group>"; };
 		8F99357326BCA82C006FA04C /* GameDateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDateTableViewCell.swift; sourceTree = "<group>"; };
-		8F99357526BD1558006FA04C /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		8F99357726BDB95E006FA04C /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		8F99357B26BDCB6E006FA04C /* TeamObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamObjects.swift; sourceTree = "<group>"; };
 		8F99357D26BDCB90006FA04C /* FeedCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCells.swift; sourceTree = "<group>"; };
@@ -158,12 +162,16 @@
 				8F6BED4026B9D48900F05A3D /* sign in, sign up, password recovery */,
 				8F6BED3526B9D35300F05A3D /* acount, settings, filters */,
 				8F955FD22698E4A2003DD8F1 /* AppDelegate.swift */,
+				06D2B0CE26C09B6C008D2DE6 /* TeamCell.xib */,
 				8F955FD42698E4A2003DD8F1 /* SceneDelegate.swift */,
+				06D2B0CC26C09B69008D2DE6 /* TeamCell.swift */,
 				8F955FD62698E4A2003DD8F1 /* ViewController.swift */,
 				8F955FF1269A88DE003DD8F1 /* Helpers.swift */,
 				8F955FD82698E4A2003DD8F1 /* Main.storyboard */,
 				8F955FDE2698E4A6003DD8F1 /* Assets.xcassets */,
+				06D2B0D226C09B76008D2DE6 /* FranchiseCell.xib */,
 				8F955FE02698E4A6003DD8F1 /* LaunchScreen.storyboard */,
+				06D2B0D026C09B72008D2DE6 /* FranchiseCell.swift */,
 				8F955FE32698E4A6003DD8F1 /* Info.plist */,
 				8FC68E0F26B4FC3C007B83A2 /* WhatTheSport.xcdatamodeld */,
 				8F955FEB2698E835003DD8F1 /* GoogleService-Info.plist */,
@@ -175,12 +183,10 @@
 			isa = PBXGroup;
 			children = (
 				8F99356926BCA4F4006FA04C /* TabBarViewController.swift */,
-				8F99356B26BCA575006FA04C /* TempFeed.swift */,
 				8F99356D26BCA59D006FA04C /* TempEvent.swift */,
 				8F99356F26BCA5DF006FA04C /* GameScheduleViewController.swift */,
 				8F99357126BCA5F6006FA04C /* GameTableViewCell.swift */,
 				8F99357326BCA82C006FA04C /* GameDateTableViewCell.swift */,
-				8F99357526BD1558006FA04C /* TestViewController.swift */,
 				8F99357726BDB95E006FA04C /* MenuView.swift */,
 				8F99358526BDE530006FA04C /* ViewControllerWithMenu.swift */,
 			);
@@ -279,7 +285,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F955FE22698E4A6003DD8F1 /* LaunchScreen.storyboard in Resources */,
+				06D2B0CF26C09B6C008D2DE6 /* TeamCell.xib in Resources */,
 				8F955FEC2698E835003DD8F1 /* GoogleService-Info.plist in Resources */,
+				06D2B0D326C09B76008D2DE6 /* FranchiseCell.xib in Resources */,
 				8F955FDF2698E4A6003DD8F1 /* Assets.xcassets in Resources */,
 				8F955FDA2698E4A2003DD8F1 /* Main.storyboard in Resources */,
 			);
@@ -339,7 +347,6 @@
 				8F6BED4226B9D50800F05A3D /* Transitioner.swift in Sources */,
 				8F955FF6269AB5B5003DD8F1 /* ResetPasswordViewController.swift in Sources */,
 				8F99357426BCA82C006FA04C /* GameDateTableViewCell.swift in Sources */,
-				8F99356C26BCA575006FA04C /* TempFeed.swift in Sources */,
 				8FC68E1126B4FC3C007B83A2 /* WhatTheSport.xcdatamodeld in Sources */,
 				8F99358426BDCBEF006FA04C /* FeedViewController.swift in Sources */,
 				D3420C5126BFA3B7002FB9F9 /* CommentViewController.swift in Sources */,
@@ -351,6 +358,7 @@
 				8F99357E26BDCB90006FA04C /* FeedCells.swift in Sources */,
 				8F99356726BB2DF5006FA04C /* FiltersViewController.swift in Sources */,
 				8F99356A26BCA4F4006FA04C /* TabBarViewController.swift in Sources */,
+				06D2B0CD26C09B69008D2DE6 /* TeamCell.swift in Sources */,
 				8F6BED3B26B9D3E800F05A3D /* SettingViewController.swift in Sources */,
 				D37857D326C038A800A31BC2 /* CreateCommentViewController.swift in Sources */,
 				8F6BED3D26B9D40300F05A3D /* SettingTableViewCell.swift in Sources */,
@@ -358,7 +366,6 @@
 				8F955FD72698E4A2003DD8F1 /* ViewController.swift in Sources */,
 				8F955FD32698E4A2003DD8F1 /* AppDelegate.swift in Sources */,
 				8F6BED3726B9D3A100F05A3D /* SettingProfilePictureViewController.swift in Sources */,
-				8F99357626BD1559006FA04C /* TestViewController.swift in Sources */,
 				8F99356E26BCA59D006FA04C /* TempEvent.swift in Sources */,
 				8F955FF0269A848C003DD8F1 /* SignInViewController.swift in Sources */,
 				8F955FD52698E4A2003DD8F1 /* SceneDelegate.swift in Sources */,
@@ -366,6 +373,7 @@
 				D3420C5526BFA92B002FB9F9 /* CommentCells.swift in Sources */,
 				8F99358226BDCBD3006FA04C /* CreatePostViewController.swift in Sources */,
 				8F955FEE269A8443003DD8F1 /* SignUpViewController.swift in Sources */,
+				06D2B0D126C09B72008D2DE6 /* FranchiseCell.swift in Sources */,
 				8F6BED3426B9D34500F05A3D /* AccountPageViewController.swift in Sources */,
 				8F99357226BCA5F6006FA04C /* GameTableViewCell.swift in Sources */,
 			);

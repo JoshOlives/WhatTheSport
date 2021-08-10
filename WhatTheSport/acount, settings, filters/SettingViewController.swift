@@ -13,6 +13,7 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     let settingDisplay = ["Account", "Push Notifications", "DarkMode", "Post Color", "App version"]
     var nextVC: AccountPageViewController!
+    var profilePic: UIImage!
     
     private let tableView : UITableView = {
         let tableView = UITableView()
@@ -146,23 +147,12 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
             if nextVC == nil{
                 print("this is row at \(indexPath.row)")
                 nextVC = AccountPageViewController()
+                if let image = profilePic {
+                    nextVC.profilePhoto.setImage(image, for: .normal)
+                }
             }
             
-            if self.nextVC.profilePhoto.currentImage == nil {
-                guard let urlstring = fireUser!.get("URL") as? String else{
-                    print("error retreiving urlstring")
-                    inTransition = false
-                    return
-                }
-                let imageView = UIImageView()
-                IO.downloadImage(str: urlstring, imageView: imageView){
-                    self.nextVC.profilePhoto.setImage(imageView.image, for: .normal)
-                    UI.transition(dest: self.nextVC, src: self)
-                }
-            } else {
-                UI.transition(dest: self.nextVC, src: self)
-                print("account view")
-            }
+            UI.transition(dest: self.nextVC, src: self)
         case 3:
             let controller = UIAlertController(
                 title: "Choose Color",
