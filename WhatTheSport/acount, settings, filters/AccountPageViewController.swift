@@ -162,6 +162,12 @@ class AccountPageViewController: UIViewController, UITableViewDelegate, UITableV
             home.modalPresentationStyle = .fullScreen
             self.present(home, animated: true, completion: nil)
             print("this is row \(row)")
+        case 7:
+            let nextVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "registerSportID") as! RegisterSportController
+            let register = UINavigationController(rootViewController: nextVC)
+            register.modalPresentationStyle = .fullScreen
+            self.present(register, animated: true, completion: nil)
+            print("this is row \(row)")
         default:
           
             print("This should not happened!")

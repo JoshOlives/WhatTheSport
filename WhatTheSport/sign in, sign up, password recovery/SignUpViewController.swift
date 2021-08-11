@@ -14,12 +14,13 @@ import FirebaseStorage
 class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate {
 
     var emailField: UITextField!
+    var fromSignUp: Bool!
     var usernameField: UITextField!
     var passwordField: UITextField!
     var confirmField: UITextField!
     var signUpButton: UIButton!
     var signInVC: SignInViewController!
-    var nextVC: RegisterSportController!
+    var nextVC: UIViewController!
     var constraint: NSLayoutConstraint!
     var logo: UIImageView!
     var signInLabel: UIButton!
@@ -33,7 +34,7 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
         //ONLY UNCOMMENT TO DELETE ALL OF CORE DATA FROM THIS APP
         //clearCoreData()
         super.viewDidLoad()
-        
+        fromSignUp = false
         var constraints: [NSLayoutConstraint] = []
         
         if let navigator = navigationController {
@@ -199,6 +200,7 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
                     self.user = self.createUser(userID: userID)
                     IO.saveContext()
 
+                    self.fromSignUp = true
                     self.signIn (email: email, password: password)
                 } else {
                     let controller = UI.createAlert(title: "Error", msg: error!.localizedDescription)
@@ -222,8 +224,10 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
           user, error in
           if error == nil {
 
-            if self.nextVC == nil {
-                self.nextVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "registerSportID") as? RegisterSportController
+            if self.nextVC == nil && self.fromSignUp {
+                self.nextVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "registerSportID") as! RegisterSportController
+            } else {
+                self.nextVC = TabBarViewController()
             }
             let userID = user!.user.uid
             
@@ -234,6 +238,8 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
                 
                 if self.nextVC == nil {
                     self.nextVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "registerSportID")
+                } else {
+                    self.nextVC = TabBarViewController()
                 }
                 
                 let register = UINavigationController(rootViewController: self.nextVC)
