@@ -6,45 +6,22 @@
 //
 
 import UIKit
+import Firebase
 
 class GameScheduleViewController: ViewControllerWithMenu, UITableViewDelegate, UITableViewDataSource {
     
     struct Game {
         var date: String
+        var formattedDate: String
         var time: String
-        var team: String
+        //var team: String
+        var usersCalendar: [String] = []
+        var usersNotification: [String] = []
+        var teams: [Int] = []
+        //var savedEventId: String = ""
+        var savedNotificationId: String = ""
     }
     
-    let game1 = Game(date: "Today Friday May 14   1", time: "7:00 pm", team: "CA vs TX 1")
-    let game2 = Game(date: "Today Friday May 14   2", time: "8:00 pm", team: "CA vs NM 2")
-    let game3 = Game(date: "Today Friday May 14   3", time: "9:00 pm", team: "NM vs TX 3")
-    let game4 = Game(date: "Today Friday May 14   4", time: "10:00 pm", team: "NM vs AZ 4")
-    let game5 = Game(date: "Today Friday May 14   5", time: "11:00 pm", team: "CA vs AZ 5")
-    let game6 = Game(date: "Today Friday May 14   6", time: "12:00 pm", team: "CA vs FL 6")
-    let game7 = Game(date: "Today Friday May 14   7", time: "7:30 pm", team: "FL vs TX 7")
-    let game8 = Game(date: "Today Friday May 14   8", time: "7:40 pm", team: "FL vs NM 8")
-    let game9 = Game(date: "Today Friday May 14   9", time: "7:50 pm", team: "NV vs TX 9")
-    let game10 = Game(date: "Tomorrw Saturday May 15    10", time: "7:00 pm", team: "CA vs NV 10")
-    let game11 = Game(date: "Tomorrw Saturday May 15    11", time: "8:00 pm", team: "NY vs TX 11")
-    let game12 = Game(date: "Tomorrw Saturday May 15    12", time: "9:00 pm", team: "CA vs NY 12")
-    let game13 = Game(date: "Tomorrw Saturday May 15    13", time: "9:30 pm", team: "UT vs TX 13")
-    let game14 = Game(date: "Tomorrw Saturday May 15    14", time:"10:30 pm", team: "UT vs CA 14")
-    let game15 = Game(date: "Tomorrw Saturday May 15    15", time:"10:30 pm", team: "UT vs FL 15")
-    let game16 = Game(date: "Today Friday May 14   16", time: "7:00 pm", team: "CA vs TX 16")
-    let game17 = Game(date: "Today Friday May 14   17", time: "8:00 pm", team: "CA vs NM 17")
-    let game18 = Game(date: "Today Friday May 14   18", time: "9:00 pm", team: "NM vs TX 18")
-    let game19 = Game(date: "Today Friday May 14   19", time: "10:00 pm", team: "NM vs AZ 19")
-    let game20 = Game(date: "Today Friday May 14   20", time: "11:00 pm", team: "CA vs AZ 20")
-    let game21 = Game(date: "Today Friday May 14   21", time: "12:00 pm", team: "CA vs FL 21")
-    let game22 = Game(date: "Today Friday May 14   22", time: "7:30 pm", team: "FL vs TX 22")
-    let game23 = Game(date: "Today Friday May 14   23", time: "7:40 pm", team: "FL vs NM 23")
-    let game24 = Game(date: "Today Friday May 14   24", time: "7:50 pm", team: "NV vs TX 24")
-    let game25 = Game(date: "Tomorrw Saturday May 15   25", time: "7:00 pm", team: "CA vs NV 25")
-    let game26 = Game(date: "Tomorrw Saturday May 15   26", time: "8:00 pm", team: "NY vs TX 26")
-    let game27 = Game(date: "Tomorrw Saturday May 15   27", time: "9:00 pm", team: "CA vs NY 27")
-    let game28 = Game(date: "Tomorrw Saturday May 15   28", time: "9:30 pm", team: "UT vs TX 28")
-    let game29 = Game(date: "Tomorrw Saturday May 15   29", time:"10:30 pm", team: "UT vs CA 29 ")
-    let game30 = Game(date: "Tomorrw Saturday May 15   30", time:"10:30 pm", team: "UT vs FL 30")
     
     var gameList = [Game]()
     
@@ -57,40 +34,9 @@ class GameScheduleViewController: ViewControllerWithMenu, UITableViewDelegate, U
         super.viewDidLoad()
         self.title = "Games"
         
-        gameList.append(game1)
-        gameList.append(game2)
-        gameList.append(game3)
-        gameList.append(game4)
-        gameList.append(game5)
-        gameList.append(game6)
-        gameList.append(game7)
-        gameList.append(game8)
-        gameList.append(game9)
-        gameList.append(game10)
-        gameList.append(game11)
-        gameList.append(game12)
-        gameList.append(game13)
-        gameList.append(game14)
-        gameList.append(game15)
-        gameList.append(game16)
-        gameList.append(game17)
-        gameList.append(game18)
-        gameList.append(game19)
-        gameList.append(game28)
-        gameList.append(game21)
-        gameList.append(game22)
-        gameList.append(game23)
-        gameList.append(game24)
-        gameList.append(game25)
-        gameList.append(game26)
-        gameList.append(game27)
-        gameList.append(game28)
-        gameList.append(game29)
-        gameList.append(game30)
+        self.containerView.addSubview(self.tableView)
         
         var constraints: [NSLayoutConstraint] = []
-
-        containerView.addSubview(tableView)
 
         self.tableView.tableFooterView = UIView(frame: .zero)
         
@@ -105,6 +51,36 @@ class GameScheduleViewController: ViewControllerWithMenu, UITableViewDelegate, U
         NSLayoutConstraint.activate(constraints)
         tableView.delegate = self
         tableView.dataSource = self
+        
+        let db = Firestore.firestore()
+        
+        let games = db.collection("schedules").document("MLB").collection("games")
+        games.getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    var counter = 0;
+                    for document in querySnapshot!.documents {
+                        let date = document.get("date") as! String
+                        let formattedDate = document.get("formattedDate") as! String
+                        let time = document.get("time") as! String
+                        let usersCalender = document.get("usersCalendar") as! [String]
+                        let usersNotification = document.get("usersNotification") as! [String]
+                        let teams = document.get("teams") as! [Int]
+                        
+                        let tempGame = Game(date: date, formattedDate: formattedDate, time: time, usersCalendar: usersCalender, usersNotification: usersNotification, teams: teams, savedNotificationId: document.documentID)
+                        //print(tempGame.savedNotificationId)
+                        self.gameList.append(tempGame)
+                        counter += 1
+                        if counter % 5 == 0 {
+                            //TODO: dispatch in Main thread
+                            self.tableView.reloadData()
+                        }
+                    }
+                    self.tableView.reloadData()
+                }
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -145,13 +121,90 @@ class GameScheduleViewController: ViewControllerWithMenu, UITableViewDelegate, U
         
         let cell = tableView.dequeueReusableCell(withIdentifier: GameTableViewCell.identifier, for: indexPath) as! GameTableViewCell
         cell.textLabel?.text = gameList[indexPath.row / 2].time
-        cell.displayLabel.text = gameList[indexPath.row / 2].team
+        let teamText = "\(gameList[indexPath.row / 2].teams[0]) VS \(gameList[indexPath.row / 2].teams[1])"
+        cell.displayLabel.text = teamText
         cell.textLabel?.textColor = textColor
         cell.displayLabel.textColor = textColor
+        
+        cell.index = indexPath.row / 2
+        cell.delegate = self
+        
+        cell.notificationId = gameList[indexPath.row / 2].savedNotificationId
+        
+        cell.onCalendar =  gameList[indexPath.row / 2].usersCalendar.contains((currentUser?.userID)!)
+        cell.onNotify =  gameList[indexPath.row / 2].usersNotification.contains((currentUser?.userID)!)
+        
+        cell.formattedDate = gameList[indexPath.row / 2].formattedDate
+        
+        let hash = (teamText + (cell.textLabel?.text)!).hashValue
+        //print("hash \(hash)")
+        let hashD = Double(abs(hash))
+        //print("hashD \(hashD)")
+        let identifer = hashD / pow(10, 17)
+        //print("identifer \(identifer)")
+        cell.uniqueIdentifer = identifer
         
         cell.updateColor(color: background)
         
         return cell
       
+    }
+    
+    func updateCalendar (index: Int, remove: Bool) {
+        let ID = (currentUser?.userID)!
+        let game = gameList[index].savedNotificationId
+        updateFireLeague(sport: "MLB", field: "usersCalendar", item: ID, game: game, remove: remove)
+        if remove {
+            if let removeIndex = gameList[index].usersCalendar.firstIndex(of: ID){
+                gameList[index].usersCalendar.remove(at: removeIndex)
+            }
+        } else {
+            gameList[index].usersCalendar.append(ID)
+        }
+    }
+    
+    func updateNotification (index: Int, remove: Bool) {
+        let ID = (currentUser?.userID)!
+        let game = gameList[index].savedNotificationId
+        updateFireLeague(sport: "MLB", field: "usersNotification", item: ID, game: game, remove: remove)
+        if remove {
+            if let removeIndex = gameList[index].usersNotification.firstIndex(of: ID){
+                gameList[index].usersNotification.remove(at: removeIndex)
+            }
+        } else {
+            gameList[index].usersNotification.append(ID)
+        }
+    }
+    
+    func updateFireLeague(sport: String, field: String, item: String, game: String, remove: Bool) {
+        let db = Firestore.firestore()
+        let ref = db.collection("schedules").document(sport)
+        let docRef = ref.collection("games").document(game)
+        
+        if !remove {
+            docRef.updateData([
+                field: FieldValue.arrayUnion([item])
+                ]){ error in
+                if let e = error {
+                    print("error updating fire user \(e.localizedDescription)")
+                }
+            }
+        } else {
+            docRef.updateData([
+                field: FieldValue.arrayRemove([item])
+                ]){ error in
+                if let e = error {
+                    print("error updating fire user \(e.localizedDescription)")
+                }
+            }
+        }
+        
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                fireUser = document
+            } else {
+                print("error updating fire user")
+            }
+        }
     }
 }

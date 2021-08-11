@@ -11,7 +11,7 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     
     
-    let settingDisplay = ["Account", "Push Notifications", "DarkMode", "Post Color", "App version"]
+    let settingDisplay = ["Account", "Push Notifications", "DarkMode", "App version"]
     var nextVC: AccountPageViewController!
     var profilePic: UIImage!
     
@@ -119,14 +119,10 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         if ( indexPath.row == 0) {
             cell.displayLabel.isHidden = true
         }
-        else if ( indexPath.row == 3) {
-            cell.displayLabel.text = currentUser?.settings?.postColor
-            
-        }
         else {
-            cell.displayLabel.text = "V.01"
-        }
+            cell.displayLabel.text = "V.1"
             
+        }
         
         return cell
     }
@@ -154,48 +150,6 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
             
             UI.transition(dest: self.nextVC, src: self)
         case 3:
-            let controller = UIAlertController(
-                title: "Choose Color",
-                message: "Please enter a color from the list",
-                preferredStyle: .alert)
-            
-            let regularAction = UIAlertAction(
-                title: "Orange",
-                style: .default,
-                handler: {(action) in
-                    currentUser?.settings?.postColor = "Orange"
-                    IO.saveContext()
-                    self.tableView.reloadData()
-                })
-            controller.addAction(regularAction)
- 
-            
-            let noAction = UIAlertAction(
-                title: "Red",
-                style: .default,
-                handler:{(action) in
-                    currentUser?.settings?.postColor = "Red"
-                    IO.saveContext()
-                    self.tableView.reloadData()
-                })
-            controller.addAction(noAction)
-
-            let doubleAction = UIAlertAction(
-                title: "Blue",
-                style: .default,
-                handler: {(action) in
-                    currentUser?.settings?.postColor = "Blue"
-                    IO.saveContext()
-                    self.tableView.reloadData()
-                })
-            
-            controller.addAction(doubleAction)
-            present(controller, animated: true, completion: nil)
-            
-            self.tableView.reloadData()
-            
-            
-        case 4:
             print("this is row \(row)")
 
         default:

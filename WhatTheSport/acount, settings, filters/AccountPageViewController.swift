@@ -10,10 +10,10 @@ import Firebase
 
 class AccountPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
  
-    let setting = ["Username", "First name", "Last name", "Email", "Change password", "Change profile photo", "Blocked User", "Following", "Sign out"]
+    let setting = ["Username", "Email", "Change password", "Change profile photo", "Following", "Sign out"]
     
 
-    var userInformation = ["default", "default", "default", "default", "default", "default", "default", "default", "default"]
+    var userInformation = ["default", "default", "default", "default", "default", "default"]
     
     var nextVC: SettingProfilePictureViewController!
     
@@ -55,7 +55,7 @@ class AccountPageViewController: UIViewController, UITableViewDelegate, UITableV
         
         self.title = fireUser!.get("username") as? String
         self.userInformation[0] = fireUser!.get("username") as! String
-        self.userInformation[3] = fireUser!.get("email") as! String
+        self.userInformation[1] = fireUser!.get("email") as! String
         
         
         self.profilePhoto.contentMode = .scaleToFill
@@ -101,7 +101,7 @@ class AccountPageViewController: UIViewController, UITableViewDelegate, UITableV
         cell.border.borderColor = lineColor.cgColor
         
         
-        if indexPath.row > 3 {
+        if indexPath.row > 1 {
             cell.userInformationLabel.isHidden = true
         }
         cell.configuer(pageInfo: setting[indexPath.row], information: userInformation[indexPath.row])
@@ -116,18 +116,11 @@ class AccountPageViewController: UIViewController, UITableViewDelegate, UITableV
         //username
         case 0:
             updateUserInforAlert(titleString: "Change Username", messageString: "Please enter your username", placeholderString: "username", index: 0)
-        //firstname
-        case 1:
-            updateUserInforAlert(titleString: "Change First Name", messageString: "Please enter your first name", placeholderString: "firstname", index: 1)
-        //lastname
-        case 2:
-            updateUserInforAlert(titleString: "Change last name", messageString: "Please enter your last name", placeholderString: "last name", index: 2)
-            print("this is row \(row)")
         //email
-        case 3:
+        case 1:
             print("this is row \(row)")
         //password
-        case 4:
+        case 2:
             print("this is row \(row)")
             guard let email = fireUser?.get("email") as? String else {
                 return print("error retreiving email")
@@ -142,7 +135,7 @@ class AccountPageViewController: UIViewController, UITableViewDelegate, UITableV
                 }
             }
         //profile picture
-        case 5:
+        case 3:
             print("this is row \(row)")
             if inTransition {
                 return
@@ -159,15 +152,12 @@ class AccountPageViewController: UIViewController, UITableViewDelegate, UITableV
             UI.transition(dest: nextVC, src: self)
         
             print("this is row \(row)")
-        case 6:
-          
-            print("this is row \(row)")
-        case 7:
-           
+        //following
+        case 4:
             print("this is row \(row), your first name is \(self.userInformation[1])")
             print("this is row \(row)")
-            
-        case 8:
+        //sign out
+        case 5:
             let home = UINavigationController(rootViewController: SignUpViewController())
             home.modalPresentationStyle = .fullScreen
             self.present(home, animated: true, completion: nil)
