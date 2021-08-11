@@ -19,7 +19,7 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
     var confirmField: UITextField!
     var signUpButton: UIButton!
     var signInVC: SignInViewController!
-    var nextVC: TabBarViewController!
+    var nextVC: RegisterSportController!
     var constraint: NSLayoutConstraint!
     var logo: UIImageView!
     var signInLabel: UIButton!
@@ -211,7 +211,6 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
         }
     }
     
-    // MARK: -
     func signIn (email: String, password: String) {
         if inTransition {
             return
