@@ -35,7 +35,7 @@ class GameTableViewCell: UITableViewCell {
         super.layoutSubviews()
         var constraints: [NSLayoutConstraint] = []
         displayLabel.translatesAutoresizingMaskIntoConstraints = false
-        constraints.append(displayLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -200))
+        constraints.append( displayLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor))
         constraints.append( displayLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor))
         
         self.calanderButton = UIButton(frame: .zero)
@@ -218,7 +218,7 @@ class GameTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(displayLabel)
       
-        displayLabel.textAlignment = .right
+        displayLabel.textAlignment = .center
        // contentView.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
       
 

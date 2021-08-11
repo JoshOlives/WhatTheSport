@@ -14,6 +14,7 @@
 		34CE93502368F3E0F1D46DE0 /* Pods_WhatTheSport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FEE4B31F510091F48CC5D5B /* Pods_WhatTheSport.framework */; };
 		8F3E946A26C3655C000ADE4E /* RegisterSportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3E946926C3655B000ADE4E /* RegisterSportController.swift */; };
 		8F3E946C26C3656C000ADE4E /* RegisterTeamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3E946B26C3656C000ADE4E /* RegisterTeamController.swift */; };
+		8F3E946E26C38B24000ADE4E /* data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3E946D26C38B23000ADE4E /* data.swift */; };
 		8F6BED3426B9D34500F05A3D /* AccountPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6BED3326B9D34500F05A3D /* AccountPageViewController.swift */; };
 		8F6BED3726B9D3A100F05A3D /* SettingProfilePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6BED3626B9D3A100F05A3D /* SettingProfilePictureViewController.swift */; };
 		8F6BED3926B9D3C700F05A3D /* AccountPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6BED3826B9D3C700F05A3D /* AccountPageTableViewCell.swift */; };
@@ -62,6 +63,7 @@
 		1FEE4B31F510091F48CC5D5B /* Pods_WhatTheSport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WhatTheSport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F3E946926C3655B000ADE4E /* RegisterSportController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterSportController.swift; sourceTree = "<group>"; };
 		8F3E946B26C3656C000ADE4E /* RegisterTeamController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterTeamController.swift; sourceTree = "<group>"; };
+		8F3E946D26C38B23000ADE4E /* data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = data.swift; sourceTree = "<group>"; };
 		8F6BED3326B9D34500F05A3D /* AccountPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPageViewController.swift; sourceTree = "<group>"; };
 		8F6BED3626B9D3A100F05A3D /* SettingProfilePictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfilePictureViewController.swift; sourceTree = "<group>"; };
 		8F6BED3826B9D3C700F05A3D /* AccountPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPageTableViewCell.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				8F955FE32698E4A6003DD8F1 /* Info.plist */,
 				8FC68E0F26B4FC3C007B83A2 /* WhatTheSport.xcdatamodeld */,
 				8F955FEB2698E835003DD8F1 /* GoogleService-Info.plist */,
+				8F3E946D26C38B23000ADE4E /* data.swift */,
 			);
 			path = WhatTheSport;
 			sourceTree = "<group>";
@@ -386,6 +389,7 @@
 				D3420C5526BFA92B002FB9F9 /* CommentCells.swift in Sources */,
 				8F99358226BDCBD3006FA04C /* CreatePostViewController.swift in Sources */,
 				8F955FEE269A8443003DD8F1 /* SignUpViewController.swift in Sources */,
+				8F3E946E26C38B24000ADE4E /* data.swift in Sources */,
 				06D2B0D126C09B72008D2DE6 /* FranchiseCell.swift in Sources */,
 				8F6BED3426B9D34500F05A3D /* AccountPageViewController.swift in Sources */,
 				8F99357226BCA5F6006FA04C /* GameTableViewCell.swift in Sources */,

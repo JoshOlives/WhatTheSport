@@ -115,13 +115,15 @@ class GameScheduleViewController: ViewControllerWithMenu, UITableViewDelegate, U
             let dateBackground: UIColor = currentUser!.settings!.dark ? UIColor(rgb: 0x060426) : UIColor(rgb: Constants.Colors.orange)
             let cell = tableView.dequeueReusableCell(withIdentifier: GameDateTableViewCell.identifier, for: indexPath) as! GameDateTableViewCell
             cell.contentView.backgroundColor = dateBackground
-            cell.textLabel?.text = gameList[indexPath.row / 2].date
+            let time = gameList[indexPath.row / 2].time
+            cell.textLabel?.text = "\(gameList[indexPath.row / 2].date)\t\t\(time)"
             return cell
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: GameTableViewCell.identifier, for: indexPath) as! GameTableViewCell
-        cell.textLabel?.text = gameList[indexPath.row / 2].time
-        let teamText = "\(gameList[indexPath.row / 2].teams[0]) VS \(gameList[indexPath.row / 2].teams[1])"
+        cell.textLabel?.text = ""
+        let teamText = "\(mlb[gameList[indexPath.row / 2].teams[0]]) VS \(mlb[gameList[indexPath.row / 2].teams[1]])"
+        print(teamText)
         cell.displayLabel.text = teamText
         cell.textLabel?.textColor = textColor
         cell.displayLabel.textColor = textColor
