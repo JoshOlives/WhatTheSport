@@ -123,7 +123,7 @@ class GameScheduleViewController: ViewControllerWithMenu, UITableViewDelegate, U
         let cell = tableView.dequeueReusableCell(withIdentifier: GameTableViewCell.identifier, for: indexPath) as! GameTableViewCell
         cell.textLabel?.text = ""
         let teamText = "\(mlb[gameList[indexPath.row / 2].teams[0]]) VS \(mlb[gameList[indexPath.row / 2].teams[1]])"
-        print(teamText)
+        //print(teamText)
         cell.displayLabel.text = teamText
         cell.textLabel?.textColor = textColor
         cell.displayLabel.textColor = textColor
@@ -198,14 +198,6 @@ class GameScheduleViewController: ViewControllerWithMenu, UITableViewDelegate, U
                 if let e = error {
                     print("error updating fire user \(e.localizedDescription)")
                 }
-            }
-        }
-        
-        docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                fireUser = document
-            } else {
-                print("error updating fire user")
             }
         }
     }
