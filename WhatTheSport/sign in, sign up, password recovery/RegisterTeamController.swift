@@ -128,6 +128,12 @@ class RegisterTeamController: UIViewController, UITableViewDataSource, UITableVi
             orderedSports.append("NFL")
             teamsToShow.append(nflTeams)
         }
+        super.viewWillAppear(animated)
+        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
+        let navImage: UIImage? = currentUser!.settings!.dark ? UIImage() : nil
+        self.navigationController?.navigationBar.setBackgroundImage(navImage, for: .default)
+        view.backgroundColor = background
+        inTransition = false
     }
     
     override func viewDidLoad() {
