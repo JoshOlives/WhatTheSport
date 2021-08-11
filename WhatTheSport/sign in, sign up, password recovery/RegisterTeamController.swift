@@ -145,7 +145,7 @@ class RegisterTeamController: UIViewController, UITableViewDataSource, UITableVi
         //navigator.navigationBar.backgroundColor = UIColor(rgb: Constants.Colors.orange)
     
         self.title = "Register"
-        view.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
+        view.backgroundColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
         nextButton.backgroundColor = UIColor(rgb: Constants.Colors.orange)
         nextButton.setTitleColor(.white, for: .normal)
         nextButton.layer.cornerRadius = 20.0
