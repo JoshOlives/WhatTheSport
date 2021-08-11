@@ -224,7 +224,7 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
           user, error in
           if error == nil {
 
-            if self.nextVC == nil && self.fromSignUp {
+            if self.nextVC == nil || self.fromSignUp {
                 self.nextVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "registerSportID") as! RegisterSportController
             } else {
                 self.nextVC = TabBarViewController()
@@ -236,7 +236,7 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
             IO.retrieveFireUser(userID: userID){
                 self.printUserInfo(userID: userID)
                 
-                if self.nextVC == nil {
+                if self.nextVC == nil || self.fromSignUp {
                     self.nextVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "registerSportID")
                 } else {
                     self.nextVC = TabBarViewController()
