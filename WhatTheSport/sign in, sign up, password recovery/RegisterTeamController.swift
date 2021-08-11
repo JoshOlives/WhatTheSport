@@ -72,21 +72,25 @@ class RegisterTeamController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell  {
         if indexPath.row == 0 {
+            let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "franchiseCellIdentifier") as! FranchiseCell
             let name = orderedSports[indexPath.section]
             cell.franchiseName = name
             cell.franchiseLogo.image = UIImage(named: name)
-            cell.franchiseLogo.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
-            cell.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
+            cell.franchiseLogo.backgroundColor = background
+            cell.backgroundColor = background
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             return cell
         } else {
+            let background: UIColor = currentUser!.settings!.dark ? .black : .white
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "teamCellIdentifier", for: indexPath) as! TeamCell
             let teamName = teamsToShow[indexPath.section][indexPath.row - 1]
             let teamLogo = UIImage(named: teamName)
             cell.teamLogo.image = teamLogo
             cell.teamName.text = teamName
-            cell.backgroundColor = UIColor.white
+            cell.backgroundColor = background
             
             return cell
         }
@@ -128,7 +132,6 @@ class RegisterTeamController: UIViewController, UITableViewDataSource, UITableVi
             orderedSports.append("NFL")
             teamsToShow.append(nflTeams)
         }
-        super.viewWillAppear(animated)
         let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
         let navImage: UIImage? = currentUser!.settings!.dark ? UIImage() : nil
         self.navigationController?.navigationBar.setBackgroundImage(navImage, for: .default)

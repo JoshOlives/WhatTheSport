@@ -43,6 +43,14 @@ class RegisterSportController: UIViewController {
         self.navigationController?.navigationBar.setBackgroundImage(navImage, for: .default)
         view.backgroundColor = background
         inTransition = false
+        for view in sportViewArray {
+            let background: UIColor = currentUser!.settings!.dark ? .darkGray : .white
+            view.backgroundColor = background
+        }
+        for label in labelCollection {
+            let textColor: UIColor = currentUser!.settings!.dark ? .white : .black
+            label.textColor = textColor
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -64,7 +72,8 @@ class RegisterSportController: UIViewController {
             sender.backgroundColor = UIColor(rgb: Constants.Colors.orange)
             selectedSports.append(sport)
         } else {
-            sender.backgroundColor = .white
+            let background: UIColor = currentUser!.settings!.dark ? .darkGray : .white
+            sender.backgroundColor = background
             let removedSport = selectedSports.remove(at: selectedSports.firstIndex(of: sport)!)
             print(removedSport)
         }
