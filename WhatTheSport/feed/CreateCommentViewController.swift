@@ -50,10 +50,19 @@ class CreateCommentViewController: UIViewController {
                                             "userProfilePicID": fireUser!.get("URL")!,
                                             "username": fireUser!.get("username")!]
             
-            let feedDB = Firestore.firestore().collection("comments")
-            _ = feedDB.addDocument(data: fsComment, completion: { err in
+            let commentDB = Firestore.firestore().collection("comments")
+            _ = commentDB.addDocument(data: fsComment, completion: { err in
                 if let err = err {
                     print("Error adding document: \(err)")
+                } else {
+                    currPost!.numComments += 1
+                    let postDB = Firestore.firestore().collection("posts")
+                    postDB.document(currPost!.postID).updateData(["numComments": currPost!.numComments]) {
+                        err in
+                        if let err = err {
+                            print("Error updating document: \(err)")
+                        }
+                    }
                 }
             })
         }
