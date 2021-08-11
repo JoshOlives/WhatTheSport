@@ -111,6 +111,7 @@ class RegisterTeamController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewWillAppear(_ animated:Bool) {
         super.viewWillAppear(animated)
+        inTransition = false
         if selectedSports.contains("MLB") {
             orderedSports.append("MLB")
             teamsToShow.append(mlbTeams)

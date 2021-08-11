@@ -36,6 +36,11 @@ class RegisterSportController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        inTransition = false
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "RegisterTeamIdentifier",
             let destination = segue.destination as? RegisterTeamController {

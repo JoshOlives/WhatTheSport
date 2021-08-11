@@ -15,7 +15,8 @@ class AccountPageViewController: UIViewController, UITableViewDelegate, UITableV
 
     var userInformation = ["default", "default", "default", "default", "default", "default"]
     
-    var nextVC: SettingProfilePictureViewController!
+    var pictureVC: SettingProfilePictureViewController!
+    var registerVC: RegisterSportController!
     
     
     var profilePhoto = UIButton()
@@ -136,26 +137,36 @@ class AccountPageViewController: UIViewController, UITableViewDelegate, UITableV
             }
         //profile picture
         case 3:
-            print("this is row \(row)")
             if inTransition {
                 return
             } else {
                 inTransition = true
             }
             
-            if nextVC == nil{
+            if pictureVC == nil{
                 print("this is row at \(indexPath.row)")
-                nextVC = SettingProfilePictureViewController()
+                pictureVC = SettingProfilePictureViewController()
             }
-            nextVC.photo = profilePhoto.currentImage
-            nextVC.delegate = self
-            UI.transition(dest: nextVC, src: self)
+            pictureVC.photo = profilePhoto.currentImage
+            pictureVC.delegate = self
+            UI.transition(dest: pictureVC, src: self)
         
             print("this is row \(row)")
         //following
         case 4:
-            let registerView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "registerSportID") as! RegisterSportController
-            UI.transition(dest: registerView, src: self)
+            if inTransition {
+                return
+            } else {
+                inTransition = true
+            }
+            
+            if registerVC == nil{
+                registerVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "registerSportID") as? RegisterSportController
+            }
+            
+            //TODO: PASS IN THE USERS FOLLOWED SPORTS AND TEAMS!!!
+            
+            UI.transition(dest: registerVC, src: self)
         //sign out
         case 5:
             let home = UINavigationController(rootViewController: SignUpViewController())
@@ -211,15 +222,15 @@ class AccountPageViewController: UIViewController, UITableViewDelegate, UITableV
     
     @objc func changePicture() {
         
-        if nextVC == nil{
+        if pictureVC == nil{
           
-            nextVC = SettingProfilePictureViewController()
+            pictureVC = SettingProfilePictureViewController()
         }
     
-        nextVC.delegate = self
-        nextVC.photo = profilePhoto.currentImage
+        pictureVC.delegate = self
+        pictureVC.photo = profilePhoto.currentImage
         if let navigator = navigationController {
-            navigator.pushViewController(nextVC, animated: true)
+            navigator.pushViewController(pictureVC, animated: true)
         }
         
     }
