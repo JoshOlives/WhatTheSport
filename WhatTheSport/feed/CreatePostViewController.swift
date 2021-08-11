@@ -11,16 +11,39 @@ import FirebaseFirestore
 class CreatePostViewController: UIViewController {
     private var postTextView: UITextView!
     private var postBarButton: UIBarButtonItem!
+    private var sportSelector: UIPickerView!
+    private var teamSelector: UIPickerView!
     var delegate: UIViewController!
     
-    override func loadView() {
-        super.loadView()
+    
+    override func viewSafeAreaInsetsDidChange() {
+        var constraints: [NSLayoutConstraint] = []
         
-        let safeArea = self.view.bounds.inset(by: view.safeAreaInsets)
-        self.postTextView = UITextView(frame:
-                                        CGRect(x: 0, y: 0, width: safeArea.width, height: safeArea.height / 2))
+        self.postTextView = UITextView(frame: .zero)
+//                                        CGRect(x: 0, y: 0, width: safeArea.width, height: safeArea.height / 2))
+        self.postTextView.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.sportSelector = UIPickerView(frame: .zero)
+        self.sportSelector.translatesAutoresizingMaskIntoConstraints = false
         
         self.view.addSubview(postTextView)
+        self.view.addSubview(sportSelector)
+        let safe = self.view.safeAreaLayoutGuide
+        
+        constraints.append(self.postTextView.topAnchor.constraint(equalTo: safe.topAnchor))
+        constraints.append(self.postTextView.widthAnchor.constraint(equalTo: safe.widthAnchor))
+        constraints.append(self.postTextView.heightAnchor.constraint(equalToConstant: self.view.bounds.height / 2 - 50))
+        
+        constraints.append(self.sportSelector.topAnchor.constraint(equalTo: self.postTextView.bottomAnchor))
+        constraints.append(self.sportSelector.widthAnchor.constraint(equalToConstant: self.view.bounds.width / 4))
+        constraints.append(self.sportSelector.heightAnchor.constraint(equalToConstant: 50))
+        
+        self.view.backgroundColor = UIColor.systemGray6
+        self.postTextView.backgroundColor = UIColor.systemGray6
+        self.postTextView.font = .systemFont(ofSize: 18)
+        self.postTextView.becomeFirstResponder()
+        
+        NSLayoutConstraint.activate(constraints)
     }
     
     override func viewDidLoad() {
@@ -30,10 +53,7 @@ class CreatePostViewController: UIViewController {
         self.postBarButton.tintColor = UIColor.white
         self.navigationItem.setRightBarButtonItems([self.postBarButton], animated: true)
 
-        self.view.backgroundColor = UIColor.systemGray6
-        self.postTextView.backgroundColor = UIColor.systemGray6
-        self.postTextView.font = .systemFont(ofSize: 18)
-        self.postTextView.becomeFirstResponder()
+        
     }
     
     @objc
