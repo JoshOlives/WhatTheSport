@@ -223,7 +223,7 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
           if error == nil {
 
             if self.nextVC == nil {
-                self.nextVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "registerSportID") as! RegisterSportController
+                self.nextVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "registerSportID") as? RegisterSportController
             }
             let userID = user!.user.uid
             

@@ -13,6 +13,7 @@ class RegisterTeamController: UIViewController, UITableViewDataSource, UITableVi
     var delegate: UIViewController!
     var selectedSports: [String] = []
     var orderedSports: [String] = []
+    var home: TabBarViewController!
     @IBOutlet weak var tableView: UITableView!
     
     private let mlbTeams: [String] = ["Arizona Diamondbacks","Atlanta Braves","Baltimore Orioles",
@@ -148,6 +149,15 @@ class RegisterTeamController: UIViewController, UITableViewDataSource, UITableVi
         //update firestore
         IO.updateFireUserArray(field: "sports", collection: orderedSports, completion: nil)
         IO.updateFireUserArray(field: "teams", collection: selectedTeams, completion: nil)
+        
+        if home == nil {
+            home = TabBarViewController()
+        }
+        
+        let tabBar = UINavigationController(rootViewController: self.home)
+        tabBar.modalPresentationStyle = .fullScreen
+        self.present(tabBar, animated: true, completion: nil)
+        
         let tabBarVC = TabBarViewController()
         navigationController?.pushViewController(tabBarVC, animated: true)
     }

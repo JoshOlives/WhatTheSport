@@ -23,6 +23,14 @@ class RegisterSportController: UIViewController {
         nextButton.setTitleColor(.white, for: .normal)
         nextButton.layer.cornerRadius = 20.0
         
+        if let navigator = navigationController {
+            navigator.navigationBar.tintColor = .white
+            navigator.navigationBar.barTintColor = UIColor(rgb: Constants.Colors.orange)
+            navigator.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
+            navigator.navigationBar.barStyle = .black
+            //navigator.navigationBar.backgroundColor = UIColor(rgb: Constants.Colors.orange)
+        }
+        
         for view in sportViewArray {
             view.addTarget(self, action: #selector(selectSport(_:)), for: .touchDown)
         }
