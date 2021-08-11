@@ -12,7 +12,6 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     
     var vc1: UINavigationController!
     var vc2: UINavigationController!
-    var vc3: UINavigationController!
     
     var plusButton: UIBarButtonItem!
     var filterButton: UIBarButtonItem!
@@ -25,7 +24,6 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     
     var gameController: GameScheduleViewController!
     var feedController: FeedViewController!
-    var eventsController: ThirdViewController!
     
     var userPhoto: UIImageView!
     
@@ -147,14 +145,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         vc2.isNavigationBarHidden = true
         vc2.title = "Feed"
         
-        eventsController = ThirdViewController()
-        eventsController.delegate = self
-        eventsController.menuView.delegate = self
-        vc3 = UINavigationController(rootViewController: eventsController)
-        vc3.isNavigationBarHidden = true
-        vc3.title = "Events"
-        
-        self.setViewControllers([vc1, vc2, vc3], animated: false)
+        self.setViewControllers([vc1, vc2], animated: false)
         
         guard let items = self.tabBar.items else {
             return
@@ -193,7 +184,6 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         if (gameController.menuView.userPhoto.image != self.userPhoto.image) {
             gameController.menuView.userPhoto.image = self.userPhoto.image
             feedController.menuView.userPhoto.image = self.userPhoto.image
-            eventsController.menuView.userPhoto.image = self.userPhoto.image
         }
     }
 
@@ -225,9 +215,6 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         case vc2:
             title = "Feed"
             self.navigationItem.rightBarButtonItems = [plusButton, filterButton]
-        case vc3:
-            title = "Events"
-            self.navigationItem.rightBarButtonItems = [plusButton, filterButton]
         default:
             title = "Should not happen"
         }
@@ -246,11 +233,10 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     
     @objc
     func queueCreatePost(_ _: UIBarButtonItem) {
-        
         if self.createPostVC == nil {
             self.createPostVC = CreatePostViewController()
         }
-        
+        self.createPostVC.delegate = self.feedController
         if let navigator = navigationController {
             navigator.pushViewController(self.createPostVC, animated: true)
         }

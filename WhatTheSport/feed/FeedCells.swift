@@ -4,7 +4,6 @@
 //
 //  Created by Adam Martin on 7/27/21.
 //
-
 import Foundation
 import UIKit
 import FirebaseFirestore
@@ -21,6 +20,8 @@ class PostCell: UITableViewCell {
     private var teamLogo: UIImageView!
     private var profilePic: UIImageView!
     private var post: Post? = nil
+    private var commentVC: CommentViewController? = nil
+    private var navController: UINavigationController!
     
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -117,7 +118,6 @@ class PostCell: UITableViewCell {
         
         // Add constraints and edit subview attributes for like button
         self.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-        self.likeButton.tintColor = UIColor.gray
         self.likeButton.addTarget(self, action: #selector(likeButtonPressed), for: .touchUpInside)
         cellConstraints.append(self.likeButton.widthAnchor.constraint(equalToConstant: 20))
         cellConstraints.append(self.likeButton.heightAnchor.constraint(equalToConstant: 20))
@@ -127,13 +127,15 @@ class PostCell: UITableViewCell {
         NSLayoutConstraint.activate(cellConstraints)    // Activate constraints
     }
     
-    func setValues(postArg: Post) {
+    func setValues(postArg: Post, nav: UINavigationController) {
         self.post = postArg
+        self.navController = nav
         self.usernameLabel.text = postArg.username
         self.contentLabel.text = postArg.content
         self.viewCommentsButton.setTitle("\(postArg.numComments) comments", for: .normal)
         self.likeCount.text = String(postArg.numLikes)
-        self.teamLogo.image = UIImage(named: postArg.team!.imageID)
+        self.teamLogo.image = postArg.teamIndex != nil ? UIImage(named: teamsList[postArg.teamIndex!].imageID) : UIImage(systemName: "house")
+        self.likeButton.tintColor = postArg.userLikedPost ? UIColor.red : UIColor.gray
     }
     
     func changeTextColor(color: UIColor) {
@@ -148,21 +150,52 @@ class PostCell: UITableViewCell {
     
     @objc
     func commentsButtonPressed() {
-        print("COMMENTS")
+        if self.commentVC == nil {
+            self.commentVC = CommentViewController()
+        }
+        
+        self.commentVC!.post = self.post
+        self.navController.pushViewController(self.commentVC!, animated: true)
     }
     
     @objc
     func likeButtonPressed() {
+        var newArray = post!.likeUserIDs
+        newArray.append(TestUser.userID)
         let feedDB = Firestore.firestore().collection("posts")
-        feedDB.document(self.post!.postID).updateData([
-            "numLikes": self.post!.numLikes + 1
-        ]) { err in
-            if let err = err {
-                print("Error updating document: \(err)")
-            } else {
-                self.post!.numLikes += 1
-                self.likeCount.text = String(self.post!.numLikes)
-                self.likeButton.tintColor = UIColor.red
+        if self.post != nil && !self.post!.userLikedPost {
+            feedDB.document(self.post!.postID).updateData([
+                "numLikes": self.post!.numLikes + 1,
+                "likeUserIDs": newArray
+            ]) { err in
+                if let err = err {
+                    print("Error updating document: \(err)")
+                } else {
+                    self.post!.numLikes += 1
+                    self.post!.likeUserIDs = newArray
+                    self.post!.userLikedPost = true
+                    self.likeCount.text = String(self.post!.numLikes)
+                    self.likeButton.tintColor = UIColor.red
+                }
+            }
+        } else {
+            var newArray = self.post!.likeUserIDs
+            if let valIndex = self.post!.likeUserIDs.firstIndex(of: TestUser.userID) {
+                _ = newArray.remove(at: valIndex)
+            }
+            feedDB.document(self.post!.postID).updateData([
+                "numLikes": self.post!.numLikes - 1,
+                "likeUserIDs": newArray
+            ]) { err in
+                if let err = err {
+                    print("Error updating document: \(err)")
+                } else {
+                    self.post!.numLikes -= 1
+                    self.post!.likeUserIDs = newArray
+                    self.post!.userLikedPost = false
+                    self.likeCount.text = String(self.post!.numLikes)
+                    self.likeButton.tintColor = UIColor.gray
+                }
             }
         }
     }

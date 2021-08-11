@@ -8,21 +8,21 @@
 import UIKit
 import FirebaseFirestore
 
-
-let ops: [Int] = []
 let cellIdentifier = "FeedCell"
-let testContent = "This is some text content that I am writing so that I can see how it looks in a post on our application. I am still typing so that it will be long. I hope that it turns out ok"
 
-class FeedViewController: ViewControllerWithMenu, UITableViewDataSource, UITableViewDelegate {
+protocol PostAddition {
+    func addCreatedPost(newPost: Post)
+}
+
+class FeedViewController: ViewControllerWithMenu, UITableViewDataSource, UITableViewDelegate, PostAddition {
     private let feedDB = Firestore.firestore().collection("posts")
     
     var createPostVC: CreatePostViewController!
     var feedTableView: UITableView!
     var posts: [Post] = []
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Feed"
         getPosts()
         self.feedTableView = UITableView(frame: .zero)
     }
@@ -36,10 +36,12 @@ class FeedViewController: ViewControllerWithMenu, UITableViewDataSource, UITable
         self.feedTableView.dataSource = self
         self.feedTableView.delegate = self
         
-        containerView.addSubview(self.feedTableView)
+        self.view.addSubview(self.feedTableView)
         constraints.append(self.feedTableView.heightAnchor.constraint(equalTo: safeArea.heightAnchor))
         constraints.append(self.feedTableView.widthAnchor.constraint(equalTo: safeArea.widthAnchor))
         constraints.append(self.feedTableView.topAnchor.constraint(equalTo: safeArea.topAnchor))
+        
+        self.feedTableView.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
         
         NSLayoutConstraint.activate(constraints)
         
@@ -53,7 +55,9 @@ class FeedViewController: ViewControllerWithMenu, UITableViewDataSource, UITable
         let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
         
         feedTableView.backgroundColor = background
-        feedTableView.reloadData()
+        if self.feedTableView != nil {
+            self.feedTableView.reloadData()
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -64,11 +68,11 @@ class FeedViewController: ViewControllerWithMenu, UITableViewDataSource, UITable
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath as IndexPath) as! PostCell
         let row = indexPath.row
         let currPost = posts[row]
-        cell.setValues(postArg: currPost)
+        cell.setValues(postArg: currPost, nav: delegate.navigationController!)
         
+        cell.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
         let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
         let textColor: UIColor =  currentUser!.settings!.dark ? .white : .black
-        
         
         cell.backgroundColor = background
         cell.changeTextColor(color: textColor)
@@ -87,17 +91,21 @@ class FeedViewController: ViewControllerWithMenu, UITableViewDataSource, UITable
                 print(err)
             } else {
                 for post in querySnapshot!.documents {
-                    let teamIndex = post.get("teamIndex") as! Int
-                    let team: Team? = teamIndex >= 0 ? teamsList[teamIndex] : nil
-                    self.posts.append(Post(postIDVal: post.documentID, sportVal: sportsList[post.get("sportIndex") as! Int], teamVal: team, contentVal: post.get("content") as! String, userIDVal: post.get("userID") as! String, usernameVal: post.get("username") as! String, numLikesVal: post.get("numLikes") as! Int, numCommentsVal: post.get("numComments") as! Int))
+                    self.posts.append(Post(postIDArg: post.documentID, sportIndexArg: post.get("sportIndex") as! Int, teamIndexArg: post.get("teamIndex") as? Int, contentArg: post.get("content") as! String, userIDArg: post.get("userID") as! String, usernameArg: post.get("username") as! String, numLikesArg: post.get("numLikes") as! Int, numCommentsArg: post.get("numComments") as! Int, userLikedPostArg: (post.get("likeUserIDs") as! [String]).contains(TestUser.userID), likeUserIDsArg: post.get("likeUserIDs") as! [String]))
                 }
                 self.feedTableView.reloadData()
             }
         }
     }
     
+    // Protocol function for create post view controller
+    func addCreatedPost(newPost: Post) {
+        self.posts.append(newPost)
+    }
+    
     // From https://stackoverflow.com/questions/31651983/how-to-remove-border-from-segmented-control
     // create a 1x1 image with this color
+    // Used to set background of segmented controller tabs
         private func imageWithColor(color: UIColor) -> UIImage {
             let rect = CGRect(x: 0.0, y: 0.0, width:  1.0, height: 1.0)
             UIGraphicsBeginImageContext(rect.size)

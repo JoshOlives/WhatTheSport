@@ -9,26 +9,42 @@ import Foundation
 
 class Post {
     var postID: String
-    var sport: Sport?
-    var team: Team?
+    var sportIndex: Int
+    var teamIndex: Int?
     var content: String
     var userID: String
     var username: String
     var numLikes: Int
     var numComments: Int
+    var userLikedPost: Bool
+    var likeUserIDs: [String]
     
-    init(postIDVal: String, sportVal: Sport, teamVal: Team?, contentVal: String, userIDVal: String, usernameVal: String, numLikesVal: Int, numCommentsVal: Int) {
-        self.postID = postIDVal
-        self.sport = sportVal
-        self.team = teamVal
-        self.content = contentVal
-        self.userID = userIDVal
-        self.username = usernameVal
-        self.numLikes = numLikesVal
-        self.numComments = numCommentsVal
+    init(postIDArg: String, sportIndexArg: Int, teamIndexArg: Int?, contentArg: String, userIDArg: String, usernameArg: String, numLikesArg: Int, numCommentsArg: Int, userLikedPostArg: Bool, likeUserIDsArg: [String]) {
+        self.postID = postIDArg
+        self.sportIndex = sportIndexArg
+        self.teamIndex = teamIndexArg
+        self.content = contentArg
+        self.userID = userIDArg
+        self.username = usernameArg
+        self.numLikes = numLikesArg
+        self.numComments = numCommentsArg
+        self.userLikedPost = userLikedPostArg
+        self.likeUserIDs = likeUserIDsArg
     }
 }
 
-//class Event: Post {
-//
-//}
+class Comment {
+    var commentID: String
+    var postID: String
+    var username: String
+    var userID: String
+    var content: String
+    
+    init(commentIDArg: String, postIDArg: String, usernameArg: String, userIDArg: String, contentArg: String) {
+        self.commentID = commentIDArg
+        self.postID = postIDArg
+        self.username = usernameArg
+        self.userID = userIDArg
+        self.content = contentArg
+    }
+}
