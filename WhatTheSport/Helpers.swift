@@ -316,7 +316,7 @@ struct IO {
         }
     }
     
-        static func updateFireUserArray(field: String, collection: [String], completion: CompletionMethod?) {
+    static func updateFireUserArray(field: String, collection: [String], completion: CompletionMethod?) {
         let db = Firestore.firestore()
         let ref = db.collection("users")
         guard let userID = currentUser?.userID else {
@@ -340,6 +340,37 @@ struct IO {
             }
             if completion != nil {
                 completion?()
+            }
+        }
+    }
+    
+    static func updateFireUserArray(userID: String, field: String, items: [String], remove: Bool) {
+        let db = Firestore.firestore()
+        let docRef = db.collection("users").document(userID)
+        
+        if !remove {
+            docRef.updateData([
+                field: FieldValue.arrayUnion(items)
+                ]){ error in
+                if let e = error {
+                    print("error updating fire user \(e.localizedDescription)")
+                }
+            }
+        } else {
+            docRef.updateData([
+                field: FieldValue.arrayRemove(items)
+                ]){ error in
+                if let e = error {
+                    print("error updating fire user \(e.localizedDescription)")
+                }
+            }
+        }
+        
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                fireUser = document
+            } else {
+                print("error updating fire user")
             }
         }
     }
