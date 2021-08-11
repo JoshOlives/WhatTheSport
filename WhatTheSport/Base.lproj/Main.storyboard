@@ -235,9 +235,6 @@
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="m7A-1i-c5Z">
                                 <rect key="frame" x="20" y="168" width="374" height="500"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="500" id="1Bu-SO-DeQ"/>
-                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="teamCellIdentifier" id="GtJ-1B-nDn" userLabel="Team Cell" customClass="TeamCell" customModule="WhatTheSport" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="24.333333969116211" width="374" height="43.666667938232422"/>
@@ -254,6 +251,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="P7T-HU-oxr" firstAttribute="top" secondItem="Tpx-N9-rO9" secondAttribute="top" constant="35" id="5j8-Fc-Wdn"/>
+                            <constraint firstItem="7YX-pQ-7lS" firstAttribute="top" secondItem="m7A-1i-c5Z" secondAttribute="bottom" constant="79" id="AXu-dg-CMu"/>
                             <constraint firstItem="Tpx-N9-rO9" firstAttribute="trailing" secondItem="m7A-1i-c5Z" secondAttribute="trailing" constant="20" id="E4c-BE-Oe2"/>
                             <constraint firstItem="7YX-pQ-7lS" firstAttribute="leading" secondItem="Tpx-N9-rO9" secondAttribute="leading" constant="20" id="KfQ-ZR-3TY"/>
                             <constraint firstItem="Tpx-N9-rO9" firstAttribute="trailing" secondItem="7YX-pQ-7lS" secondAttribute="trailing" constant="20" id="RGq-d7-7bT"/>
