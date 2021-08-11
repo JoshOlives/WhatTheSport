@@ -48,6 +48,8 @@
 		D3420C5126BFA3B7002FB9F9 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3420C5026BFA3B7002FB9F9 /* CommentViewController.swift */; };
 		D3420C5526BFA92B002FB9F9 /* CommentCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3420C5426BFA92B002FB9F9 /* CommentCells.swift */; };
 		D37857D326C038A800A31BC2 /* CreateCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37857D226C038A800A31BC2 /* CreateCommentViewController.swift */; };
+		D3E32A7C26C3679D002535F7 /* RegisterSportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E32A7B26C3679D002535F7 /* RegisterSportController.swift */; };
+		D3E32A7E26C367AC002535F7 /* RegisterTeamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E32A7D26C367AC002535F7 /* RegisterTeamController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +96,8 @@
 		D3420C5026BFA3B7002FB9F9 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		D3420C5426BFA92B002FB9F9 /* CommentCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCells.swift; sourceTree = "<group>"; };
 		D37857D226C038A800A31BC2 /* CreateCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCommentViewController.swift; sourceTree = "<group>"; };
+		D3E32A7B26C3679D002535F7 /* RegisterSportController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterSportController.swift; sourceTree = "<group>"; };
+		D3E32A7D26C367AC002535F7 /* RegisterTeamController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterTeamController.swift; sourceTree = "<group>"; };
 		F8E07A5013DEBC95359E872D /* Pods-WhatTheSport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatTheSport.release.xcconfig"; path = "Target Support Files/Pods-WhatTheSport/Pods-WhatTheSport.release.xcconfig"; sourceTree = "<group>"; };
 		FE5519523DB56ACCFCB5B20D /* Pods-WhatTheSport.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatTheSport.debug.xcconfig"; path = "Target Support Files/Pods-WhatTheSport/Pods-WhatTheSport.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -128,7 +132,9 @@
 			isa = PBXGroup;
 			children = (
 				8F955FED269A8443003DD8F1 /* SignUpViewController.swift */,
+				D3E32A7B26C3679D002535F7 /* RegisterSportController.swift */,
 				8F955FEF269A848C003DD8F1 /* SignInViewController.swift */,
+				D3E32A7D26C367AC002535F7 /* RegisterTeamController.swift */,
 				8F955FF3269AB4FB003DD8F1 /* ForgotPasswordViewController.swift */,
 				8F955FF5269AB5B5003DD8F1 /* ResetPasswordViewController.swift */,
 				8F6BED4126B9D50800F05A3D /* Transitioner.swift */,
@@ -360,6 +366,7 @@
 				8F99356A26BCA4F4006FA04C /* TabBarViewController.swift in Sources */,
 				06D2B0CD26C09B69008D2DE6 /* TeamCell.swift in Sources */,
 				8F6BED3B26B9D3E800F05A3D /* SettingViewController.swift in Sources */,
+				D3E32A7C26C3679D002535F7 /* RegisterSportController.swift in Sources */,
 				D37857D326C038A800A31BC2 /* CreateCommentViewController.swift in Sources */,
 				8F6BED3D26B9D40300F05A3D /* SettingTableViewCell.swift in Sources */,
 				8F955FF2269A88DE003DD8F1 /* Helpers.swift in Sources */,
@@ -376,6 +383,7 @@
 				06D2B0D126C09B72008D2DE6 /* FranchiseCell.swift in Sources */,
 				8F6BED3426B9D34500F05A3D /* AccountPageViewController.swift in Sources */,
 				8F99357226BCA5F6006FA04C /* GameTableViewCell.swift in Sources */,
+				D3E32A7E26C367AC002535F7 /* RegisterTeamController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
