@@ -154,22 +154,15 @@ class AccountPageViewController: UIViewController, UITableViewDelegate, UITableV
             print("this is row \(row)")
         //following
         case 4:
-            print("this is row \(row), your first name is \(self.userInformation[1])")
-            print("this is row \(row)")
+            let registerView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "registerSportID") as! RegisterSportController
+            UI.transition(dest: registerView, src: self)
         //sign out
         case 5:
             let home = UINavigationController(rootViewController: SignUpViewController())
             home.modalPresentationStyle = .fullScreen
             self.present(home, animated: true, completion: nil)
             print("this is row \(row)")
-        case 7:
-            let nextVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "registerSportID") as! RegisterSportController
-            let register = UINavigationController(rootViewController: nextVC)
-            register.modalPresentationStyle = .fullScreen
-            self.present(register, animated: true, completion: nil)
-            print("this is row \(row)")
         default:
-          
             print("This should not happened!")
         }
         self.tableView.reloadData()
