@@ -44,6 +44,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
               navigator.pushViewController(accountPageVC, animated: true)
         }
     }
+    
     func settingsPageTapped() {
         if settingsVC == nil {
             settingsVC = SettingViewController()

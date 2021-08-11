@@ -13,6 +13,7 @@ class RegisterTeamController: UIViewController, UITableViewDataSource, UITableVi
     var delegate: UIViewController!
     var selectedSports: [String] = []
     var orderedSports: [String] = []
+    var home: TabBarViewController!
     @IBOutlet weak var tableView: UITableView!
     
     private let mlbTeams: [String] = ["Arizona Diamondbacks","Atlanta Braves","Baltimore Orioles",
@@ -71,21 +72,25 @@ class RegisterTeamController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell  {
         if indexPath.row == 0 {
+            let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "franchiseCellIdentifier") as! FranchiseCell
             let name = orderedSports[indexPath.section]
             cell.franchiseName = name
             cell.franchiseLogo.image = UIImage(named: name)
-            cell.franchiseLogo.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
-            cell.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
+            cell.franchiseLogo.backgroundColor = background
+            cell.backgroundColor = background
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             return cell
         } else {
+            let background: UIColor = currentUser!.settings!.dark ? .black : .white
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "teamCellIdentifier", for: indexPath) as! TeamCell
             let teamName = teamsToShow[indexPath.section][indexPath.row - 1]
             let teamLogo = UIImage(named: teamName)
             cell.teamLogo.image = teamLogo
             cell.teamName.text = teamName
-            cell.backgroundColor = UIColor.white
+            cell.backgroundColor = background
             
             return cell
         }
@@ -110,6 +115,7 @@ class RegisterTeamController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewWillAppear(_ animated:Bool) {
         super.viewWillAppear(animated)
+        inTransition = false
         if selectedSports.contains("MLB") {
             orderedSports.append("MLB")
             teamsToShow.append(mlbTeams)
@@ -126,6 +132,11 @@ class RegisterTeamController: UIViewController, UITableViewDataSource, UITableVi
             orderedSports.append("NFL")
             teamsToShow.append(nflTeams)
         }
+        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
+        let navImage: UIImage? = currentUser!.settings!.dark ? UIImage() : nil
+        self.navigationController?.navigationBar.setBackgroundImage(navImage, for: .default)
+        view.backgroundColor = background
+        inTransition = false
     }
     
     override func viewDidLoad() {
@@ -134,7 +145,7 @@ class RegisterTeamController: UIViewController, UITableViewDataSource, UITableVi
         //navigator.navigationBar.backgroundColor = UIColor(rgb: Constants.Colors.orange)
     
         self.title = "Register"
-        view.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
+        view.backgroundColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
         nextButton.backgroundColor = UIColor(rgb: Constants.Colors.orange)
         nextButton.setTitleColor(.white, for: .normal)
         nextButton.layer.cornerRadius = 20.0
@@ -146,8 +157,17 @@ class RegisterTeamController: UIViewController, UITableViewDataSource, UITableVi
 
     @IBAction func nextButtonPressed(_ sender: Any) {
         //update firestore
-        IO.updateFireUserArray(field: "sports", collection: orderedSports, completion: nil)
-        IO.updateFireUserArray(field: "teams", collection: selectedTeams, completion: nil)
+        IO.updateFireUserArray(userID: (currentUser?.userID)!, field: "sports", items: orderedSports, remove: false)
+        IO.updateFireUserArray(userID: (currentUser?.userID)!, field: "teams", items: selectedTeams, remove: false)
+        
+        if home == nil {
+            home = TabBarViewController()
+        }
+        
+        let tabBar = UINavigationController(rootViewController: self.home)
+        tabBar.modalPresentationStyle = .fullScreen
+        self.present(tabBar, animated: true, completion: nil)
+        
         let tabBarVC = TabBarViewController()
         navigationController?.pushViewController(tabBarVC, animated: true)
     }

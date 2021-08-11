@@ -23,8 +23,33 @@ class RegisterSportController: UIViewController {
         nextButton.setTitleColor(.white, for: .normal)
         nextButton.layer.cornerRadius = 20.0
         
+        if let navigator = navigationController {
+            navigator.navigationBar.tintColor = .white
+            navigator.navigationBar.barTintColor = UIColor(rgb: Constants.Colors.orange)
+            navigator.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
+            navigator.navigationBar.barStyle = .black
+            //navigator.navigationBar.backgroundColor = UIColor(rgb: Constants.Colors.orange)
+        }
+        
         for view in sportViewArray {
             view.addTarget(self, action: #selector(selectSport(_:)), for: .touchDown)
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
+        let navImage: UIImage? = currentUser!.settings!.dark ? UIImage() : nil
+        self.navigationController?.navigationBar.setBackgroundImage(navImage, for: .default)
+        view.backgroundColor = background
+        inTransition = false
+        for view in sportViewArray {
+            let background: UIColor = currentUser!.settings!.dark ? .darkGray : .white
+            view.backgroundColor = background
+        }
+        for label in labelCollection {
+            let textColor: UIColor = currentUser!.settings!.dark ? .white : .black
+            label.textColor = textColor
         }
     }
     
@@ -47,7 +72,8 @@ class RegisterSportController: UIViewController {
             sender.backgroundColor = UIColor(rgb: Constants.Colors.orange)
             selectedSports.append(sport)
         } else {
-            sender.backgroundColor = .white
+            let background: UIColor = currentUser!.settings!.dark ? .darkGray : .white
+            sender.backgroundColor = background
             let removedSport = selectedSports.remove(at: selectedSports.firstIndex(of: sport)!)
             print(removedSport)
         }

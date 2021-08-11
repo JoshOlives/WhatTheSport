@@ -14,12 +14,13 @@ import FirebaseStorage
 class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate {
 
     var emailField: UITextField!
+    var fromSignUp: Bool!
     var usernameField: UITextField!
     var passwordField: UITextField!
     var confirmField: UITextField!
     var signUpButton: UIButton!
     var signInVC: SignInViewController!
-    var nextVC: RegisterSportController!
+    var nextVC: UIViewController!
     var constraint: NSLayoutConstraint!
     var logo: UIImageView!
     var signInLabel: UIButton!
@@ -33,7 +34,7 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
         //ONLY UNCOMMENT TO DELETE ALL OF CORE DATA FROM THIS APP
         //clearCoreData()
         super.viewDidLoad()
-        
+        fromSignUp = false
         var constraints: [NSLayoutConstraint] = []
         
         if let navigator = navigationController {
@@ -199,6 +200,7 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
                     self.user = self.createUser(userID: userID)
                     IO.saveContext()
 
+                    self.fromSignUp = true
                     self.signIn (email: email, password: password)
                 } else {
                     let controller = UI.createAlert(title: "Error", msg: error!.localizedDescription)
@@ -221,10 +223,7 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
         Auth.auth().signIn(withEmail: email, password: password) {
           user, error in
           if error == nil {
-
-            if self.nextVC == nil {
-                self.nextVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "registerSportID") as! RegisterSportController
-            }
+            
             let userID = user!.user.uid
             
             //TODO: only assign if not nil  ?
@@ -232,8 +231,10 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
             IO.retrieveFireUser(userID: userID){
                 self.printUserInfo(userID: userID)
                 
-                if self.nextVC == nil {
+                if self.fromSignUp {
                     self.nextVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "registerSportID")
+                } else {
+                    self.nextVC = TabBarViewController()
                 }
                 
                 let register = UINavigationController(rootViewController: self.nextVC)

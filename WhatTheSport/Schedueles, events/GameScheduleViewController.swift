@@ -153,7 +153,7 @@ class GameScheduleViewController: ViewControllerWithMenu, UITableViewDelegate, U
     func updateCalendar (index: Int, remove: Bool) {
         let ID = (currentUser?.userID)!
         let game = gameList[index].savedNotificationId
-        updateFireLeague(sport: "MLB", field: "usersCalendar", item: ID, game: game, remove: remove)
+        updateFireLeague(sport: "MLB", field: "usersCalendar", items: [ID], game: game, remove: remove)
         if remove {
             if let removeIndex = gameList[index].usersCalendar.firstIndex(of: ID){
                 gameList[index].usersCalendar.remove(at: removeIndex)
@@ -166,7 +166,7 @@ class GameScheduleViewController: ViewControllerWithMenu, UITableViewDelegate, U
     func updateNotification (index: Int, remove: Bool) {
         let ID = (currentUser?.userID)!
         let game = gameList[index].savedNotificationId
-        updateFireLeague(sport: "MLB", field: "usersNotification", item: ID, game: game, remove: remove)
+        updateFireLeague(sport: "MLB", field: "usersNotification", items: [ID], game: game, remove: remove)
         if remove {
             if let removeIndex = gameList[index].usersNotification.firstIndex(of: ID){
                 gameList[index].usersNotification.remove(at: removeIndex)
@@ -176,14 +176,14 @@ class GameScheduleViewController: ViewControllerWithMenu, UITableViewDelegate, U
         }
     }
     
-    func updateFireLeague(sport: String, field: String, item: String, game: String, remove: Bool) {
+    func updateFireLeague(sport: String, field: String, items: [String], game: String, remove: Bool) {
         let db = Firestore.firestore()
         let ref = db.collection("schedules").document(sport)
         let docRef = ref.collection("games").document(game)
         
         if !remove {
             docRef.updateData([
-                field: FieldValue.arrayUnion([item])
+                field: FieldValue.arrayUnion(items)
                 ]){ error in
                 if let e = error {
                     print("error updating fire user \(e.localizedDescription)")
@@ -191,7 +191,7 @@ class GameScheduleViewController: ViewControllerWithMenu, UITableViewDelegate, U
             }
         } else {
             docRef.updateData([
-                field: FieldValue.arrayRemove([item])
+                field: FieldValue.arrayRemove(items)
                 ]){ error in
                 if let e = error {
                     print("error updating fire user \(e.localizedDescription)")
