@@ -34,7 +34,6 @@ class PostCell: UITableViewCell {
         self.profilePic.translatesAutoresizingMaskIntoConstraints = false
         
         self.teamLogo = UIImageView(frame: .zero)
-        self.teamLogo.image = UIImage(named: "sunsLogo")
         self.teamLogo.translatesAutoresizingMaskIntoConstraints = false
         
         self.contentLabel = UILabel(frame: .zero)
@@ -132,7 +131,7 @@ class PostCell: UITableViewCell {
         self.contentLabel.text = postArg.content
         self.viewCommentsButton.setTitle("\(postArg.numComments) comments", for: .normal)
         self.likeCount.text = String(postArg.numLikes)
-        self.teamLogo.image = postArg.teamIndex != nil ? UIImage(named: teamsList[postArg.teamIndex!].imageID) : UIImage(systemName: "house")
+        self.teamLogo.image = UIImage(named: self.post!.team!)
         self.likeButton.tintColor = postArg.userLikedPost ? UIColor.red : UIColor.gray
         if self.profilePic.image == nil {
             let userDB = Firestore.firestore().collection("users")
@@ -170,7 +169,7 @@ class PostCell: UITableViewCell {
     @objc
     func likeButtonPressed() {
         var newArray = post!.likeUserIDs
-        newArray.append(TestUser.userID)
+        newArray.append(fireUser!.documentID)
         let feedDB = Firestore.firestore().collection("posts")
         if self.post != nil && !self.post!.userLikedPost {
             feedDB.document(self.post!.postID).updateData([
@@ -189,7 +188,7 @@ class PostCell: UITableViewCell {
             }
         } else {
             var newArray = self.post!.likeUserIDs
-            if let valIndex = self.post!.likeUserIDs.firstIndex(of: TestUser.userID) {
+            if let valIndex = self.post!.likeUserIDs.firstIndex(of: fireUser!.documentID) {
                 _ = newArray.remove(at: valIndex)
             }
             feedDB.document(self.post!.postID).updateData([

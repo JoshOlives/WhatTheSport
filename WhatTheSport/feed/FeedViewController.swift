@@ -86,12 +86,12 @@ class FeedViewController: ViewControllerWithMenu, UITableViewDataSource, UITable
     }
     
     func getPosts() {
-        feedDB.getDocuments() { (querySnapshot, err) in
+        feedDB.whereField("team", in: fireUser!.get("teams") as! [String]).getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print(err)
             } else {
                 for post in querySnapshot!.documents {
-                    self.posts.append(Post(postIDArg: post.documentID, sportIndexArg: post.get("sportIndex") as! Int, teamIndexArg: post.get("teamIndex") as? Int, contentArg: post.get("content") as! String, userIDArg: post.get("userID") as! String, usernameArg: post.get("username") as! String, numLikesArg: post.get("numLikes") as! Int, numCommentsArg: post.get("numComments") as! Int, userLikedPostArg: (post.get("likeUserIDs") as! [String]).contains(TestUser.userID), likeUserIDsArg: post.get("likeUserIDs") as! [String]))
+                    self.posts.append(Post(postIDArg: post.documentID, sportArg: post.get("sport") as! String, teamArg: post.get("team") as? String, contentArg: post.get("content") as! String, userIDArg: post.get("userID") as! String, usernameArg: post.get("username") as! String, numLikesArg: post.get("numLikes") as! Int, numCommentsArg: post.get("numComments") as! Int, userLikedPostArg: (post.get("likeUserIDs") as! [String]).contains(fireUser!.documentID), likeUserIDsArg: post.get("likeUserIDs") as! [String]))
                 }
                 self.feedTableView.reloadData()
             }

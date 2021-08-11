@@ -9,8 +9,8 @@ import Foundation
 
 class Post {
     var postID: String
-    var sportIndex: Int
-    var teamIndex: Int?
+    var sport: String
+    var team: String?
     var content: String
     var userID: String
     var username: String
@@ -19,10 +19,10 @@ class Post {
     var userLikedPost: Bool
     var likeUserIDs: [String]
     
-    init(postIDArg: String, sportIndexArg: Int, teamIndexArg: Int?, contentArg: String, userIDArg: String, usernameArg: String, numLikesArg: Int, numCommentsArg: Int, userLikedPostArg: Bool, likeUserIDsArg: [String]) {
+    init(postIDArg: String, sportArg: String, teamArg: String?, contentArg: String, userIDArg: String, usernameArg: String, numLikesArg: Int, numCommentsArg: Int, userLikedPostArg: Bool, likeUserIDsArg: [String]) {
         self.postID = postIDArg
-        self.sportIndex = sportIndexArg
-        self.teamIndex = teamIndexArg
+        self.sport = sportArg
+        self.team = teamArg
         self.content = contentArg
         self.userID = userIDArg
         self.username = usernameArg
