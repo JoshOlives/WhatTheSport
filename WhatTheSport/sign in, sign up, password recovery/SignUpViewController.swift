@@ -221,6 +221,10 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
         Auth.auth().signIn(withEmail: email, password: password) {
           user, error in
           if error == nil {
+
+            if self.nextVC == nil {
+                self.nextVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "registerSportID") as! RegisterSportController
+            }
             let userID = user!.user.uid
             
             //TODO: only assign if not nil  ?
@@ -229,12 +233,12 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
                 self.printUserInfo(userID: userID)
                 
                 if self.nextVC == nil {
-                    self.nextVC = TabBarViewController()
+                    self.nextVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "registerSportID")
                 }
                 
-                let home = UINavigationController(rootViewController: self.nextVC)
-                home.modalPresentationStyle = .fullScreen
-                self.present(home, animated: true, completion: nil)
+                let register = UINavigationController(rootViewController: self.nextVC)
+                register.modalPresentationStyle = .fullScreen
+                self.present(register, animated: true, completion: nil)
                 //UI.transition(dest: self.nextVC, src: self)
                 print("signed in")
             }
