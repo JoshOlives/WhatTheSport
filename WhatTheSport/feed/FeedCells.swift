@@ -23,7 +23,6 @@ class PostCell: UITableViewCell {
     private var commentVC: CommentViewController? = nil
     private var navController: UINavigationController!
     
-
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         var cellConstraints: [NSLayoutConstraint] = []
@@ -32,7 +31,6 @@ class PostCell: UITableViewCell {
         self.usernameLabel.translatesAutoresizingMaskIntoConstraints = false
         
         self.profilePic = UIImageView(frame: .zero)
-        self.profilePic.image = UIImage(named: "noProfilePic")
         self.profilePic.translatesAutoresizingMaskIntoConstraints = false
         
         self.teamLogo = UIImageView(frame: .zero)
@@ -136,6 +134,17 @@ class PostCell: UITableViewCell {
         self.likeCount.text = String(postArg.numLikes)
         self.teamLogo.image = postArg.teamIndex != nil ? UIImage(named: teamsList[postArg.teamIndex!].imageID) : UIImage(systemName: "house")
         self.likeButton.tintColor = postArg.userLikedPost ? UIColor.red : UIColor.gray
+        if self.profilePic.image == nil {
+            let userDB = Firestore.firestore().collection("users")
+            userDB.document(postArg.userID).getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let url = document.get("URL") as! String
+                    IO.downloadImage(str: url, imageView: self.profilePic, completion: nil)
+                } else {
+                    print("error retreiving firestore data")
+                }
+            }
+        }
     }
     
     func changeTextColor(color: UIColor) {
