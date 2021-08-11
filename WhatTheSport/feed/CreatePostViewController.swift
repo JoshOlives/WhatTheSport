@@ -66,12 +66,14 @@ class CreatePostViewController: UIViewController {
             let likeUserIDs: [String] = []
             let fsPost: [String: Any] = ["userID": fireUser!.documentID,
                                          "username": fireUser!.get("username")!,
-                                         "teamIndex": 1,
-                                         "sportIndex": 0,
+                                         "team": "Los Angeles Lakers",
+                                         "sport": "NBA",
                                          "numLikes": 0,
                                          "numComments": 0,
                                          "content": self.postTextView.text!,
-                                         "likeUserIDs": likeUserIDs]
+                                         "likeUserIDs": likeUserIDs,
+                                         "sportIndex": 0,
+                                         "teamIndex": 2]
             
             let feedDB = Firestore.firestore().collection("posts")
             var ref: DocumentReference? = nil
@@ -79,7 +81,7 @@ class CreatePostViewController: UIViewController {
                 if let err = err {
                     print("Error adding document: \(err)")
                 } else {
-                    let newPost = Post(postIDArg: ref!.documentID, sportIndexArg: 0, teamIndexArg: 1, contentArg: self.postTextView.text, userIDArg: fireUser!.documentID, usernameArg: fireUser!.get("username") as! String, numLikesArg: 0, numCommentsArg: 0, userLikedPostArg: false, likeUserIDsArg: [])
+                    let newPost = Post(postIDArg: ref!.documentID, sportArg: "NBA", teamArg: "Los Angeles Lakers", contentArg: self.postTextView.text, userIDArg: fireUser!.documentID, usernameArg: fireUser!.get("username") as! String, numLikesArg: 0, numCommentsArg: 0, userLikedPostArg: false, likeUserIDsArg: [])
                     let otherVC = self.delegate as! PostAddition
                     otherVC.addCreatedPost(newPost: newPost)
                     _ = self.navigationController?.popViewController(animated: true)
