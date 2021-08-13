@@ -1,9 +1,6 @@
 //
 //  helpers.swift
 //  WhatTheSport
-//
-//  Created by David Olivares on 7/10/21.
-//
 
 import Foundation
 import UIKit

@@ -1,10 +1,4 @@
-//
-//  ViewController.swift
-//  ClassDemo2
-//
-//  Created by bulko on 6/19/19.
-//  Copyright © 2019 bulko. All rights reserved.
-//
+
 
 import UIKit
 import Firebase
