@@ -60,7 +60,8 @@ class CreateCommentViewController: UIViewController {
                                             "postID": currPost!.postID,
                                             "userID": fireUser!.documentID,
                                             "userProfilePicID": fireUser!.get("URL")!,
-                                            "username": fireUser!.get("username")!]
+                                            "username": fireUser!.get("username")!,
+                                            "created": FieldValue.serverTimestamp()]
             
             let commentDB = Firestore.firestore().collection("comments")
             _ = commentDB.addDocument(data: fsComment, completion: { err in
