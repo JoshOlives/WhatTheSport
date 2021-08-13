@@ -136,6 +136,22 @@ class RegisterTeamController: UIViewController, UITableViewDataSource, UITableVi
         let navImage: UIImage? = currentUser!.settings!.dark ? UIImage() : nil
         self.navigationController?.navigationBar.setBackgroundImage(navImage, for: .default)
         view.backgroundColor = background
+            
+        //for pre-selection of teams that a user already follows
+        if selectedTeams.count != 0 {
+            var section = 0
+            for teams in teamsToShow {
+                for team in selectedTeams {
+                    if teams.contains(team) {
+                        let row = teams.firstIndex(of: team)! + 1
+                        let ip = IndexPath(arrayLiteral: section, row)
+                        tableView.selectRow(at: ip, animated: false, scrollPosition: UITableView.ScrollPosition.none)
+                    }
+                }
+                section += 1
+            }
+        }
+            
         inTransition = false
     }
     
