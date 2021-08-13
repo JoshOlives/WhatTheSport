@@ -103,12 +103,6 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         cell.displayLabel.textColor = textColor
         cell.textLabel?.text = settingDisplay [indexPath.row]
         
-//        if indexPath.row == 1 {
-//            let togglecell = cell as! SettingToggleTableViewCell
-//            togglecell.toggle.isOn = currentUser!.settings!.push
-//            togglecell.toggle.addTarget(self, action: #selector(pushSwitch), for: .valueChanged)
-//            return togglecell
-//        }
         if indexPath.row == 1 {
             let togglecell = cell as! SettingToggleTableViewCell
             togglecell.toggle.isOn = currentUser!.settings!.dark
