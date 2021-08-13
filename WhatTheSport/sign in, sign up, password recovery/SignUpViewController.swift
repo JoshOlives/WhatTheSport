@@ -145,6 +145,12 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
     }
     
     @objc func signInPress(sender: UIButton!) {
+        if inTransition {
+            return
+        } else {
+            inTransition = true
+        }
+        
         if signInVC == nil {
             signInVC = SignInViewController()
         }

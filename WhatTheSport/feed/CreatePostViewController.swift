@@ -19,7 +19,6 @@ class CreatePostViewController: UIViewController {
     override func viewSafeAreaInsetsDidChange() {
         var constraints: [NSLayoutConstraint] = []
         
-        self.postTextView = UITextView(frame: .zero)
 //                                        CGRect(x: 0, y: 0, width: safeArea.width, height: safeArea.height / 2))
         self.postTextView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -38,10 +37,7 @@ class CreatePostViewController: UIViewController {
         constraints.append(self.sportSelector.widthAnchor.constraint(equalToConstant: self.view.bounds.width / 4))
         constraints.append(self.sportSelector.heightAnchor.constraint(equalToConstant: 50))
         
-        self.view.backgroundColor = UIColor.systemGray6
-        self.postTextView.backgroundColor = UIColor.systemGray6
         self.postTextView.font = .systemFont(ofSize: 18)
-        self.postTextView.becomeFirstResponder()
         
         NSLayoutConstraint.activate(constraints)
     }
@@ -52,8 +48,24 @@ class CreatePostViewController: UIViewController {
         self.postBarButton = UIBarButtonItem(title: "Post", style: .plain, target: self, action: #selector(createPost))
         self.postBarButton.tintColor = UIColor.white
         self.navigationItem.setRightBarButtonItems([self.postBarButton], animated: true)
+        
+        self.postTextView = UITextView(frame: .zero)
 
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor.systemGray6
+        let textColor: UIColor = currentUser!.settings!.dark ? .white : .black
+        
+        self.postTextView.textColor = textColor
+        
+        self.postTextView.backgroundColor = background
+        self.view.backgroundColor = background
+        
+        self.postTextView.becomeFirstResponder()
     }
     
     @objc
