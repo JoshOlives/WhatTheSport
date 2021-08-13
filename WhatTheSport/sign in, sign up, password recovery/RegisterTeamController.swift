@@ -175,6 +175,11 @@ class RegisterTeamController: UIViewController, UITableViewDataSource, UITableVi
         tableView.dataSource = self
         tableView.register(UINib(nibName: "TeamCell", bundle: nil), forCellReuseIdentifier: "teamCellIdentifier")
         tableView.register(UINib(nibName: "FranchiseCell", bundle: nil), forCellReuseIdentifier: "franchiseCellIdentifier")
+            
+        let userTeams = fireUser?.get("teams") as! [String]
+        if userTeams.count != 0 {
+            selectedTeams = userTeams
+        }
     }
 
     @IBAction func nextButtonPressed(_ sender: Any) {
