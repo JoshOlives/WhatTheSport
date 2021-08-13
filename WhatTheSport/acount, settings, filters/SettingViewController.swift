@@ -11,7 +11,7 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     
     
-    let settingDisplay = ["Account", "Push Notifications", "DarkMode", "App version"]
+    let settingDisplay = ["Account", "DarkMode", "App version"]
     var nextVC: AccountPageViewController!
     var profilePic: UIImage!
     
@@ -93,7 +93,7 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         let lineColor : UIColor = currentUser!.settings!.dark ? .white : UIColor(rgb: Constants.Colors.orange)
         let textColor: UIColor =  currentUser!.settings!.dark ? .white : .black
         
-        let cell: SettingTableViewCell = (indexPath.row > 0 && indexPath.row < 3) ?
+        let cell: SettingTableViewCell = (indexPath.row == 1) ?
             tableView.dequeueReusableCell(withIdentifier: "ToggleCell", for: indexPath)  as! SettingTableViewCell :
             tableView.dequeueReusableCell(withIdentifier: "SettingCell", for: indexPath) as! SettingTableViewCell
         
@@ -103,13 +103,13 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         cell.displayLabel.textColor = textColor
         cell.textLabel?.text = settingDisplay [indexPath.row]
         
+//        if indexPath.row == 1 {
+//            let togglecell = cell as! SettingToggleTableViewCell
+//            togglecell.toggle.isOn = currentUser!.settings!.push
+//            togglecell.toggle.addTarget(self, action: #selector(pushSwitch), for: .valueChanged)
+//            return togglecell
+//        }
         if indexPath.row == 1 {
-            let togglecell = cell as! SettingToggleTableViewCell
-            togglecell.toggle.isOn = currentUser!.settings!.push
-            togglecell.toggle.addTarget(self, action: #selector(pushSwitch), for: .valueChanged)
-            return togglecell
-        }
-        else if indexPath.row == 2 {
             let togglecell = cell as! SettingToggleTableViewCell
             togglecell.toggle.isOn = currentUser!.settings!.dark
             togglecell.toggle.addTarget(self, action: #selector(darkModeSwitch), for: .valueChanged)
