@@ -83,14 +83,19 @@ class RegisterTeamController: UIViewController, UITableViewDataSource, UITableVi
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             return cell
         } else {
-            let background: UIColor = currentUser!.settings!.dark ? .black : .white
+            let background: UIColor = currentUser!.settings!.dark ? .darkGray : .white
+            let textColor: UIColor = currentUser!.settings!.dark ? .white : .black
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "teamCellIdentifier", for: indexPath) as! TeamCell
             let teamName = teamsToShow[indexPath.section][indexPath.row - 1]
             let teamLogo = UIImage(named: teamName)
             cell.teamLogo.image = teamLogo
             cell.teamName.text = teamName
-            cell.backgroundColor = background
+            
+            cell.contentView.backgroundColor = background
+            cell.teamLogo.backgroundColor = background
+            cell.teamName.backgroundColor = background
+            cell.teamName.textColor = textColor
             
             return cell
         }
@@ -136,6 +141,7 @@ class RegisterTeamController: UIViewController, UITableViewDataSource, UITableVi
         let navImage: UIImage? = currentUser!.settings!.dark ? UIImage() : nil
         self.navigationController?.navigationBar.setBackgroundImage(navImage, for: .default)
         view.backgroundColor = background
+        self.tableView.backgroundColor = background
             
         //for pre-selection of teams that a user already follows
         if selectedTeams.count != 0 {

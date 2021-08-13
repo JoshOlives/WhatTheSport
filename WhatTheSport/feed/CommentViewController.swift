@@ -121,13 +121,14 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         let createBackground = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.orange)
         let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
+        let writeBackground = currentUser!.settings!.dark ? UIColor.systemGray : UIColor.systemGray5
         
         self.view.backgroundColor = createBackground
         self.commentTableView.backgroundColor = background
         
         self.createCommentView.backgroundColor = createBackground
         
-        self.writeView.backgroundColor = UIColor.systemGray5
+        self.writeView.backgroundColor = writeBackground
         
         self.commentTableView.reloadData()
     }
