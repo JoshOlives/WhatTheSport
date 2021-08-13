@@ -60,6 +60,11 @@ class CommentCell: UITableViewCell {
         self.contentLabel.text = commentArg.content
     }
     
+    func setTextColor(textColor: UIColor) {
+        self.usernameLabel.textColor = textColor
+        self.contentLabel.textColor = textColor
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

@@ -30,9 +30,21 @@ class CreateCommentViewController: UIViewController {
         self.commentBarButton.tintColor = UIColor.white
         self.navigationItem.setRightBarButtonItems([self.commentBarButton], animated: true)
 
-        self.view.backgroundColor = UIColor.systemGray6
-        self.commentTextView.backgroundColor = UIColor.systemGray6
         self.commentTextView.font = .systemFont(ofSize: 18)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        inTransition = false
+        super.viewWillAppear(animated)
+        
+        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor.systemGray6
+        let textColor: UIColor = currentUser!.settings!.dark ? .white : .black
+        
+        self.commentTextView.textColor = textColor
+        
+        self.commentTextView.backgroundColor = background
+        self.view.backgroundColor = background
+        
         self.commentTextView.becomeFirstResponder()
     }
     

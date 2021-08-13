@@ -25,9 +25,10 @@ class TeamCell: UITableViewCell {
             teamLogo.backgroundColor = UIColor(rgb: Constants.Colors.orange)
             teamName.backgroundColor = UIColor(rgb: Constants.Colors.orange)
         } else {
-            contentView.backgroundColor = .white
-            teamLogo.backgroundColor = .white
-            teamName.backgroundColor = .white
+            let background: UIColor = currentUser!.settings!.dark ? .darkGray : .white
+            contentView.backgroundColor = background
+            teamLogo.backgroundColor = background
+            teamName.backgroundColor = background
         }
     }
     
