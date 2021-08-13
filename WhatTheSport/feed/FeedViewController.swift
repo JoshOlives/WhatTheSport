@@ -23,7 +23,6 @@ class FeedViewController: ViewControllerWithMenu, UITableViewDataSource, UITable
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        getPosts()
         self.feedTableView = UITableView(frame: .zero)
     }
     
@@ -52,12 +51,11 @@ class FeedViewController: ViewControllerWithMenu, UITableViewDataSource, UITable
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        getPosts()
         let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
         
         feedTableView.backgroundColor = background
-        if self.feedTableView != nil {
-            self.feedTableView.reloadData()
-        }
+        self.feedTableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
