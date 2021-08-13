@@ -94,7 +94,7 @@ class GameTableViewCell: UITableViewCell {
         let hourDate = date.addingTimeInterval(60 * 60 * -1)
         let fiveHourDate = date.addingTimeInterval(60 * 60 * -5)
         
-        //let nowDate = Date().addingTimeInterval(30)
+        //let nowDate = Date().addingTimeInterval(10)
     
         let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
         
@@ -105,13 +105,13 @@ class GameTableViewCell: UITableViewCell {
         //let dateComponents4 = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: nowDate)
         
         if !(self.onNotify) {
-            self.createNotifications(title: eventName!, subtitle: "WhatTheSport", body: "Happening NOW!", date: dateComponents, identifier: notificationId)
+            self.createNotifications(title: eventName!, subtitle: "", body: "Happening NOW!", date: dateComponents, identifier: notificationId)
             
-            self.createNotifications(title: eventName!, subtitle: "WhatTheSport", body: "Happening in FIVE minutes!", date: dateComponents1, identifier: "\(notificationId)1")
-            self.createNotifications(title: eventName!, subtitle: "WhatTheSport", body: "Happening in ONE hour!", date: dateComponents2, identifier: "\(notificationId)2")
-            self.createNotifications(title: eventName!, subtitle: "WhatTheSport", body: "Happening in FIVE hours", date: dateComponents3, identifier: "\(notificationId)3")
+            self.createNotifications(title: eventName!, subtitle: "", body: "Happening in FIVE minutes!", date: dateComponents1, identifier: "\(notificationId)1")
+            self.createNotifications(title: eventName!, subtitle: "", body: "Happening in ONE hour!", date: dateComponents2, identifier: "\(notificationId)2")
+            self.createNotifications(title: eventName!, subtitle: "", body: "Happening in FIVE hours", date: dateComponents3, identifier: "\(notificationId)3")
             
-            //self.createNotifications(title: eventName!, subtitle: "WhatTheSport", body: "TESTING", date: dateComponents4, identifier: "\(notificationId)4")
+            //self.createNotifications(title: eventName!, subtitle: "", body: "TESTING", date: dateComponents4, identifier: "\(notificationId)4")
         }
         else {
             self.deleteNotifications(eventIdentifier: notificationId)
