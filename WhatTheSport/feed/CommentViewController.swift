@@ -32,7 +32,10 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         let currComment = self.comments[row]
         cell.setValues(commentArg: currComment)
         
-        cell.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
+        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
+        let textColor: UIColor = currentUser!.settings!.dark ? .white : .black
+        cell.backgroundColor = background
+        cell.setTextColor(textColor: textColor)
         return cell
     }
     
@@ -43,29 +46,26 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(rgb: Constants.Colors.orange)
+        self.commentTableView = UITableView(frame: .zero)
+        self.createCommentView = UIView(frame: .zero)
+        self.writeView = UIView(frame: .zero)
     }
     
     override func viewSafeAreaInsetsDidChange() {
         var constraints: [NSLayoutConstraint] = []
         let safeArea = self.view.safeAreaLayoutGuide
         
-        self.commentTableView = UITableView(frame: .zero)
         self.commentTableView.translatesAutoresizingMaskIntoConstraints = false
         self.commentTableView.register(CommentCell.self, forCellReuseIdentifier: cellIdentifier)
         self.commentTableView.dataSource = self
         self.commentTableView.delegate = self
-        self.commentTableView.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
         self.commentTableView.separatorStyle = .none
         
-        self.createCommentView = UIView(frame: .zero)
         self.createCommentView.translatesAutoresizingMaskIntoConstraints = false
-        self.createCommentView.backgroundColor = UIColor(rgb: Constants.Colors.orange)
         
-        self.writeView = UIView(frame: .zero)
+        
         self.writeView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(writeViewPressed)))
         self.writeView.translatesAutoresizingMaskIntoConstraints = false
-        self.writeView.backgroundColor = UIColor.systemGray5
         
         self.profilePicView = UIImageView(frame: .zero)
         self.profilePicView.translatesAutoresizingMaskIntoConstraints = false
@@ -74,6 +74,7 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         self.writeSomethingLabel = UILabel(frame: .zero)
         self.writeSomethingLabel.translatesAutoresizingMaskIntoConstraints = false
         self.writeSomethingLabel.lineBreakMode = .byWordWrapping
+        self.writeSomethingLabel.textAlignment = .center
         self.writeSomethingLabel.text = "Write a comment"
         
         self.view.addSubview(self.commentTableView)
@@ -103,31 +104,41 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         constraints.append(self.writeSomethingLabel.heightAnchor.constraint(equalToConstant: 20))
         constraints.append(self.writeSomethingLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 250))
         constraints.append(self.writeSomethingLabel.centerYAnchor.constraint(equalTo: self.writeView.centerYAnchor))
+        constraints.append(self.writeSomethingLabel.centerXAnchor.constraint(equalTo: self.writeView.centerXAnchor))
         
         NSLayoutConstraint.activate(constraints)
         
-        let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
-        commentTableView.backgroundColor = background
         commentTableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        inTransition = false
         self.comments = []
         getComments()
         if self.commentTableView != nil {
             self.commentTableView.reloadData()
         }
+        let createBackground = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.orange)
         let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
-        if self.commentTableView != nil {
-            self.commentTableView.backgroundColor = background
-            self.commentTableView.reloadData()
-        }
-
+        
+        self.view.backgroundColor = createBackground
+        self.commentTableView.backgroundColor = background
+        
+        self.createCommentView.backgroundColor = createBackground
+        
+        self.writeView.backgroundColor = UIColor.systemGray5
+        
+        self.commentTableView.reloadData()
     }
     
     @objc
     func writeViewPressed() {
+        if inTransition {
+            return
+        } else {
+            inTransition = true
+        }
         if self.createCommentVC == nil {
             self.createCommentVC = CreateCommentViewController()
         }

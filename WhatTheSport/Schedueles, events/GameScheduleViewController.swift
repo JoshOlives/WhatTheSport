@@ -67,7 +67,7 @@ class GameScheduleViewController: ViewControllerWithMenu, UITableViewDelegate, U
                             print("Error getting documents: \(err)")
                         }
                         for document in querySnapshot!.documents {
-                            print(document.documentID)
+                            //print(document.documentID)
                             let date = document.get("date") as! String
                             
                             var formattedDate = document.get("formattedDate") as! String

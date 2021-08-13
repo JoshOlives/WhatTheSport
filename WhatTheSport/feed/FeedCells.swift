@@ -158,6 +158,11 @@ class PostCell: UITableViewCell {
     
     @objc
     func commentsButtonPressed() {
+        if inTransition {
+            return
+        } else {
+            inTransition = true
+        }
         if self.commentVC == nil {
             self.commentVC = CommentViewController()
         }
