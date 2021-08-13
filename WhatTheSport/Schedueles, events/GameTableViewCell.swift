@@ -90,29 +90,53 @@ class GameTableViewCell: UITableViewCell {
         dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ssZZZ"
         let date = dateFormatter.date(from: dateString)! as Date
         
+        let fiveMinDate = date.addingTimeInterval(60 * -5)
+        let hourDate = date.addingTimeInterval(60 * 60 * -1)
+        let fiveHourDate = date.addingTimeInterval(60 * 60 * -5)
+        
+        //let nowDate = Date().addingTimeInterval(30)
+    
         let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
         
+        let dateComponents1 = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: fiveMinDate)
+        let dateComponents2 = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: hourDate)
+        let dateComponents3 = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: fiveHourDate)
+        
+        //let dateComponents4 = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: nowDate)
+        
         if !(self.onNotify) {
-            self.createNotifications(title: eventName!, subtitle: "", body: "", date: dateComponents)
+            self.createNotifications(title: eventName!, subtitle: "WhatTheSport", body: "Happening NOW!", date: dateComponents, identifier: notificationId)
+            
+            self.createNotifications(title: eventName!, subtitle: "WhatTheSport", body: "Happening in FIVE minutes!", date: dateComponents1, identifier: "\(notificationId)1")
+            self.createNotifications(title: eventName!, subtitle: "WhatTheSport", body: "Happening in ONE hour!", date: dateComponents2, identifier: "\(notificationId)2")
+            self.createNotifications(title: eventName!, subtitle: "WhatTheSport", body: "Happening in FIVE hours", date: dateComponents3, identifier: "\(notificationId)3")
+            
+            //self.createNotifications(title: eventName!, subtitle: "WhatTheSport", body: "TESTING", date: dateComponents4, identifier: "\(notificationId)4")
         }
         else {
             self.deleteNotifications(eventIdentifier: notificationId)
+            
+            self.deleteNotifications(eventIdentifier: "\(notificationId)1")
+            self.deleteNotifications(eventIdentifier: "\(notificationId)2")
+            self.deleteNotifications(eventIdentifier: "\(notificationId)3")
+            
+            //self.deleteNotifications(eventIdentifier: "\(notificationId)4")
         }
         self.onNotify.toggle()
     }
     
-    func createNotifications (title:String, subtitle: String, body: String, date: DateComponents) {
+    func createNotifications (title: String, subtitle: String, body: String, date: DateComponents, identifier: String) {
         
         let notification = UNMutableNotificationContent()
-        notification.title = "title"
-        notification.subtitle = "subtitle"
-        notification.body = "Now complete"
+        notification.title = title
+        notification.subtitle = subtitle
+        notification.body = body
         
         let notificationTrigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: false)
         //let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: seconds, repeats: false)
         
         // set up a request to tell iOS to submit the notification with that trigger
-        let request = UNNotificationRequest(identifier: notificationId,
+        let request = UNNotificationRequest(identifier: identifier,
                                             content: notification,
                                             trigger: notificationTrigger)
         //notificationId = request.identifier
@@ -128,8 +152,8 @@ class GameTableViewCell: UITableViewCell {
         self.notifyButton.tintColor = UIColor.yellow
     }
     
-    func deleteNotifications (eventIdentifier:String) {
-        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [self.notificationId])
+    func deleteNotifications (eventIdentifier: String) {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [eventIdentifier])
         self.notifyButton.tintColor = UIColor.gray
         self.delegate.updateNotification(index: self.index, remove: true)
         print("deleted notification")
@@ -144,8 +168,8 @@ class GameTableViewCell: UITableViewCell {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ssZZZ"
-        var startDate = dateFormatter.date(from: dateString)! as NSDate
-        startDate = startDate.addingTimeInterval(60 * 60 * 12)
+        print("\n\n\n dateString: \(dateString)")
+        let startDate = dateFormatter.date(from: dateString)! as NSDate
         let endDate = startDate.addingTimeInterval(self.uniqueIdentifer)
         
         print("\n\n\n startDate: \(startDate)")
@@ -176,6 +200,9 @@ class GameTableViewCell: UITableViewCell {
     
     func createEvent(title:String, startDate:NSDate, endDate:NSDate) {
         //let event = eventStore.event(withIdentifier: "3A758214-D33E-4C25-BA40-1C45CDCEAC56:53072782-5997-4797-9F0D-2E8E12A50EC3")
+        DispatchQueue.main.async {
+            self.calanderButton.tintColor = UIColor.red
+        }
         let event = EKEvent(eventStore: eventStore)//EKEvent(eventStore: eventStore)
         event.title = title
         event.isAllDay = true
@@ -191,13 +218,15 @@ class GameTableViewCell: UITableViewCell {
             print("Error occurred during add")
         }
         self.delegate.updateCalendar(index: self.index, remove: false)
-        self.calanderButton.tintColor = UIColor.red
     }
     
     func deleteEvent(startDate: Date, endDate: Date) {
         let pred = eventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: nil)
         let events = eventStore.events(matching: pred)
         print ("about to delete")
+        DispatchQueue.main.async {
+            self.calanderButton.tintColor = UIColor.gray
+        }
         //let eventToRemove = event//eventStore.event(withIdentifier: eventIdentifier)//"3A758214-D33E-4C25-BA40-1C45CDCEAC56:53072782-5997-4797-9F0D-2E8E12A50EC3")
         if (!(events.isEmpty)) {
             let eventToRemove = events[0]
@@ -210,7 +239,6 @@ class GameTableViewCell: UITableViewCell {
             }
         }
         self.delegate.updateCalendar(index: self.index, remove: true)
-        self.calanderButton.tintColor = UIColor.gray
     }
 
     

@@ -191,7 +191,7 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
                     docRef.setData( ["username": username, "sports": [String](),
                                                               "teams": [String](), "postIDs": [String](),
                                                               "URL": Constants.Defaults.profilePicture , "uid": userID,
-                                                              "email": email]) { (error) in
+                                                              "email": email, "dark" : false, "allTeams": false, "allSports": false] ) { (error) in
                         if error != nil {
                             let controller = UI.createAlert(title: "Error", msg: error!.localizedDescription)
                             self.present(controller, animated: true, completion: nil)
@@ -227,8 +227,16 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
             let userID = user!.user.uid
             
             //TODO: only assign if not nil  ?
-            currentUser = IO.retrieveUser(userID: userID) as? User
+            let users = IO.retrieveUser(userID: userID)
             IO.retrieveFireUser(userID: userID){
+                if !(users!.isEmpty) {
+                    currentUser = users![0] as? User
+                } else {
+                    currentUser = self.createUser(userID: userID) as? User
+                    currentUser!.filters!.allGames = fireUser!.get("allTeams") as! Bool
+                    currentUser!.filters!.allSports = fireUser!.get("allSports") as! Bool
+                    currentUser!.settings!.dark = fireUser!.get("dark") as! Bool
+                }
                 self.printUserInfo(userID: userID)
                 
                 if self.fromSignUp {

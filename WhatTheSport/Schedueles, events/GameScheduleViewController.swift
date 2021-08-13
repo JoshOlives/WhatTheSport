@@ -20,6 +20,7 @@ class GameScheduleViewController: ViewControllerWithMenu, UITableViewDelegate, U
         var teams: [Int] = []
         //var savedEventId: String = ""
         var savedNotificationId: String = ""
+        var sport: String
     }
     
     
@@ -54,33 +55,62 @@ class GameScheduleViewController: ViewControllerWithMenu, UITableViewDelegate, U
         
         let db = Firestore.firestore()
         
-        let games = db.collection("schedules").document("MLB").collection("games")
+        let games = db.collection("schedules")
         games.getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
-                } else {
-                    var counter = 0;
-                    for document in querySnapshot!.documents {
-                        let date = document.get("date") as! String
-                        let formattedDate = document.get("formattedDate") as! String
-                        let time = document.get("time") as! String
-                        let usersCalender = document.get("usersCalendar") as! [String]
-                        let usersNotification = document.get("usersNotification") as! [String]
-                        let teams = document.get("teams") as! [Int]
+                }
+                for sport in querySnapshot!.documents {
+                    
+                    games.document(sport.documentID).collection("games").getDocuments() { (querySnapshot, err) in
+                        if let err = err {
+                            print("Error getting documents: \(err)")
+                        }
+                        for document in querySnapshot!.documents {
+                            //print(document.documentID)
+                            let date = document.get("date") as! String
+                            
+                            var formattedDate = document.get("formattedDate") as! String
+                            
+                            let time = document.get("time") as! String
+                            let addTime = time.contains("am") || time.contains("12:") ? 0 : 12
+                            let timeParts = time.components(separatedBy: CharacterSet(charactersIn:  ":amAMpmPM "))
+                            let timeString = "T" + String(Int(timeParts[0])! + addTime) + ":" + String(Int(timeParts[1])!)
+                            formattedDate = formattedDate.replacingOccurrences(of: "T00:00", with: timeString)
+                            formattedDate = formattedDate.replacingOccurrences(of: "+0000", with: "-0600")
+                            
+                            
+                            let usersCalender = document.get("usersCalendar") as! [String]
+                            let usersNotification = document.get("usersNotification") as! [String]
+                            let teams = document.get("teams") as! [Int]
+                            
+                            let tempGame = Game(date: date, formattedDate: formattedDate, time: time, usersCalendar: usersCalender, usersNotification: usersNotification, teams: teams, savedNotificationId: document.documentID, sport: sport.documentID)
+                            self.gameList.append(tempGame)
+                        }
                         
-                        let tempGame = Game(date: date, formattedDate: formattedDate, time: time, usersCalendar: usersCalender, usersNotification: usersNotification, teams: teams, savedNotificationId: document.documentID)
-                        //print(tempGame.savedNotificationId)
-                        self.gameList.append(tempGame)
-                        counter += 1
-                        if counter % 5 == 0 {
-                            //TODO: dispatch in Main thread
+                        self.gameList.sort(by: {(game1, game2) in
+                            let fdate1 = game1.formattedDate
+                            let fdate2 = game2.formattedDate
+                            let times1 = fdate1.components(separatedBy: CharacterSet(charactersIn:  "-T:+"))
+                            let times2 = fdate2.components(separatedBy: CharacterSet(charactersIn:  "-T:+"))
+                            var i = 0
+                            
+                            while (i < times1.count && Int(times1[i])! == Int(times2[i])!){
+                                i += 1
+                            }
+                            i = i >= times1.count ? i - 1 : i
+                            
+                            return Int(times1[i])! < Int(times2[i])!
+                        }
+                        )
+                        DispatchQueue.main.async {
+                            print("DONE WITH A SPORT")
                             self.tableView.reloadData()
                         }
                     }
-                    self.tableView.reloadData()
                 }
         }
-        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -122,7 +152,24 @@ class GameScheduleViewController: ViewControllerWithMenu, UITableViewDelegate, U
         
         let cell = tableView.dequeueReusableCell(withIdentifier: GameTableViewCell.identifier, for: indexPath) as! GameTableViewCell
         cell.textLabel?.text = ""
-        let teamText = "\(mlb[gameList[indexPath.row / 2].teams[0]]) VS \(mlb[gameList[indexPath.row / 2].teams[1]])"
+        //print("about to print indices")
+        //print(gameList[indexPath.row / 2].teams[0])
+        //print(gameList[indexPath.row / 2].teams[1])
+        let sport = gameList[indexPath.row / 2].sport
+        var sportArray: [String] = []
+        switch sport {
+        case "MLB":
+            sportArray = mlb
+        case "NBA":
+            sportArray = nba
+        case "MLS":
+            sportArray = mls
+        case "NFL":
+            sportArray = nfl
+        default:
+            print("SHOULD NOT HAPPEN sport: \(sport)")
+        }
+        let teamText = "\(sportArray[gameList[indexPath.row / 2].teams[0]]) VS \(sportArray[gameList[indexPath.row / 2].teams[1]])"
         //print(teamText)
         cell.displayLabel.text = teamText
         cell.textLabel?.textColor = textColor
@@ -155,7 +202,8 @@ class GameScheduleViewController: ViewControllerWithMenu, UITableViewDelegate, U
     func updateCalendar (index: Int, remove: Bool) {
         let ID = (currentUser?.userID)!
         let game = gameList[index].savedNotificationId
-        updateFireLeague(sport: "MLB", field: "usersCalendar", items: [ID], game: game, remove: remove)
+        let sport = gameList[index].sport
+        updateFireLeague(sport: sport, field: "usersCalendar", items: [ID], game: game, remove: remove)
         if remove {
             if let removeIndex = gameList[index].usersCalendar.firstIndex(of: ID){
                 gameList[index].usersCalendar.remove(at: removeIndex)
@@ -168,7 +216,8 @@ class GameScheduleViewController: ViewControllerWithMenu, UITableViewDelegate, U
     func updateNotification (index: Int, remove: Bool) {
         let ID = (currentUser?.userID)!
         let game = gameList[index].savedNotificationId
-        updateFireLeague(sport: "MLB", field: "usersNotification", items: [ID], game: game, remove: remove)
+        let sport = gameList[index].sport
+        updateFireLeague(sport: sport, field: "usersNotification", items: [ID], game: game, remove: remove)
         if remove {
             if let removeIndex = gameList[index].usersNotification.firstIndex(of: ID){
                 gameList[index].usersNotification.remove(at: removeIndex)

@@ -244,7 +244,7 @@ struct IO {
         IO.downloadImage(url: url, imageView: imageView, completion: completion)
     }
     
-    static func retrieveUser(userID: String) -> NSManagedObject {
+    static func retrieveUser(userID: String) -> [NSManagedObject]? {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         
@@ -262,7 +262,7 @@ struct IO {
             NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
             abort()
         }
-        return(fetchedResults)![0]
+        return(fetchedResults)
     }
     
     static func retrieveFireUser(userID: String, completion: CompletionMethod?) {
