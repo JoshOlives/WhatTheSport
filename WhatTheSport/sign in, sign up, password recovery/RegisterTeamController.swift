@@ -173,20 +173,23 @@ class RegisterTeamController: UIViewController, UITableViewDataSource, UITableVi
 
     @IBAction func nextButtonPressed(_ sender: Any) {
         //update firestore
-        IO.updateFireUserArray(field: "sports", collection: orderedSports, completion: nil)
-        IO.updateFireUserArray(field: "teams", collection: selectedTeams, completion: nil)
-        //IO.updateFireUserArray(userID: (currentUser?.userID)!, field: "sports", items: orderedSports, remove: false)
-        //IO.updateFireUserArray(userID: (currentUser?.userID)!, field: "teams", items: selectedTeams, remove: false)
-        
-        if home == nil {
-            home = TabBarViewController()
+        if selectedTeams.count != 0 {
+            IO.updateFireUserArray(field: "sports", collection: orderedSports, completion: nil)
+            IO.updateFireUserArray(field: "teams", collection: selectedTeams, completion: nil)
+            
+            if home == nil {
+                home = TabBarViewController()
+            }
+            
+            let tabBar = UINavigationController(rootViewController: self.home)
+            tabBar.modalPresentationStyle = .fullScreen
+            self.present(tabBar, animated: true, completion: nil)
+            
+            let tabBarVC = TabBarViewController()
+            navigationController?.pushViewController(tabBarVC, animated: true)
+        } else { //require 1 team selected
+            let alertController = UI.createAlert(title: "No teams selected", msg: "Please select at least 1 team.")
+            present(alertController, animated: true, completion: nil)
         }
-        
-        let tabBar = UINavigationController(rootViewController: self.home)
-        tabBar.modalPresentationStyle = .fullScreen
-        self.present(tabBar, animated: true, completion: nil)
-        
-        let tabBarVC = TabBarViewController()
-        navigationController?.pushViewController(tabBarVC, animated: true)
     }
 }
