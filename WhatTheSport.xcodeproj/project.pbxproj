@@ -15,6 +15,7 @@
 		8F3E946A26C3655C000ADE4E /* RegisterSportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3E946926C3655B000ADE4E /* RegisterSportController.swift */; };
 		8F3E946C26C3656C000ADE4E /* RegisterTeamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3E946B26C3656C000ADE4E /* RegisterTeamController.swift */; };
 		8F3E946E26C38B24000ADE4E /* data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3E946D26C38B23000ADE4E /* data.swift */; };
+		8F3E947426C64719000ADE4E /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F3E947326C64719000ADE4E /* splash.png */; };
 		8F6BED3426B9D34500F05A3D /* AccountPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6BED3326B9D34500F05A3D /* AccountPageViewController.swift */; };
 		8F6BED3726B9D3A100F05A3D /* SettingProfilePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6BED3626B9D3A100F05A3D /* SettingProfilePictureViewController.swift */; };
 		8F6BED3926B9D3C700F05A3D /* AccountPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6BED3826B9D3C700F05A3D /* AccountPageTableViewCell.swift */; };
@@ -61,6 +62,7 @@
 		8F3E946926C3655B000ADE4E /* RegisterSportController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterSportController.swift; sourceTree = "<group>"; };
 		8F3E946B26C3656C000ADE4E /* RegisterTeamController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterTeamController.swift; sourceTree = "<group>"; };
 		8F3E946D26C38B23000ADE4E /* data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = data.swift; sourceTree = "<group>"; };
+		8F3E947326C64719000ADE4E /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
 		8F6BED3326B9D34500F05A3D /* AccountPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPageViewController.swift; sourceTree = "<group>"; };
 		8F6BED3626B9D3A100F05A3D /* SettingProfilePictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfilePictureViewController.swift; sourceTree = "<group>"; };
 		8F6BED3826B9D3C700F05A3D /* AccountPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPageTableViewCell.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				8F955FE02698E4A6003DD8F1 /* LaunchScreen.storyboard */,
 				06D2B0D026C09B72008D2DE6 /* FranchiseCell.swift */,
 				8F955FE32698E4A6003DD8F1 /* Info.plist */,
+				8F3E947326C64719000ADE4E /* splash.png */,
 				8FC68E0F26B4FC3C007B83A2 /* WhatTheSport.xcdatamodeld */,
 				8F955FEB2698E835003DD8F1 /* GoogleService-Info.plist */,
 				8F3E946D26C38B23000ADE4E /* data.swift */,
@@ -295,6 +298,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F955FE22698E4A6003DD8F1 /* LaunchScreen.storyboard in Resources */,
+				8F3E947426C64719000ADE4E /* splash.png in Resources */,
 				06D2B0CF26C09B6C008D2DE6 /* TeamCell.xib in Resources */,
 				8F955FEC2698E835003DD8F1 /* GoogleService-Info.plist in Resources */,
 				06D2B0D326C09B76008D2DE6 /* FranchiseCell.xib in Resources */,
