@@ -85,7 +85,8 @@ class CreatePostViewController: UIViewController {
                                          "content": self.postTextView.text!,
                                          "likeUserIDs": likeUserIDs,
                                          "sportIndex": 0,
-                                         "teamIndex": 2]
+                                         "teamIndex": 2,
+                                         "created": FieldValue.serverTimestamp()]
             
             let feedDB = Firestore.firestore().collection("posts")
             var ref: DocumentReference? = nil
