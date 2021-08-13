@@ -77,8 +77,7 @@ class GameScheduleViewController: ViewControllerWithMenu, UITableViewDelegate, U
                             let timeParts = time.components(separatedBy: CharacterSet(charactersIn:  ":amAMpmPM "))
                             let timeString = "T" + String(Int(timeParts[0])! + addTime) + ":" + String(Int(timeParts[1])!)
                             formattedDate = formattedDate.replacingOccurrences(of: "T00:00", with: timeString)
-                            formattedDate = formattedDate.replacingOccurrences(of: "+0000", with: "-0600")
-                            
+                            formattedDate = formattedDate.replacingOccurrences(of: "+0000", with: "-0500")
                             
                             let usersCalender = document.get("usersCalendar") as! [String]
                             let usersNotification = document.get("usersNotification") as! [String]
@@ -169,7 +168,9 @@ class GameScheduleViewController: ViewControllerWithMenu, UITableViewDelegate, U
         default:
             print("SHOULD NOT HAPPEN sport: \(sport)")
         }
-        let teamText = "\(sportArray[gameList[indexPath.row / 2].teams[0]]) VS \(sportArray[gameList[indexPath.row / 2].teams[1]])"
+        let team1 = sportArray[gameList[indexPath.row / 2].teams[0]]
+        let team2 = sportArray[gameList[indexPath.row / 2].teams[1]]
+        let teamText = "\(team1) VS \(team2)"
         //print(teamText)
         cell.displayLabel.text = teamText
         cell.textLabel?.textColor = textColor
@@ -185,11 +186,11 @@ class GameScheduleViewController: ViewControllerWithMenu, UITableViewDelegate, U
         
         cell.formattedDate = gameList[indexPath.row / 2].formattedDate
         
-        let hash = (teamText + (cell.textLabel?.text)!).hashValue
+        let hash = (team1 + team2).hashValue
         //print("hash \(hash)")
         let hashD = Double(abs(hash))
         //print("hashD \(hashD)")
-        let identifer = hashD / pow(10, 17)
+        let identifer = hashD / pow(10, 16)
         //print("identifer \(identifer)")
         cell.uniqueIdentifer = identifer
         

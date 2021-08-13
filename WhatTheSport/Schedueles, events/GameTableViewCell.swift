@@ -170,7 +170,7 @@ class GameTableViewCell: UITableViewCell {
         dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ssZZZ"
         print("\n\n\n dateString: \(dateString)")
         let startDate = dateFormatter.date(from: dateString)! as NSDate
-        let endDate = startDate.addingTimeInterval(self.uniqueIdentifer)
+        let endDate = startDate.addingTimeInterval(self.uniqueIdentifer).addingTimeInterval((60 * 60 * 3))
         
         print("\n\n\n startDate: \(startDate)")
         print("\n\n\n enddate: \(endDate)")
@@ -205,7 +205,7 @@ class GameTableViewCell: UITableViewCell {
         }
         let event = EKEvent(eventStore: eventStore)//EKEvent(eventStore: eventStore)
         event.title = title
-        event.isAllDay = true
+        event.isAllDay = false
         event.startDate = startDate as Date?
         event.endDate = endDate as Date?
         event.calendar = eventStore.defaultCalendarForNewEvents
