@@ -84,8 +84,6 @@ class CreatePostViewController: UIViewController {
                                          "numComments": 0,
                                          "content": self.postTextView.text!,
                                          "likeUserIDs": likeUserIDs,
-                                         "sportIndex": 0,
-                                         "teamIndex": 2,
                                          "created": FieldValue.serverTimestamp()]
             
             let feedDB = Firestore.firestore().collection("posts")
