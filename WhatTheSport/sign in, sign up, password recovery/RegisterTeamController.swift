@@ -157,8 +157,10 @@ class RegisterTeamController: UIViewController, UITableViewDataSource, UITableVi
 
     @IBAction func nextButtonPressed(_ sender: Any) {
         //update firestore
-        IO.updateFireUserArray(userID: (currentUser?.userID)!, field: "sports", items: orderedSports, remove: false)
-        IO.updateFireUserArray(userID: (currentUser?.userID)!, field: "teams", items: selectedTeams, remove: false)
+        IO.updateFireUserArray(field: "sports", collection: orderedSports, completion: nil)
+        IO.updateFireUserArray(field: "teams", collection: selectedTeams, completion: nil)
+        //IO.updateFireUserArray(userID: (currentUser?.userID)!, field: "sports", items: orderedSports, remove: false)
+        //IO.updateFireUserArray(userID: (currentUser?.userID)!, field: "teams", items: selectedTeams, remove: false)
         
         if home == nil {
             home = TabBarViewController()
