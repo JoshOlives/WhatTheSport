@@ -23,6 +23,14 @@ sliding menu since uploading the image and retreiving it takes some time
 you can uncomment lines 97, 105, 114, and 123. This will cause a notification to go off
 10 seconds from the current time for any game. 
 - Landscape mode not supported
+- Sign up as a new user and select what sports and teams you are interested in
+- look at the schedules of those teams in the schedules page or look at people posting about those teams in the posts page
+- If you want to be able to see all posts and games then select the upside triangle icon in the upper right and toggle all teams
+- To enable dark mode then open the sliding menu in upper left and go to the settings page and toggle dark mode
+- To change the teams you are following go to the account page and tap on the following cell
+- To change your profile picture tap on your profile picture or tap the "change profile picture label in account page"
+- To add calendar event or notification simply tap on the calendar or bell icon on the schedules page
+- IMPORTANT: You must click the icons in the sliding menu to transition NOT the label
 <!-- end of the list -->
 
 
@@ -35,7 +43,7 @@ you can uncomment lines 97, 105, 114, and 123. This will cause a notification to
 | settings | allows user to enable dark mode or access their profile | Joshua (10%) Zhongyi (90%) |
 | account page | allows user to view their information. Users can change their username, following sports/teams, profile picture from here or request a change password email or sign out   | Joshua (30%) Zhongyi (70%) |
 | Filtering | Filter the schedules or feed according to uesr filters | Adam Martin (100%) |
-| Feed | Allow users to see their feed and create posts | Adam Martin (100%) |
+| Feed | Allow users to see their feed and create posts | Adam Martin (70%) Joshua (30%) |
 | followed sports | allows user to choose what sports to follow | Adam Gluch (100%) |
 | change profile picture | allows user to change profile picture and preview image | Zhongyi (100%) |
 | Comments | Allow users to view comment on posts and create comments | Adam Martin (100%) |
