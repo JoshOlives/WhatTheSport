@@ -230,7 +230,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="nextButtonPressed:" destination="YOz-r7-DIY" eventType="touchUpInside" id="ozC-I0-NbG"/>
+                                    <action selector="nextButtonPressed:" destination="YOz-r7-DIY" eventType="touchUpInside" id="MJ1-p4-WNB"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="m7A-1i-c5Z">
@@ -263,8 +263,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="EzQ-X5-J3G"/>
                     <connections>
-                        <outlet property="nextButton" destination="7YX-pQ-7lS" id="AlX-Nb-OhO"/>
-                        <outlet property="tableView" destination="m7A-1i-c5Z" id="gi2-bJ-4T8"/>
+                        <outlet property="nextButton" destination="7YX-pQ-7lS" id="6AN-eo-f6c"/>
+                        <outlet property="tableView" destination="m7A-1i-c5Z" id="Wql-Lp-wHX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m0y-NW-Wgo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -289,6 +289,71 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gXc-8s-238" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2810.144927536232" y="116.51785714285714"/>
+        </scene>
+        <!--Select Team Controller-->
+        <scene sceneID="qBw-bZ-YwZ">
+            <objects>
+                <viewController storyboardIdentifier="selectTeamID" id="E5a-uQ-Pv9" customClass="SelectTeamController" customModule="WhatTheSport" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SMb-Cg-8H4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a team to post about" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tXY-cg-iWd">
+                                <rect key="frame" x="97" y="79" width="220" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HqP-sE-UcQ" userLabel="Next Button">
+                                <rect key="frame" x="20" y="747" width="374" height="40"/>
+                                <color key="backgroundColor" red="1" green="0.58255845309999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="LoF-eB-50C"/>
+                                </constraints>
+                                <state key="normal" title="Next">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="nextButtonPressed:" destination="E5a-uQ-Pv9" eventType="touchUpInside" id="x1R-5D-IXZ"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cjx-eV-CvN">
+                                <rect key="frame" x="20" y="124" width="374" height="544"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="teamCellIdentifier" id="14T-iF-hRu" userLabel="Team Cell" customClass="TeamCell" customModule="WhatTheSport" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="24.333333969116211" width="374" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="14T-iF-hRu" id="lGa-3m-Sde">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="rPR-LX-czL"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="HqP-sE-UcQ" firstAttribute="top" secondItem="cjx-eV-CvN" secondAttribute="bottom" constant="79" id="KDd-8y-GFk"/>
+                            <constraint firstItem="HqP-sE-UcQ" firstAttribute="leading" secondItem="rPR-LX-czL" secondAttribute="leading" constant="20" id="OOy-NC-lhI"/>
+                            <constraint firstItem="cjx-eV-CvN" firstAttribute="leading" secondItem="rPR-LX-czL" secondAttribute="leading" constant="20" id="Rrp-B4-a1d"/>
+                            <constraint firstItem="tXY-cg-iWd" firstAttribute="top" secondItem="rPR-LX-czL" secondAttribute="top" constant="35" id="TkJ-T4-sv1"/>
+                            <constraint firstItem="cjx-eV-CvN" firstAttribute="top" secondItem="tXY-cg-iWd" secondAttribute="bottom" constant="24" id="fdz-Sh-Inn"/>
+                            <constraint firstItem="rPR-LX-czL" firstAttribute="trailing" secondItem="cjx-eV-CvN" secondAttribute="trailing" constant="20" id="kwX-MF-ega"/>
+                            <constraint firstItem="tXY-cg-iWd" firstAttribute="centerX" secondItem="SMb-Cg-8H4" secondAttribute="centerX" id="oH5-Ph-GMU"/>
+                            <constraint firstItem="rPR-LX-czL" firstAttribute="bottom" secondItem="HqP-sE-UcQ" secondAttribute="bottom" constant="75" id="qlm-8u-jGP"/>
+                            <constraint firstItem="rPR-LX-czL" firstAttribute="trailing" secondItem="HqP-sE-UcQ" secondAttribute="trailing" constant="20" id="uVp-u4-bkP"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="CHK-wu-Kr7"/>
+                    <connections>
+                        <outlet property="nextButton" destination="HqP-sE-UcQ" id="IZL-tg-zJc"/>
+                        <outlet property="tableView" destination="cjx-eV-CvN" id="X6P-8l-gzR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="76B-z0-7fI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5890" y="117"/>
         </scene>
     </scenes>
     <resources>
