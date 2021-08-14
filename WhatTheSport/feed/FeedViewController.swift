@@ -80,6 +80,7 @@ class FeedViewController: ViewControllerWithMenu, UITableViewDataSource, UITable
         cell.backgroundColor = background
         cell.changeTextColor(color: textColor)
         cell.changeContentColor(color: background)
+        cell.selectionStyle = .none
         
         return cell
     }

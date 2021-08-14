@@ -36,6 +36,7 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         let textColor: UIColor = currentUser!.settings!.dark ? .white : .black
         cell.backgroundColor = background
         cell.setTextColor(textColor: textColor)
+        cell.selectionStyle = .none
         return cell
     }
     
@@ -69,7 +70,18 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         
         self.profilePicView = UIImageView(frame: .zero)
         self.profilePicView.translatesAutoresizingMaskIntoConstraints = false
-        self.profilePicView.image = UIImage(named: "knicksLogo")
+        if self.profilePicView?.image == nil {
+            let userDB = Firestore.firestore().collection("users")
+            userDB.document(fireUser!.documentID).getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let url = document.get("URL") as! String
+                    IO.downloadImage(str: url, imageView: self.profilePicView, completion: nil)
+                } else {
+                    print("error retreiving firestore data")
+                }
+            }
+        }
+
         
         self.writeSomethingLabel = UILabel(frame: .zero)
         self.writeSomethingLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -115,8 +127,9 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewWillAppear(animated)
         inTransition = false
         self.comments = []
-        getComments()
         if self.commentTableView != nil {
+            comments = []
+            getComments()
             self.commentTableView.reloadData()
         }
         let createBackground = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.orange)
@@ -125,7 +138,6 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         
         self.view.backgroundColor = createBackground
         self.commentTableView.backgroundColor = background
-        
         self.createCommentView.backgroundColor = createBackground
         
         self.writeView.backgroundColor = writeBackground

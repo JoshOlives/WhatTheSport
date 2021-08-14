@@ -26,7 +26,7 @@ class CreateCommentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Create Comment"
-        self.commentBarButton = UIBarButtonItem(title: "Post Comment", style: .plain, target: self, action: #selector(createComment))
+        self.commentBarButton = UIBarButtonItem(title: "Comment", style: .plain, target: self, action: #selector(createComment))
         self.commentBarButton.tintColor = UIColor.white
         self.navigationItem.setRightBarButtonItems([self.commentBarButton], animated: true)
 
@@ -78,6 +78,7 @@ class CreateCommentViewController: UIViewController {
                     }
                 }
             })
+            _ = self.navigationController?.popViewController(animated: true)
         }
     }
 }

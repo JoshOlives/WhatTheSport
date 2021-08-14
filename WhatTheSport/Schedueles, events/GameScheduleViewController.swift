@@ -151,9 +151,6 @@ class GameScheduleViewController: ViewControllerWithMenu, UITableViewDelegate, U
         
         let cell = tableView.dequeueReusableCell(withIdentifier: GameTableViewCell.identifier, for: indexPath) as! GameTableViewCell
         cell.textLabel?.text = ""
-        //print("about to print indices")
-        //print(gameList[indexPath.row / 2].teams[0])
-        //print(gameList[indexPath.row / 2].teams[1])
         let sport = gameList[indexPath.row / 2].sport
         var sportArray: [String] = []
         switch sport {

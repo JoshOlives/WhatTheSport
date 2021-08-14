@@ -49,13 +49,25 @@ class CommentCell: UITableViewCell {
         cellConstraints.append(self.contentLabel.topAnchor.constraint(equalTo: self.usernameLabel.bottomAnchor, constant: 20))
         cellConstraints.append(self.contentLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 10))
         cellConstraints.append(self.contentLabel.bottomAnchor.constraint(lessThanOrEqualTo: self.contentView.bottomAnchor, constant: -8))
+        
+        
                                
         NSLayoutConstraint.activate(cellConstraints)
     }
     
     func setValues(commentArg: Comment) {
         self.comment = commentArg
-        self.userProfilePicView.image = UIImage(named: "knicksLogo")
+        if self.userProfilePicView?.image == nil {
+            let userDB = Firestore.firestore().collection("users")
+            userDB.document(fireUser!.documentID).getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let url = document.get("URL") as! String
+                    IO.downloadImage(str: url, imageView: self.userProfilePicView, completion: nil)
+                } else {
+                    print("error retreiving firestore data")
+                }
+            }
+        }
         self.usernameLabel.text = commentArg.username
         self.contentLabel.text = commentArg.content
     }
