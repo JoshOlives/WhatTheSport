@@ -347,7 +347,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="CHK-wu-Kr7"/>
                     <connections>
-                        <outlet property="nextButton" destination="HqP-sE-UcQ" id="IZL-tg-zJc"/>
+                        <outlet property="nextButton" destination="HqP-sE-UcQ" id="h6f-nN-6b5"/>
                         <outlet property="tableView" destination="cjx-eV-CvN" id="X6P-8l-gzR"/>
                     </connections>
                 </viewController>

@@ -9,7 +9,7 @@ import UIKit
 
 class SelectTeamController: UIViewController, UITableViewDataSource, UITableViewDelegate {
         
-    @IBOutlet weak var nextButton: UIButton!
+    var nextButton: UIButton!
     var delegate: UIViewController!
     var selectedSports: [String] = []
     var orderedSports: [String] = []
@@ -153,21 +153,24 @@ class SelectTeamController: UIViewController, UITableViewDataSource, UITableView
 
     @IBAction func nextButtonPressed(_ sender: Any) {
         //update firestore
-        if selectedTeams.count != 0 {
-            //TODO present Martin's view
-            if home == nil {
-                home = TabBarViewController()
-            }
-            
-            let tabBar = UINavigationController(rootViewController: self.home)
-            tabBar.modalPresentationStyle = .fullScreen
-            self.present(tabBar, animated: true, completion: nil)
-            
-            let tabBarVC = TabBarViewController()
-            navigationController?.pushViewController(tabBarVC, animated: true)
-        } else { //require 1 team selected
-            let alertController = UI.createAlert(title: "No team selected", msg: "Please select 1 team.")
-            present(alertController, animated: true, completion: nil)
-        }
+//        if selectedTeams.count != 0 {
+//            //TODO present Martin's view
+//            if home == nil {
+//                home = TabBarViewController()
+//            }
+//
+//            let tabBar = UINavigationController(rootViewController: self.home)
+//            tabBar.modalPresentationStyle = .fullScreen
+//            self.present(tabBar, animated: true, completion: nil)
+//
+//            let tabBarVC = TabBarViewController()
+//            navigationController?.pushViewController(tabBarVC, animated: true)
+//        } else { //require 1 team selected
+//            let alertController = UI.createAlert(title: "No team selected", msg: "Please select 1 team.")
+//            present(alertController, animated: true, completion: nil)
+//        }
+        let otherVC = self.delegate as! CreatePostViewController
+        otherVC.team = selectedSports[0]
+        _ = self.navigationController?.popViewController(animated: true)
     }
 }

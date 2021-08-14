@@ -12,7 +12,7 @@ class CreatePostViewController: UIViewController {
 
     
     private var sport: String?
-    private var team: String?
+    var team: String?
     private var button: UIButton!
     private var postTextView: UITextView!
     private var postBarButton: UIBarButtonItem!
@@ -73,7 +73,9 @@ class CreatePostViewController: UIViewController {
     
     @objc
     func selectTeam() {
-        print("select team")
+        let selectTeam = SelectTeamController()
+        selectTeam.delegate = self
+        self.navigationController?.pushViewController(selectTeam, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {

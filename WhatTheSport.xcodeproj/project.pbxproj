@@ -51,6 +51,7 @@
 		D3420C5126BFA3B7002FB9F9 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3420C5026BFA3B7002FB9F9 /* CommentViewController.swift */; };
 		D3420C5526BFA92B002FB9F9 /* CommentCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3420C5426BFA92B002FB9F9 /* CommentCells.swift */; };
 		D37857D326C038A800A31BC2 /* CreateCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37857D226C038A800A31BC2 /* CreateCommentViewController.swift */; };
+		D386B52626C76D290040D3DD /* SelectTeamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D386B52526C76D290040D3DD /* SelectTeamController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,6 +101,7 @@
 		D3420C5026BFA3B7002FB9F9 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		D3420C5426BFA92B002FB9F9 /* CommentCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCells.swift; sourceTree = "<group>"; };
 		D37857D226C038A800A31BC2 /* CreateCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCommentViewController.swift; sourceTree = "<group>"; };
+		D386B52526C76D290040D3DD /* SelectTeamController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectTeamController.swift; sourceTree = "<group>"; };
 		D3E32A7B26C3679D002535F7 /* RegisterSportController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterSportController.swift; sourceTree = "<group>"; };
 		D3E32A7D26C367AC002535F7 /* RegisterTeamController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterTeamController.swift; sourceTree = "<group>"; };
 		F8E07A5013DEBC95359E872D /* Pods-WhatTheSport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatTheSport.release.xcconfig"; path = "Target Support Files/Pods-WhatTheSport/Pods-WhatTheSport.release.xcconfig"; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				8F99357D26BDCB90006FA04C /* FeedCells.swift */,
 				8F99357F26BDCBB1006FA04C /* FeedObjects.swift */,
 				8F99358126BDCBD3006FA04C /* CreatePostViewController.swift */,
+				D386B52526C76D290040D3DD /* SelectTeamController.swift */,
 				8F99358326BDCBEF006FA04C /* FeedViewController.swift */,
 				D3420C5026BFA3B7002FB9F9 /* CommentViewController.swift */,
 				D3420C5426BFA92B002FB9F9 /* CommentCells.swift */,
@@ -384,6 +387,7 @@
 				8F955FF0269A848C003DD8F1 /* SignInViewController.swift in Sources */,
 				8F955FD52698E4A2003DD8F1 /* SceneDelegate.swift in Sources */,
 				8F99357826BDB95F006FA04C /* MenuView.swift in Sources */,
+				D386B52626C76D290040D3DD /* SelectTeamController.swift in Sources */,
 				D3420C5526BFA92B002FB9F9 /* CommentCells.swift in Sources */,
 				8F99358226BDCBD3006FA04C /* CreatePostViewController.swift in Sources */,
 				8F955FEE269A8443003DD8F1 /* SignUpViewController.swift in Sources */,
