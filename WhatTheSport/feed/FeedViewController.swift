@@ -51,7 +51,6 @@ class FeedViewController: ViewControllerWithMenu, UITableViewDataSource, UITable
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getPosts()
         let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
         
         feedTableView.backgroundColor = background
