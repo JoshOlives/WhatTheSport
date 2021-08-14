@@ -42,5 +42,6 @@ you can uncomment lines 97, 105, 114, and 123. This will cause a notification to
 | game data | set up data for games in Firestore | Zhongyi (100%) |
 | followed teams | allows user to choose what teams to follow | Adam Gluch (100%) |
 | schedules page | allows user see upcoming game schedules | Joshua (50%) Zhongyi (50%) |
+| Calendar and local notifications | allows user to set a notification or create an event on their calendar for games | Joshua (100%) |
 | reset password | allows user to request a password reset email | Joshua (100%) |
 | Filters page | allows users to modify their filters | Joshua (10%) Zhongyi (90%) |
