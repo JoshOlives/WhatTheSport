@@ -131,5 +131,16 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         
         UI.transition(dest: forgotVC, src: self)
     }
+    
+    // code to enable tapping on the background to remove software keyboard
+        
+    func textFieldShouldReturn(textField:UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }
 
