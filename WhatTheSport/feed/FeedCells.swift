@@ -138,7 +138,9 @@ class PostCell: UITableViewCell {
             userDB.document(postArg.userID).getDocument { (document, error) in
                 if let document = document, document.exists {
                     let url = document.get("URL") as! String
-                    IO.downloadImage(str: url, imageView: self.profilePic, completion: nil)
+                    if (self.profilePic.image == nil) {
+                        IO.downloadImage(str: url, imageView: self.profilePic, completion: nil)
+                    }
                 } else {
                     print("error retreiving firestore data")
                 }

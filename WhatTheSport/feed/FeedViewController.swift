@@ -89,7 +89,7 @@ class FeedViewController: ViewControllerWithMenu, UITableViewDataSource, UITable
     
     func getPosts() {
         let teams = fireUser!.get("teams") as! [String]
-        if !currentUser!.filters!.allGames && !(teams.isEmpty) {
+        if !(currentUser!.filters!.allGames) && !(teams.isEmpty) {
             feedDB.whereField("team", in: teams).order(by: "created", descending: true).getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print(err)
