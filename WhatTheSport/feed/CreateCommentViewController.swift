@@ -37,6 +37,7 @@ class CreateCommentViewController: UIViewController {
         inTransition = false
         super.viewWillAppear(animated)
         
+        self.commentTextView.text = ""
         let background: UIColor = currentUser!.settings!.dark ? .black : UIColor.systemGray6
         let textColor: UIColor = currentUser!.settings!.dark ? .white : .black
         

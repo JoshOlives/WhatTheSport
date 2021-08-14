@@ -12,14 +12,14 @@ class CreatePostViewController: UIViewController {
 
     
     private var sport: String?
-    private var team: String?
+    var team: String?
     private var button: UIButton!
-    private var postTextView: UITextView!
+    var postTextView = UITextView(frame: .zero)
     private var postBarButton: UIBarButtonItem!
     private var sportSelector: UIPickerView!
     private var teamSelector: UIPickerView!
     var delegate: UIViewController!
-    var chooseTeamVC: UIViewController!
+    var chooseTeamVC: SelectTeamController!
     
     
     override func viewSafeAreaInsetsDidChange() {
@@ -66,14 +66,18 @@ class CreatePostViewController: UIViewController {
         self.postBarButton.tintColor = UIColor.white
         self.navigationItem.setRightBarButtonItems([self.postBarButton], animated: true)
         
-        self.postTextView = UITextView(frame: .zero)
-
-        
     }
     
     @objc
     func selectTeam() {
-        print("select team")
+        chooseTeamVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "selectTeamID")
+        chooseTeamVC.delegate = self
+        
+        UI.transition(dest: chooseTeamVC, src: self)
+    }
+    
+    func updateTeam(team: String) {
+        self.team = team
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -92,6 +96,12 @@ class CreatePostViewController: UIViewController {
     
     @objc
     func createPost() {
+        if self.team == nil {
+            let alertController = UI.createAlert(title: "Missing Content",
+                                                 msg: "Please select a team for your post")
+                        present(alertController, animated: true, completion: nil)
+            return
+        }
         if !self.postTextView.hasText {
             let alertController = UI.createAlert(title: "Missing Content",
                                                  msg: "Please enter some text for your post")
@@ -100,7 +110,7 @@ class CreatePostViewController: UIViewController {
             let likeUserIDs: [String] = []
             let fsPost: [String: Any] = ["userID": fireUser!.documentID,
                                          "username": fireUser!.get("username")!,
-                                         "team": "Los Angeles Lakers",
+                                         "team": self.team!,
                                          "sport": "NBA",
                                          "numLikes": 0,
                                          "numComments": 0,
@@ -114,7 +124,7 @@ class CreatePostViewController: UIViewController {
                 if let err = err {
                     print("Error adding document: \(err)")
                 } else {
-                    let newPost = Post(postIDArg: ref!.documentID, sportArg: "NBA", teamArg: "Los Angeles Lakers", contentArg: self.postTextView.text, userIDArg: fireUser!.documentID, usernameArg: fireUser!.get("username") as! String, numLikesArg: 0, numCommentsArg: 0, userLikedPostArg: false, likeUserIDsArg: [])
+                    let newPost = Post(postIDArg: ref!.documentID, sportArg: "NBA", teamArg: self.team!, contentArg: self.postTextView.text, userIDArg: fireUser!.documentID, usernameArg: fireUser!.get("username") as! String, numLikesArg: 0, numCommentsArg: 0, userLikedPostArg: false, likeUserIDsArg: [])
                     let otherVC = self.delegate as! PostAddition
                     otherVC.addCreatedPost(newPost: newPost)
                     _ = self.navigationController?.popViewController(animated: true)

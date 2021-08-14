@@ -347,8 +347,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="CHK-wu-Kr7"/>
                     <connections>
-                        <outlet property="nextButton" destination="HqP-sE-UcQ" id="IZL-tg-zJc"/>
-                        <outlet property="tableView" destination="cjx-eV-CvN" id="X6P-8l-gzR"/>
+                        <outlet property="nextButton" destination="HqP-sE-UcQ" id="vB5-rK-ius"/>
+                        <outlet property="tableView" destination="cjx-eV-CvN" id="R10-d7-Lmh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="76B-z0-7fI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

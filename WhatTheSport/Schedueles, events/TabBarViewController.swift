@@ -237,6 +237,8 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         if self.createPostVC == nil {
             self.createPostVC = CreatePostViewController()
         }
+        createPostVC.postTextView.text = ""
+        createPostVC.team = nil
         self.createPostVC.delegate = self.feedController
         if let navigator = navigationController {
             navigator.pushViewController(self.createPostVC, animated: true)

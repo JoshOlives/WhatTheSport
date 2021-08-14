@@ -16,6 +16,7 @@
 		8F3E946C26C3656C000ADE4E /* RegisterTeamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3E946B26C3656C000ADE4E /* RegisterTeamController.swift */; };
 		8F3E946E26C38B24000ADE4E /* data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3E946D26C38B23000ADE4E /* data.swift */; };
 		8F3E947426C64719000ADE4E /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F3E947326C64719000ADE4E /* splash.png */; };
+		8F3E947626C76CF6000ADE4E /* SelectTeamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3E947526C76CF6000ADE4E /* SelectTeamController.swift */; };
 		8F6BED3426B9D34500F05A3D /* AccountPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6BED3326B9D34500F05A3D /* AccountPageViewController.swift */; };
 		8F6BED3726B9D3A100F05A3D /* SettingProfilePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6BED3626B9D3A100F05A3D /* SettingProfilePictureViewController.swift */; };
 		8F6BED3926B9D3C700F05A3D /* AccountPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6BED3826B9D3C700F05A3D /* AccountPageTableViewCell.swift */; };
@@ -63,6 +64,7 @@
 		8F3E946B26C3656C000ADE4E /* RegisterTeamController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterTeamController.swift; sourceTree = "<group>"; };
 		8F3E946D26C38B23000ADE4E /* data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = data.swift; sourceTree = "<group>"; };
 		8F3E947326C64719000ADE4E /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
+		8F3E947526C76CF6000ADE4E /* SelectTeamController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectTeamController.swift; sourceTree = "<group>"; };
 		8F6BED3326B9D34500F05A3D /* AccountPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPageViewController.swift; sourceTree = "<group>"; };
 		8F6BED3626B9D3A100F05A3D /* SettingProfilePictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfilePictureViewController.swift; sourceTree = "<group>"; };
 		8F6BED3826B9D3C700F05A3D /* AccountPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPageTableViewCell.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 		8F99357A26BDCB04006FA04C /* feed */ = {
 			isa = PBXGroup;
 			children = (
+				8F3E947526C76CF6000ADE4E /* SelectTeamController.swift */,
 				8F99357D26BDCB90006FA04C /* FeedCells.swift */,
 				8F99357F26BDCBB1006FA04C /* FeedObjects.swift */,
 				8F99358126BDCBD3006FA04C /* CreatePostViewController.swift */,
@@ -384,6 +387,7 @@
 				8F955FF0269A848C003DD8F1 /* SignInViewController.swift in Sources */,
 				8F955FD52698E4A2003DD8F1 /* SceneDelegate.swift in Sources */,
 				8F99357826BDB95F006FA04C /* MenuView.swift in Sources */,
+				8F3E947626C76CF6000ADE4E /* SelectTeamController.swift in Sources */,
 				D3420C5526BFA92B002FB9F9 /* CommentCells.swift in Sources */,
 				8F99358226BDCBD3006FA04C /* CreatePostViewController.swift in Sources */,
 				8F955FEE269A8443003DD8F1 /* SignUpViewController.swift in Sources */,

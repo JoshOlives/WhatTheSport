@@ -196,8 +196,6 @@ class RegisterTeamController: UIViewController, UITableViewDataSource, UITableVi
             tabBar.modalPresentationStyle = .fullScreen
             self.present(tabBar, animated: true, completion: nil)
             
-            let tabBarVC = TabBarViewController()
-            navigationController?.pushViewController(tabBarVC, animated: true)
         } else { //require 1 team selected
             let alertController = UI.createAlert(title: "No teams selected", msg: "Please select at least 1 team.")
             present(alertController, animated: true, completion: nil)

@@ -9,11 +9,13 @@ import UIKit
 
 class SelectTeamController: UIViewController, UITableViewDataSource, UITableViewDelegate {
         
+
     @IBOutlet weak var nextButton: UIButton!
-    var delegate: UIViewController!
+    var delegate: CreatePostViewController!
     var selectedSports: [String] = []
     var orderedSports: [String] = []
     var home: TabBarViewController!
+    var currentTeam: String!
     @IBOutlet weak var tableView: UITableView!
     
     private let mlbTeams: [String] = ["Arizona Diamondbacks","Atlanta Braves","Baltimore Orioles",
@@ -101,6 +103,7 @@ class SelectTeamController: UIViewController, UITableViewDataSource, UITableView
             let teamName = teamsToShow[indexPath.section][indexPath.row - 1]
             selectedTeams.append(teamName)
             print(teamName)
+            currentTeam = teamName
         }
     }
     
@@ -110,7 +113,14 @@ class SelectTeamController: UIViewController, UITableViewDataSource, UITableView
             let teamName = teamsToShow[indexPath.section][indexPath.row - 1]
             let removedTeam = selectedTeams.remove(at: selectedTeams.firstIndex(of: teamName)!)
             print(removedTeam)
+            if let currentTeam = currentTeam, currentTeam == teamName{
+                self.currentTeam = nil
+            }
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+
     }
     
     override func viewWillAppear(_ animated:Bool) {
@@ -142,9 +152,7 @@ class SelectTeamController: UIViewController, UITableViewDataSource, UITableView
     
         self.title = "Select Team"
         view.backgroundColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
-        nextButton.backgroundColor = UIColor(rgb: Constants.Colors.orange)
-        nextButton.setTitleColor(.white, for: .normal)
-        nextButton.layer.cornerRadius = 20.0
+        self.nextButton.isHidden = false
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "TeamCell", bundle: nil), forCellReuseIdentifier: "teamCellIdentifier")
@@ -153,21 +161,14 @@ class SelectTeamController: UIViewController, UITableViewDataSource, UITableView
 
     @IBAction func nextButtonPressed(_ sender: Any) {
         //update firestore
-        if selectedTeams.count != 0 {
-            //TODO present Martin's view
-            if home == nil {
-                home = TabBarViewController()
-            }
-            
-            let tabBar = UINavigationController(rootViewController: self.home)
-            tabBar.modalPresentationStyle = .fullScreen
-            self.present(tabBar, animated: true, completion: nil)
-            
-            let tabBarVC = TabBarViewController()
-            navigationController?.pushViewController(tabBarVC, animated: true)
-        } else { //require 1 team selected
+        if currentTeam == nil {
             let alertController = UI.createAlert(title: "No team selected", msg: "Please select 1 team.")
             present(alertController, animated: true, completion: nil)
+        } else {
+            delegate.updateTeam(team: currentTeam)
+            if let nav = navigationController{
+                nav.popViewController(animated: true)
+            }
         }
     }
 }
