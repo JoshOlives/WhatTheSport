@@ -154,6 +154,8 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         
         let images = ["calendar", "house.fill", "star.fill"]
         
+        self.tabBar.unselectedItemTintColor = .darkGray
+        
         for index in 0 ..< items.count {
           
             items[index].image = UIImage(systemName: images[index])
