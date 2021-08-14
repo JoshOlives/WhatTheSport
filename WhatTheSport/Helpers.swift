@@ -215,6 +215,9 @@ struct IO {
     
     typealias CompletionMethod = ()  -> Void
     static func downloadImage(url: URL, imageView: UIImageView, completion: CompletionMethod?) {
+        if (imageView.image != nil) {
+            return
+        }
         var image: UIImage?
         let task = URLSession.shared.dataTask(with: url) { ( data, _, error) in
             guard let data = data, error == nil else {
