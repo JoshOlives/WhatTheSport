@@ -18,6 +18,8 @@ class ForgotPasswordViewController: UIViewController {
         
         var constraints: [NSLayoutConstraint] = []
         
+       
+        
         view.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
         self.title = "Forgot Password"
         
@@ -41,6 +43,7 @@ class ForgotPasswordViewController: UIViewController {
         constraints.append(sendResetButton.heightAnchor.constraint(equalTo: emailField.heightAnchor))
         
         NSLayoutConstraint.activate(constraints)
+        emailField.textColor = .black
     }
     
     @objc func sendResetEmail(sender: UIButton!) {
@@ -53,6 +56,17 @@ class ForgotPasswordViewController: UIViewController {
                 self.present(controller, animated: true, completion: nil)
             }
         }
+    }
+    
+    // code to enable tapping on the background to remove software keyboard
+        
+    func textFieldShouldReturn(textField:UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 }
 

@@ -39,6 +39,8 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
             //navigator.navigationBar.backgroundColor = UIColor(rgb: Constants.Colors.orange)
         }
         
+       
+        
         view.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
         self.title = "Sign Up"
         
@@ -138,6 +140,10 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
         self.view.addSubview(hStack)
         
         NSLayoutConstraint.activate(constraints)
+        emailField.textColor = .black
+        usernameField.textColor = .black
+        passwordField.textColor = .black
+        confirmField.textColor = .black
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -321,6 +327,17 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
         clearEntity(entity: "Setting")
         clearEntity(entity: "Filter")
         print("\n\nCLEARED ALL CORED DATA\n\n")
+    }
+    
+    // code to enable tapping on the background to remove software keyboard
+        
+    func textFieldShouldReturn(textField:UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
 }

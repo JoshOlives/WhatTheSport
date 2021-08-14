@@ -27,6 +27,9 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         view.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
         self.title = "Sign In"
         
+ 
+    
+        
         logo = UIImageView(frame: .zero)
         logo.image = UIImage(named: "splash")
         self.view.addSubview(logo)
@@ -89,6 +92,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         constraints.append(signInButton.heightAnchor.constraint(equalTo: passwordField.heightAnchor))
         
         NSLayoutConstraint.activate(constraints)
+        emailField.textColor = .black
+        passwordField.textColor = .black
     }
     override func viewWillAppear(_ animated: Bool) {
         inTransition = false
@@ -125,6 +130,17 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         }
         
         UI.transition(dest: forgotVC, src: self)
+    }
+    
+    // code to enable tapping on the background to remove software keyboard
+        
+    func textFieldShouldReturn(textField:UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 }
 
