@@ -213,7 +213,7 @@ class GameTableViewCell: UITableViewCell {
         do {
             try eventStore.save(event, span: .thisEvent)
             eventId = event.eventIdentifier
-            print("IDENTIFER: \(event.eventIdentifier)")
+            //print("IDENTIFER: \(event.eventIdentifier)")
         } catch {
             print("Error occurred during add")
         }
@@ -227,7 +227,6 @@ class GameTableViewCell: UITableViewCell {
         DispatchQueue.main.async {
             self.calanderButton.tintColor = UIColor.gray
         }
-        //let eventToRemove = event//eventStore.event(withIdentifier: eventIdentifier)//"3A758214-D33E-4C25-BA40-1C45CDCEAC56:53072782-5997-4797-9F0D-2E8E12A50EC3")
         if (!(events.isEmpty)) {
             let eventToRemove = events[0]
             // event found in event store
@@ -247,10 +246,6 @@ class GameTableViewCell: UITableViewCell {
         contentView.addSubview(displayLabel)
       
         displayLabel.textAlignment = .center
-       // contentView.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
-      
-
-        //userInformationLabel.text = " user Infor"
     }
     
     required init?(coder: NSCoder) {

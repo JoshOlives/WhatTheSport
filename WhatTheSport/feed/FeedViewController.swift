@@ -55,7 +55,12 @@ class FeedViewController: ViewControllerWithMenu, UITableViewDataSource, UITable
         let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
         
         feedTableView.backgroundColor = background
-        self.feedTableView.reloadData()
+        
+        if self.feedTableView != nil {
+            posts = []
+            getPosts()
+            self.feedTableView.reloadData()
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -86,7 +91,7 @@ class FeedViewController: ViewControllerWithMenu, UITableViewDataSource, UITable
     func getPosts() {
         let teams = fireUser!.get("teams") as! [String]
         if !currentUser!.filters!.allGames && !(teams.isEmpty) {
-            feedDB.whereField("team", in: teams).getDocuments() { (querySnapshot, err) in
+            feedDB.whereField("team", in: teams).order(by: "created", descending: true).getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print(err)
                 } else {
@@ -97,7 +102,7 @@ class FeedViewController: ViewControllerWithMenu, UITableViewDataSource, UITable
                 }
             }
         } else {
-            feedDB.getDocuments() { (querySnapshot, err) in
+            feedDB.order(by: "created", descending: true).getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print(err)
                 } else {
