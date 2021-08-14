@@ -27,8 +27,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         view.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
         self.title = "Sign In"
         
-        emailField.textColor = .black
-        passwordField.textColor = .black
+ 
+    
         
         logo = UIImageView(frame: .zero)
         logo.image = UIImage(named: "splash")
@@ -92,6 +92,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         constraints.append(signInButton.heightAnchor.constraint(equalTo: passwordField.heightAnchor))
         
         NSLayoutConstraint.activate(constraints)
+        emailField.textColor = .black
+        passwordField.textColor = .black
     }
     override func viewWillAppear(_ animated: Bool) {
         inTransition = false

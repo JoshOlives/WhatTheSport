@@ -18,7 +18,7 @@ class ForgotPasswordViewController: UIViewController {
         
         var constraints: [NSLayoutConstraint] = []
         
-        emailField.textColor = .black
+       
         
         view.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
         self.title = "Forgot Password"
@@ -43,6 +43,7 @@ class ForgotPasswordViewController: UIViewController {
         constraints.append(sendResetButton.heightAnchor.constraint(equalTo: emailField.heightAnchor))
         
         NSLayoutConstraint.activate(constraints)
+        emailField.textColor = .black
     }
     
     @objc func sendResetEmail(sender: UIButton!) {

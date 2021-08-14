@@ -39,10 +39,7 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
             //navigator.navigationBar.backgroundColor = UIColor(rgb: Constants.Colors.orange)
         }
         
-        emailField.textColor = .black
-        usernameField.textColor = .black
-        passwordField.textColor = .black
-        confirmField.textColor = .black
+       
         
         view.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
         self.title = "Sign Up"
@@ -143,6 +140,10 @@ class SignUpViewController: UIViewController, Transitioner, UITextFieldDelegate 
         self.view.addSubview(hStack)
         
         NSLayoutConstraint.activate(constraints)
+        emailField.textColor = .black
+        usernameField.textColor = .black
+        passwordField.textColor = .black
+        confirmField.textColor = .black
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -13,7 +13,14 @@ class SettingToggleTableViewCell: SettingTableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        toggle.frame = CGRect(x: 350, y: contentView.frame.midY - toggle.frame.size.height / 2, width: 150, height: contentView.frame.size.height)
+//        toggle.frame = CGRect(x: 350, y: contentView.frame.midY - toggle.frame.size.height / 2, width: 150, height: contentView.frame.size.height)
+        var constraints: [NSLayoutConstraint] = []
+        toggle.translatesAutoresizingMaskIntoConstraints = false
+        constraints.append( toggle.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -15))
+        constraints.append( toggle.centerYAnchor.constraint(equalTo: contentView.centerYAnchor))
+        toggle.isOn = false
+       // toggle.addTarget(self, action: #selector(followedTeamsSwithch), for: .valueChanged)
+        NSLayoutConstraint.activate(constraints)
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
