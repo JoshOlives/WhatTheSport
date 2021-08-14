@@ -9,14 +9,11 @@ import UIKit
 
 class FiltersViewController: UIViewController{
  
-    let filtersDisplay = [ "All Teams", "All Sports"]
+    let filtersDisplay = [ "All Teams"]
     
     var allGames = UILabel()
     
-    var allSports = UILabel()
-    
     let allGamesToggle = UISwitch()
-    let allSportsToggle = UISwitch()
     var labels: [UILabel]!
 
     override func viewDidLoad() {
@@ -25,7 +22,7 @@ class FiltersViewController: UIViewController{
         
         var constraints: [NSLayoutConstraint] = []
         
-        labels = [allGames, allSports]
+        labels = [allGames]
         
         // allTeams
         allGames.textAlignment = NSTextAlignment.center
@@ -42,21 +39,6 @@ class FiltersViewController: UIViewController{
         allGamesToggle.addTarget(self, action: #selector(allGamesSwithch), for: .valueChanged)
         self.view.addSubview(allGamesToggle)
         
-        
-        // allSports
-        allSports.textAlignment = NSTextAlignment.center
-        allSports.translatesAutoresizingMaskIntoConstraints = false
-        allSports.text = filtersDisplay[1]
-        constraints.append( allSports.topAnchor.constraint(equalTo: allGames.bottomAnchor, constant: 60))
-        constraints.append( allSports.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20))
-        self.view.addSubview(allSports)
-        
-        allSportsToggle.translatesAutoresizingMaskIntoConstraints = false
-        constraints.append(allSportsToggle.topAnchor.constraint(equalTo: allSports.topAnchor))
-        constraints.append(allSportsToggle.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -70))
-        allSportsToggle.isOn = currentUser!.filters!.allSports
-        allSportsToggle.addTarget(self, action: #selector(allSportsSwithch), for: .valueChanged)
-        self.view.addSubview(allSportsToggle)
         
         NSLayoutConstraint.activate(constraints)
 
@@ -77,11 +59,6 @@ class FiltersViewController: UIViewController{
     
     @objc func allGamesSwithch( sender: UISwitch) {
         currentUser!.filters!.allGames = !(currentUser!.filters!.allGames)
-        IO.saveContext()
-    }
-    
-    @objc func allSportsSwithch( sender: UISwitch) {
-        currentUser!.filters!.allSports = !(currentUser!.filters!.allSports)
         IO.saveContext()
     }
 

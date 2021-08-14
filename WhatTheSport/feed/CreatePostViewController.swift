@@ -19,6 +19,7 @@ class CreatePostViewController: UIViewController {
     private var sportSelector: UIPickerView!
     private var teamSelector: UIPickerView!
     var delegate: UIViewController!
+    var chooseTeamVC: UIViewController!
     
     
     override func viewSafeAreaInsetsDidChange() {
