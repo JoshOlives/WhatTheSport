@@ -427,7 +427,8 @@ let nflTeams: [String] = ["Arizona Cardinals","Atlanta Falcons","Baltimore Raven
                                   "San Francisco 49ers","Seattle Seahawks","Tampa Bay Buccaneers",
                                   "Tennessee Titans","Washington Football Team"]
 
-
 let sportsList = ["MLB", "MLS", "NBA", "NFL"]
 
 let sportsIndexList = [mlbTeams, mlsTeams, nbaTeams, nflTeams]
+
+let sportsMap: [String: [String]] = ["MLB": mlbTeams, "MLS": mlsTeams, "NBA": nbaTeams, "NFL": nflTeams]
