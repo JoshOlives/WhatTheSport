@@ -53,68 +53,15 @@ class GameScheduleViewController: ViewControllerWithMenu, UITableViewDelegate, U
         tableView.delegate = self
         tableView.dataSource = self
         
-        let db = Firestore.firestore()
-        
-        let games = db.collection("schedules")
-        games.getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                }
-                for sport in querySnapshot!.documents {
-                    
-                    games.document(sport.documentID).collection("games").getDocuments() { (querySnapshot, err) in
-                        if let err = err {
-                            print("Error getting documents: \(err)")
-                        }
-                        for document in querySnapshot!.documents {
-                            //print(document.documentID)
-                            let date = document.get("date") as! String
-                            
-                            var formattedDate = document.get("formattedDate") as! String
-                            
-                            let time = document.get("time") as! String
-                            let addTime = time.contains("am") || time.contains("12:") ? 0 : 12
-                            let timeParts = time.components(separatedBy: CharacterSet(charactersIn:  ":amAMpmPM "))
-                            let timeString = "T" + String(Int(timeParts[0])! + addTime) + ":" + String(Int(timeParts[1])!)
-                            formattedDate = formattedDate.replacingOccurrences(of: "T00:00", with: timeString)
-                            formattedDate = formattedDate.replacingOccurrences(of: "+0000", with: "-0500")
-                            
-                            let usersCalender = document.get("usersCalendar") as! [String]
-                            let usersNotification = document.get("usersNotification") as! [String]
-                            let teams = document.get("teams") as! [Int]
-                            
-                            let tempGame = Game(date: date, formattedDate: formattedDate, time: time, usersCalendar: usersCalender, usersNotification: usersNotification, teams: teams, savedNotificationId: document.documentID, sport: sport.documentID)
-                            self.gameList.append(tempGame)
-                        }
-                        
-                        self.gameList.sort(by: {(game1, game2) in
-                            let fdate1 = game1.formattedDate
-                            let fdate2 = game2.formattedDate
-                            let times1 = fdate1.components(separatedBy: CharacterSet(charactersIn:  "-T:+"))
-                            let times2 = fdate2.components(separatedBy: CharacterSet(charactersIn:  "-T:+"))
-                            var i = 0
-                            
-                            while (i < times1.count && Int(times1[i])! == Int(times2[i])!){
-                                i += 1
-                            }
-                            i = i >= times1.count ? i - 1 : i
-                            
-                            return Int(times1[i])! < Int(times2[i])!
-                        }
-                        )
-                        DispatchQueue.main.async {
-                            print("DONE WITH A SPORT \(sport.documentID)")
-                            self.tableView.reloadData()
-                        }
-                    }
-                }
-        }
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let background: UIColor = currentUser!.settings!.dark ? .black : UIColor(rgb: Constants.Colors.lightOrange)
+        if self.tableView != nil {
+            gameList = []
+            getGames()
+        }
         
         tableView.backgroundColor = background
         tableView.reloadData()
@@ -246,6 +193,121 @@ class GameScheduleViewController: ViewControllerWithMenu, UITableViewDelegate, U
                     print("error updating fire user \(e.localizedDescription)")
                 }
             }
+        }
+    }
+    
+    func getGames() {
+        let db = Firestore.firestore()
+        
+        let games = db.collection("schedules")
+        games.getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                }
+                for sport in querySnapshot!.documents {
+                    var indexes: [Int] = []
+                    let sportArray = sportsMap[sport.documentID]
+                    for team in fireUser!.get("teams") as! [String]{
+                        let result = sportArray!.firstIndex(of: team)
+                        if result != nil {
+                            indexes.append(result!)
+                        }
+                    }
+                    
+                    if !currentUser!.filters!.allGames {
+                        if !indexes.isEmpty {
+                            games.document(sport.documentID).collection("games").whereField("teams", arrayContainsAny: indexes).getDocuments() { (querySnapshot, err) in
+                                if let err = err {
+                                    print("Error getting documents: \(err)")
+                                }
+                                for document in querySnapshot!.documents {
+                                    
+                                    let date = document.get("date") as! String
+                                    var formattedDate = document.get("formattedDate") as! String
+                                    
+                                    let time = document.get("time") as! String
+                                    let addTime = time.contains("am") || time.contains("12:") ? 0 : 12
+                                    let timeParts = time.components(separatedBy: CharacterSet(charactersIn:  ":amAMpmPM "))
+                                    let timeString = "T" + String(Int(timeParts[0])! + addTime) + ":" + String(Int(timeParts[1])!)
+                                    formattedDate = formattedDate.replacingOccurrences(of: "T00:00", with: timeString)
+                                    formattedDate = formattedDate.replacingOccurrences(of: "+0000", with: "-0500")
+                                    
+                                    let usersCalender = document.get("usersCalendar") as! [String]
+                                    let usersNotification = document.get("usersNotification") as! [String]
+                                    let teams = document.get("teams") as! [Int]
+                                    
+                                    let tempGame = Game(date: date, formattedDate: formattedDate, time: time, usersCalendar: usersCalender, usersNotification: usersNotification, teams: teams, savedNotificationId: document.documentID, sport: sport.documentID)
+                                    self.gameList.append(tempGame)
+                                }
+                                
+                                self.gameList.sort(by: {(game1, game2) in
+                                    let fdate1 = game1.formattedDate
+                                    let fdate2 = game2.formattedDate
+                                    let times1 = fdate1.components(separatedBy: CharacterSet(charactersIn:  "-T:+"))
+                                    let times2 = fdate2.components(separatedBy: CharacterSet(charactersIn:  "-T:+"))
+                                    var i = 0
+                                    
+                                    while (i < times1.count && Int(times1[i])! == Int(times2[i])!){
+                                        i += 1
+                                    }
+                                    i = i >= times1.count ? i - 1 : i
+                                    
+                                    return Int(times1[i])! < Int(times2[i])!
+                                }
+                                )
+                                DispatchQueue.main.async {
+                                    print("DONE WITH A SPORT \(sport.documentID)")
+                                    self.tableView.reloadData()
+                                }
+                            }
+                        }
+                        } else {
+                            games.document(sport.documentID).collection("games").getDocuments() { (querySnapshot, err) in
+                                if let err = err {
+                                    print("Error getting documents: \(err)")
+                                }
+                                for document in querySnapshot!.documents {
+                                    
+                                    let date = document.get("date") as! String
+                                    var formattedDate = document.get("formattedDate") as! String
+                                    
+                                    let time = document.get("time") as! String
+                                    let addTime = time.contains("am") || time.contains("12:") ? 0 : 12
+                                    let timeParts = time.components(separatedBy: CharacterSet(charactersIn:  ":amAMpmPM "))
+                                    let timeString = "T" + String(Int(timeParts[0])! + addTime) + ":" + String(Int(timeParts[1])!)
+                                    formattedDate = formattedDate.replacingOccurrences(of: "T00:00", with: timeString)
+                                    formattedDate = formattedDate.replacingOccurrences(of: "+0000", with: "-0500")
+                                    
+                                    let usersCalender = document.get("usersCalendar") as! [String]
+                                    let usersNotification = document.get("usersNotification") as! [String]
+                                    let teams = document.get("teams") as! [Int]
+                                    
+                                    let tempGame = Game(date: date, formattedDate: formattedDate, time: time, usersCalendar: usersCalender, usersNotification: usersNotification, teams: teams, savedNotificationId: document.documentID, sport: sport.documentID)
+                                    self.gameList.append(tempGame)
+                                }
+                                
+                                self.gameList.sort(by: {(game1, game2) in
+                                    let fdate1 = game1.formattedDate
+                                    let fdate2 = game2.formattedDate
+                                    let times1 = fdate1.components(separatedBy: CharacterSet(charactersIn:  "-T:+"))
+                                    let times2 = fdate2.components(separatedBy: CharacterSet(charactersIn:  "-T:+"))
+                                    var i = 0
+                                    
+                                    while (i < times1.count && Int(times1[i])! == Int(times2[i])!){
+                                        i += 1
+                                    }
+                                    i = i >= times1.count ? i - 1 : i
+                                    
+                                    return Int(times1[i])! < Int(times2[i])!
+                                }
+                                )
+                                DispatchQueue.main.async {
+                                    print("DONE WITH A SPORT \(sport.documentID)")
+                                    self.tableView.reloadData()
+                                }
+                            }
+                    }
+                }
         }
     }
 }
