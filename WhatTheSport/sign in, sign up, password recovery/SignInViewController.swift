@@ -27,6 +27,9 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         view.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
         self.title = "Sign In"
         
+        emailField.textColor = .black
+        passwordField.textColor = .black
+        
         logo = UIImageView(frame: .zero)
         logo.image = UIImage(named: "splash")
         self.view.addSubview(logo)

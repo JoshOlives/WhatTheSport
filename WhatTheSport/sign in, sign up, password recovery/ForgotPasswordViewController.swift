@@ -18,6 +18,8 @@ class ForgotPasswordViewController: UIViewController {
         
         var constraints: [NSLayoutConstraint] = []
         
+        emailField.textColor = .black
+        
         view.backgroundColor = UIColor(rgb: Constants.Colors.lightOrange)
         self.title = "Forgot Password"
         
