@@ -22,6 +22,7 @@ sliding menu since uploading the image and retreiving it takes some time
 - Since notifications are tied to game times if you want to see that notifications work
 you can uncomment lines 97, 105, 114, and 123. This will cause a notification to go off
 10 seconds from the current time for any game. 
+- Horizontal mode not supported
 <!-- end of the list -->
 
 
